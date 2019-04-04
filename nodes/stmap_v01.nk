@@ -1,0 +1,156 @@
+set cut_paste_input [stack 0]
+version 6.1 v5
+RotoPaint {
+ inputs 0
+ output alpha
+ curves {AnimTree: "" {
+ Version: 1.2
+ Flag: 0
+ RootNode: 1
+ Node: {
+  NodeName: "Root" {
+   Flag: 512
+   NodeType: 1
+   Transform: 0 0 S 0 0 S 0 0 S 0 0 S 0 1 S 0 1 S 0 0 S 0 960 S 0 540 
+   NumOfAttributes: 10
+   "vis" S 0 1 "opc" S 0 1 "mbo" S 0 1 "mb" S 0 1 "mbs" S 0 0.5 "fo" S 0 1 "fx" S 0 0 "fy" S 0 0 "ff" S 0 1 "ft" S 0 0 
+  }
+  NumOfChildren: 1
+  Node: {
+   NodeName: "Bezier1" {
+    Flag: 576
+    NodeType: 3
+    CurveGroup: "" {
+     Transform: 0 0 S 0 0 S 0 0 S 0 0 S 0 1 S 0 1 S 0 0 S 0 2095.5 S 0 714.5 
+     Flag: 0
+     NumOfCubicCurves: 2
+     CubicCurve: "" {
+      Type: 0 Flag: 8192 Dim: 2
+      NumOfPoints: 12
+      0 S 0 72 S 0 -12 0 0 S 0 2578 S 0 1656 0 0 S 0 -72 S 0 12 0 0 S 0 60 S 0 48 0 0 S 0 1634 S 0 1456 0 0 S 0 -60 S 0 -48 0 0 S 0 124 S 0 92 0 0 S 0 1550 S 0 -110 0 0 S 0 -124 S 0 -92 0 0 S 0 -24 S 0 -144 0 0 S 0 2620 S 0 -144 0 0 S 0 24 S 0 144 0 
+     }
+     CubicCurve: "" {
+      Type: 0 Flag: 8192 Dim: 2
+      NumOfPoints: 12
+      0 S 0 72 S 0 -12 0 0 S 0 0 S 0 0 0 0 S 0 -72 S 0 12 0 0 S 0 60 S 0 48 0 0 S 0 -1546 S 0 200 0 0 S 0 -60 S 0 -48 0 0 S 0 124 S 0 92 0 0 S 0 -1282 S 0 -112 0 0 S 0 -124 S 0 -92 0 0 S 0 -24 S 0 -144 0 0 S 0 0 S 0 0 0 0 S 0 24 S 0 144 0 
+     }
+     NumOfAttributes: 44
+     "vis" S 0 1 "r" S 0 1 "g" S 0 1 "b" S 0 1 "a" S 0 1 "ro" S 0 0 "go" S 0 0 "bo" S 0 0 "ao" S 0 0 "opc" S 0 1 "bm" S 0 0 "inv" S 0 0 "mbo" S 0 0 "mb" S 0 1 "mbs" S 0 0.5 "mbsot" S 0 0 "mbso" S 0 0 "fo" S 0 1 "fx" S 0 0 "fy" S 0 0 "ff" S 0 1 "ft" S 0 0 "src" S 0 0 "stx" S 0 0 "sty" S 0 0 "str" S 0 0 "sr" S 0 0 "ssx" S 0 1 "ssy" S 0 1 "ss" S 0 0 "spx" S 0 960 "spy" S 0 540 "stot" S 0 0 "sto" S 0 0 "sv" S 0 0 "sf" S 0 1 "sb" S 0 1 "nv" S 0 2 "view1" S 0 1 "view2" S 0 2 "ltn" S 0 126 "ltm" S 0 126 "ltt" S 0 0 "tt" S 0 4 
+    }
+   }
+   NumOfChildren: 0
+  }
+ }
+}
+}
+ toolbox {selectAll {
+  { createBezier tt 4 }
+} }
+ toolbar_brush_hardness 0.200000003
+ toolbar_lifetime_type all
+ toolbar_source_transform_scale {1 1}
+ toolbar_source_transform_center {320 240}
+ lifetime_type "all frames"
+ lifetime_start 126
+ lifetime_end 126
+ center {2095.5 714.5}
+ motionblur_shutter_offset_type centred
+ source_black_outside true
+ name RotoPaint20
+ selected true
+ xpos 3680
+ ypos 1805
+}
+Blur {
+ size 200
+ name Blur23
+ selected true
+ xpos 3680
+ ypos 1847
+}
+push $cut_paste_input
+Dot {
+ name Dot252
+ note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic"
+ note_font_size 22
+ note_font_color 0xff0000ff
+ selected true
+ xpos 3385
+ ypos 1736
+}
+set N3173bce0 [stack 0]
+add_layer {layer1}
+Shuffle {
+ red black
+ green black
+ blue black
+ name Shuffle87
+ label "\[value in]"
+ selected true
+ xpos 3559
+ ypos 1724
+}
+Ramp {
+ output {-rgba.red rgba.green -rgba.blue -rgba.alpha}
+ p0 {100 -0.5}
+ p1 {100 {height-0.5 i}}
+ name Ramp39
+ selected true
+ xpos 3559
+ ypos 1766
+}
+Ramp {
+ output {rgba.red -rgba.green -rgba.blue -rgba.alpha}
+ p0 {-0.5 0}
+ p1 {{"width - 0.5" i} 0}
+ name Ramp42
+ selected true
+ xpos 3559
+ ypos 1808
+}
+Grade {
+ inputs 1+1
+ channels {rgba.red -rgba.green -rgba.blue}
+ add 0.01
+ mix {{curve i x112 0 x134 1}}
+ name Grade59
+ selected true
+ xpos 3559
+ ypos 1864
+}
+push $N3173bce0
+STMap {
+ inputs 2
+ uv rgb
+ name STMap17
+ selected true
+ xpos 3559
+ ypos 1906
+}
+Transform {
+ translate {{curve i x112 0 x134 -2} 0}
+ center {1147 871.5}
+ motionblur {{root.motionblur i}}
+ shutter {{root.shutter i}}
+ shutteroffset centred
+ name Transform36
+ selected true
+ xpos 3559
+ ypos 1948
+}
+push $N3173bce0
+JoinViews {
+ inputs 2
+ name JoinViews19
+ selected true
+ xpos 3351
+ ypos 1954
+ viewassoc "lt\nrt"
+}
+Anaglyph {
+ views {lt rt}
+ name Anaglyph12
+ selected true
+ xpos 3254
+ ypos 2018
+}

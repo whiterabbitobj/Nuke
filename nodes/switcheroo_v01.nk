@@ -1,0 +1,79 @@
+set cut_paste_input [stack 0]
+version 6.3 v4
+push $cut_paste_input
+Group {
+ name switcheroo_01
+ tile_color 0xff0000ff
+ selected true
+ xpos -1517
+ ypos -6
+ addUserKnob {20 User}
+ addUserKnob {3 firstFrame}
+ firstFrame 1017
+ addUserKnob {6 doFirst l " " -STARTLINE}
+ doFirst true
+ addUserKnob {3 lastFrame}
+ lastFrame 1032
+ addUserKnob {6 doLast l " " -STARTLINE}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -389
+  ypos -486
+ }
+ Dot {
+  name Dot1
+  note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic Italic"
+  note_font_size 22
+  note_font_color 0xff0000ff
+  xpos -355
+  ypos -446
+ }
+set N79bde70 [stack 0]
+ Constant {
+  inputs 0
+  channels rgb
+  first 1001
+  last 1032
+  name Constant1
+  xpos -630
+  ypos -497
+ }
+push $N79bde70
+ Grade {
+  channels all
+  multiply 0
+  name Grade2
+  selected true
+  xpos -515
+  ypos -446
+ }
+ Switch {
+  inputs 2
+  which {{hasError i}}
+  name Switch2
+  xpos -630
+  ypos -398
+ }
+ Switch {
+  inputs 2
+  which {{"(frame < firstFrame) && doFirst ? 0 : (frame > lastFrame) && doLast ? 0 : 1"}}
+  name Switch1
+  xpos -389
+  ypos -350
+ }
+ Dot {
+  name Dot3
+  note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic Italic"
+  note_font_size 22
+  note_font_color 0xff0000ff
+  xpos -355
+  ypos -285
+ }
+ Output {
+  name Output1
+  xpos -389
+  ypos -183
+ }
+end_group

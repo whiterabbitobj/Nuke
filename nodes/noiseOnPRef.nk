@@ -1,0 +1,71 @@
+set cut_paste_input [stack 0]
+version 6.3 v4
+push $cut_paste_input
+add_layer {aov_util_pref aov_util_pref.red aov_util_pref.green aov_util_pref.blue}
+Group {
+ name noise_3d_on_pref_1
+ note_font "Cachet Std Book"
+ selected true
+ xpos -6928
+ ypos -4168
+ mapsize {0.15 0.15}
+ addUserKnob {20 Noise3D}
+ addUserKnob {20 Instructions n 1}
+ Instructions 0
+ addUserKnob {26 text l "" +STARTLINE T "You need a aov_util_p in your image in order to map the noise in 3D space.\nr - noise function\ng - fBm function\nb - turbulence function"}
+ addUserKnob {20 endGroup n -1}
+ addUserKnob {26 separator l "Noise Control"}
+ addUserKnob {41 in l "p aov" T Shuffle1.in}
+ addUserKnob {7 lacunarity R 0 10}
+ lacunarity 3.3
+ addUserKnob {7 gain}
+ gain 1
+ addUserKnob {3 octaves}
+ octaves 2
+ addUserKnob {7 frequency R 0 100}
+ frequency 5
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -629
+  ypos -33
+ }
+add_layer {layer1}
+ Shuffle {
+  in aov_util_pref
+  alpha black
+  name Shuffle1
+  xpos -629
+  ypos 66
+ }
+ Remove {
+  operation keep
+  channels rgba
+  name Remove1
+  xpos -629
+  ypos 140
+ }
+ Expression {
+  temp_name0 lcr
+  temp_expr0 parent.lacunarity
+  temp_name1 fq
+  temp_expr1 parent.frequency
+  temp_name2 gn
+  temp_expr2 parent.gain
+  temp_name3 oct
+  temp_expr3 parent.octaves
+  expr0 "noise(r/fq, b/fq, g/fq) "
+  expr1 "fBm(r/fq, b/fq, g/fq, oct, lcr, gn)"
+  expr2 "turbulence(r/fq, b/fq, g/fq, oct, lcr, gn)"
+  name Expression1
+  selected true
+  xpos -629
+  ypos 235
+ }
+ Output {
+  name Output1
+  xpos -629
+  ypos 309
+ }
+end_group

@@ -1,0 +1,84 @@
+set cut_paste_input [stack 0]
+version 6.1 v5
+push $cut_paste_input
+Group {
+ name timeX_v4_1
+ tile_color 0xd1ba31ff
+ label "hero: \[value heroFrame] / offs: \[value offset] / cur: \[value curFrame]"
+ note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 13
+ note_font_color 0xff
+ selected true
+ xpos 7877
+ ypos -676
+ addUserKnob {20 User}
+ addUserKnob {6 blackBefore l "Black before offset frame?" +STARTLINE}
+ addUserKnob {3 heroFrame l "Hero Frame:::"}
+ heroFrame 1
+ addUserKnob {3 offset l "Offset Frame:::"}
+ offset 1
+ addUserKnob {26 ""}
+ addUserKnob {6 doLast l "Do Last Frame?" +STARTLINE}
+ addUserKnob {4 whichLast l of -STARTLINE M {Element Comp ""}}
+ addUserKnob {3 lastFrame l "Last Frame:::"}
+ lastFrame 100
+ addUserKnob {26 ""}
+ addUserKnob {7 Speed}
+ Speed 1
+ addUserKnob {41 filter T timeX_timeWarp.filter}
+ addUserKnob {26 ""}
+ addUserKnob {26 ""}
+ addUserKnob {7 curFrame l "Frame (read-only):"}
+ curFrame {{"((frame - offset) * Speed) + heroFrame"}}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos 568
+  ypos 480
+ }
+ Dot {
+  name Dot4
+  xpos 602
+  ypos 520
+ }
+set Nc96a070 [stack 0]
+ Grade {
+  channels all
+  multiply 0
+  name Grade2
+  xpos 412
+  ypos 580
+ }
+set Nca599a0 [stack 0]
+push $Nca599a0
+push $Nc96a070
+ TimeWarp {
+  lookup {{"((frame - offset) * Speed) + parent.heroFrame" i C x200 200 x232 232}}
+  name timeX_timeWarp
+  xpos 568
+  ypos 606
+ }
+ Switch {
+  inputs 2
+  which {{"frame < parent.offset ? 1 : 0" i x223 0}}
+  name ff_switch
+  selected true
+  xpos 568
+  ypos 662
+  disable {{!parent.blackBefore i}}
+ }
+ Switch {
+  inputs 2
+  which {{"parent.whichLast ? (frame > parent.lastFrame ? 1 : 0) : (parent.timeX_timeWarp.lookup > parent.lastFrame ? 1 : 0)" i}}
+  name lf_switch
+  xpos 568
+  ypos 706
+  disable {{"! parent.doLast" i}}
+ }
+ Output {
+  name Output1
+  xpos 568
+  ypos 783
+ }
+end_group

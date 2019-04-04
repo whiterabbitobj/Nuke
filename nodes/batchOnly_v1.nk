@@ -1,0 +1,38 @@
+set cut_paste_input [stack 0]
+version 6.3 v4
+push 0
+push $cut_paste_input
+Group {
+ inputs 2
+ name BATCH_ONLY_1
+ selected true
+ xpos -1893
+ ypos -4565
+}
+ Input {
+  inputs 0
+  name gui
+  selected true
+  xpos -704
+  ypos -482
+  number 1
+ }
+ Input {
+  inputs 0
+  name batch
+  xpos -847
+  ypos -482
+ }
+ Switch {
+  inputs 2
+  which {{"\$gui"}}
+  name Switch1
+  xpos -847
+  ypos -393
+ }
+ Output {
+  name Output1
+  xpos -847
+  ypos -320
+ }
+end_group

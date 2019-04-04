@@ -1,0 +1,159 @@
+set cut_paste_input [stack 0]
+version 6.2 v4
+push $cut_paste_input
+Reformat {
+ format "2048 2048 0 0 2048 2048 1 square_2K"
+ name Reformat4
+ selected true
+ xpos -2866
+ ypos -2973
+}
+set N2d834eb0 [stack 0]
+Radial {
+ output alpha
+ replace true
+ area {0 0 {width i} {height i}}
+ name Radial1
+ selected true
+ xpos -2929
+ ypos -2780
+}
+ColorLookup {
+ channels alpha
+ lut {master {curve 0 x0.5933961868 0.7927860022 x1 1 s0}
+   red {}
+   green {}
+   blue {}
+   alpha {}}
+ name ColorLookup5
+ selected true
+ xpos -2929
+ ypos -2738
+}
+Transform {
+ scale {1 1}
+ center {1024 1024}
+ motionblur {{root.motionblur i}}
+ shutter {{root.shutter i}}
+ shutteroffset centred
+ name Transform21
+ selected true
+ xpos -2929
+ ypos -2696
+}
+push $N2d834eb0
+Ramp {
+ output {rgba.red -rgba.green -rgba.blue -rgba.alpha}
+ replace true
+ invert true
+ p0 {0 0}
+ p1 {{width i} 0}
+ name Ramp3
+ selected true
+ xpos -3060
+ ypos -2774
+}
+Ramp {
+ output {-rgba.red rgba.green -rgba.blue -rgba.alpha}
+ replace true
+ invert true
+ p0 {0 0}
+ p1 {0 {height i}}
+ name Ramp4
+ selected true
+ xpos -3060
+ ypos -2732
+}
+Grade {
+ blackpoint 0.5
+ black_clamp false
+ name Grade64
+ selected true
+ xpos -3060
+ ypos -2690
+}
+add_layer {layer1}
+Shuffle {
+ alpha white
+ name Shuffle13
+ label "\[value in]"
+ selected true
+ xpos -3060
+ ypos -2662
+}
+Merge2 {
+ inputs 2
+ operation mask
+ name Merge57
+ note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold"
+ note_font_size 13
+ note_font_color 0xff00ff
+ selected true
+ xpos -2929
+ ypos -2640
+}
+Reformat {
+ name Reformat5
+ selected true
+ xpos -2929
+ ypos -2610
+}
+Transform {
+ translate {0.5 -19}
+ scale {0.392 0.447}
+ center {914 778}
+ motionblur {{root.motionblur i}}
+ shutter {{root.shutter i}}
+ shutteroffset centred
+ name Transform22
+ selected true
+ xpos -2929
+ ypos -2582
+}
+push $N2d834eb0
+Ramp {
+ output {rgba.red -rgba.green -rgba.blue -rgba.alpha}
+ p0 {-0.5 0}
+ p1 {{width-0.5 i} 0}
+ name Ramp2
+ selected true
+ xpos -2733
+ ypos -2756
+}
+Ramp {
+ output {-rgba.red rgba.green -rgba.blue -rgba.alpha}
+ p0 {0 -0.5}
+ p1 {0 {height-0.5 i}}
+ name Ramp5
+ selected true
+ xpos -2733
+ ypos -2714
+}
+Reformat {
+ resize distort
+ name Reformat6
+ selected true
+ xpos -2733
+ ypos -2672
+}
+Merge2 {
+ inputs 2
+ operation plus
+ mix 0.053
+ name Merge58
+ note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold"
+ note_font_size 13
+ note_font_color 0xff00ff
+ selected true
+ xpos -2733
+ ypos -2419
+}
+push 0
+STMap {
+ inputs 2
+ uv rgb
+ name STMap2
+ selected true
+ xpos -3415
+ ypos -2425
+}

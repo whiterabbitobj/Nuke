@@ -1,0 +1,139 @@
+set cut_paste_input [stack 0]
+version 6.1 v5
+push $cut_paste_input
+Shuffle {
+ alpha white
+ name Shuffle2
+ selected true
+ xpos -376
+ ypos -254
+}
+Log2Lin {
+ operation lin2log
+ name Log2Lin3
+ selected true
+ xpos -376
+ ypos -207
+}
+set N4e88390 [stack 0]
+Colorspace {
+ colorspace_out YCbCr
+ name Colorspace7
+ selected true
+ xpos -278
+ ypos -110
+}
+OFXuk.co.thefoundry.furnace.f_denoise_v403 {
+ colourSpace sRGB
+ amount 1
+ plateSize 4K
+ suppRinging true
+ output Result
+ noise 10
+ "Analysis Region" 0
+ centre {1520.399731 811.4995244}
+ frame 95
+ Advanced 0
+ redAmount 1
+ greenAmount 1
+ blueAmount 1
+ needToAnalyse true
+ sampleFrameHasBeenInitialised true
+ notBeenMoved false
+ beenHereBefore true
+ inputHasChanged false
+ beenHereBefore2 true
+ dontAnalyse false
+ cacheBreaker false
+ name F_DeNoise6
+ selected true
+ xpos -278
+ ypos -57
+}
+Blur {
+ channels {-rgba.red rgba.green -rgba.blue}
+ size 10
+ name Blur4
+ selected true
+ xpos -278
+ ypos -14
+}
+Colorspace {
+ colorspace_in YCbCr
+ name Colorspace8
+ selected true
+ xpos -278
+ ypos 28
+}
+push $N4e88390
+OFXuk.co.thefoundry.furnace.f_denoise_v403 {
+ colourSpace Linear
+ amount 1
+ plateSize 4K
+ suppRinging true
+ output Result
+ noise 10
+ "Analysis Region" 1
+ centre {1498.850049 776.5001307}
+ frame 95
+ Advanced 1
+ redAmount 1
+ greenAmount 1
+ blueAmount 1
+ needToAnalyse true
+ sampleFrameHasBeenInitialised true
+ notBeenMoved false
+ beenHereBefore true
+ inputHasChanged false
+ beenHereBefore2 true
+ dontAnalyse false
+ cacheBreaker true
+ name F_DeNoise7
+ selected true
+ xpos -376
+ ypos -54
+}
+Copy {
+ inputs 2
+ from0 rgba.blue
+ to0 rgba.blue
+ name Copy3
+ selected true
+ xpos -376
+ ypos 116
+}
+Log2Lin {
+ name Log2Lin4
+ selected true
+ xpos -376
+ ypos 158
+}
+Colorspace {
+ colorspace_out CIE-Lab
+ name Colorspace1
+ selected true
+ xpos -376
+ ypos 186
+}
+Sharpen {
+ channels {rgba.red -rgba.green -rgba.blue}
+ name Sharpen1
+ selected true
+ xpos -376
+ ypos 214
+}
+Blur {
+ channels {-rgba.red rgba.green rgba.blue}
+ size 3
+ name Blur1
+ selected true
+ xpos -376
+ ypos 256
+}
+Colorspace {
+ colorspace_in CIE-Lab
+ name Colorspace2
+ selected true
+ xpos -376
+ ypos 298
+}

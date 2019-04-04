@@ -1,0 +1,148 @@
+set cut_paste_input [stack 0]
+version 6.0 v6
+push $cut_paste_input
+push 0
+Group {
+ inputs 2
+ name hueMix1
+ help "This node will transfer the Hue and Saturation from input A onto input B. Sliders alter amount. Advanced tab allows you to choose the HSV conversion algorithms."
+ knobChanged "\ndef doHueMixCallback():\n    k = nuke.thisKnob()\n    g = nuke.thisNode()\['doGang'].value()\n    if k.name() == 'amtHue' and g:\n        nuke.thisNode()\['amtSat'].setValue(k.value())\n    if k.name() == 'amtSat' and g:\n        nuke.thisNode()\['amtHue'].setValue(k.value())\ndoHueMixCallback()\n"
+ tile_color 0x77a8ffff
+ note_font "Verdana Bold Bold Bold Bold"
+ selected true
+ xpos -1087
+ ypos 1552
+ addUserKnob {20 huemixTab l "Hue Mix"}
+ addUserKnob {7 blurAmt l "Blur: " -STARTLINE R 0 200}
+ blurAmt 50
+ addUserKnob {4 doBlurChoice l "" -STARTLINE M {"Before conversion" "After conversion" "" ""}}
+ doBlurChoice "After conversion"
+ addUserKnob {26 ""}
+ addUserKnob {6 doGang l gang +STARTLINE}
+ doGang true
+ addUserKnob {7 amtHue l "Hue Transfer:"}
+ amtHue 1
+ addUserKnob {7 amtSat l "Sat Transfer:"}
+ amtSat 1
+ addUserKnob {26 ""}
+ addUserKnob {7 mix}
+ mix 1
+ addUserKnob {20 advTab l Advanced}
+ addUserKnob {26 descTxt l "" +STARTLINE T "These conversions will apply to both inputs and be reversed for the output."}
+ addUserKnob {26 ""}
+ addUserKnob {41 illuminant_in l in t "This will be the Out conversion after the H/S transfer." T bToHSV.illuminant_in}
+ addUserKnob {41 primary_in l "" -STARTLINE T bToHSV.primary_in}
+ addUserKnob {41 illuminant_out l out t "This will be the In conversion after the H/S transfer." T bToHSV.illuminant_out}
+ addUserKnob {41 primary_out l "" -STARTLINE T bToHSV.primary_out}
+ addUserKnob {26 ""}
+}
+ Input {
+  inputs 0
+  name A
+  xpos -106
+  ypos -182
+  number 1
+ }
+ Blur {
+  channels rgb
+  size {{blurAmt i}}
+  filter triangle
+  name blurBefore
+  xpos -106
+  ypos -61
+  disable {{parent.doBlurChoice i}}
+ }
+ Colorspace {
+  colorspace_out HSV
+  name aToHSV
+  xpos -106
+  ypos -37
+ }
+ Blur {
+  channels rgb
+  size {{parent.blurAmt i}}
+  filter triangle
+  name blurAfter
+  xpos -106
+  ypos -13
+  disable {{!parent.doBlurChoice i}}
+ }
+ Dot {
+  name Dot2
+  xpos -72
+  ypos 51
+ }
+set N105b9080 [stack 0]
+ Dot {
+  name Dot3
+  xpos -72
+  ypos 113
+ }
+push $N105b9080
+ Input {
+  inputs 0
+  name B
+  xpos 163
+  ypos -190
+ }
+ Dot {
+  name Dot4
+  xpos 197
+  ypos -101
+ }
+set N105c6300 [stack 0]
+ Colorspace {
+  colorspace_out HSV
+  name bToHSV
+  knobChanged "\ndef doConvCallback():\n    k = nuke.thisKnob()\n    aConv = nuke.toNode('aToHSV')\n    oConv = nuke.toNode('resultToRGB')\n    if k.name() == 'illuminant_in':\n        aConv\['illuminant_in'].setValue(k.value())\n        oConv\['illuminant_out'].setValue(k.value())\n    if k.name() == 'illuminant_out':\n        aConv\['illuminant_out'].setValue(k.value())\n        oConv\['illuminant_in'].setValue(k.value())\n    if k.name() == 'primary_in':\n        aConv\['primary_in'].setValue(k.value())\n        oConv\['primary_out'].setValue(k.value())\n    if k.name() == 'primary_out':\n        aConv\['primary_out'].setValue(k.value())\n        oConv\['primary_in'].setValue(k.value())\ndoConvCallback()\n"
+  xpos 163
+  ypos -39
+ }
+ Dissolve {
+  inputs 2
+  channels {rgba.red -rgba.green -rgba.blue}
+  which {{parent.amtHue i}}
+  name dissolveHue
+  xpos 163
+  ypos 43
+ }
+ Dissolve {
+  inputs 2
+  channels {-rgba.red rgba.green -rgba.blue}
+  which {{parent.amtSat i}}
+  name dissolveSat
+  xpos 163
+  ypos 105
+ }
+ Colorspace {
+  colorspace_in HSV
+  name resultToRGB
+  xpos 163
+  ypos 181
+ }
+push $N105c6300
+ Dot {
+  name Dot1
+  xpos 436
+  ypos -101
+ }
+ Dot {
+  name Dot5
+  xpos 436
+  ypos 260
+ }
+ Dissolve {
+  inputs 2
+  channels rgb
+  which {{parent.mix i}}
+  name Dissolve1
+  selected true
+  xpos 163
+  ypos 257
+ }
+ Output {
+  name Output1
+  xpos 163
+  ypos 380
+ }
+end_group

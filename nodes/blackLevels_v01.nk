@@ -1,0 +1,127 @@
+set cut_paste_input [stack 0]
+version 6.1 v5
+push $cut_paste_input
+Group {
+ name blackLevels
+ knobChanged "\nif nuke.thisKnob().name() == 'showPanel':\n    callVIPStatus = nuke.activeViewer().node()\['input_process'].value()\n    \ndef doBlackLevelsCallback():\n    k = nuke.thisKnob()\n    v = nuke.activeViewer().node()\n    if k.name() == 'doPreviewBlacks':\n        v\['input_process'].setValue(not k.value())\n    if k.name() == 'hidePanel':\n        nuke.thisNode()\['doPreviewBlacks'].setValue(False)\n        v\['input_process'].setValue(callVIPStatus)\n    if k.name() == 'inputChange':\n        n = nuke.thisNode()\n        if n.input(1) is None:\n            n\['maskCache'].setValue(n\['maskChannelMask'].value())\n            n\['maskChannelMask'].setValue(\"none\")\n        if n.input(1) is not None:\n            n\['maskChannelMask'].setValue(n\['maskCache'].value())\ndoBlackLevelsCallback()\n"
+ tile_color 0x77a8ffff
+ note_font "Verdana Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ selected true
+ xpos -2116
+ ypos -606
+ addUserKnob {20 blackLevelsTab l "Black Levels"}
+ addUserKnob {26 ""}
+ addUserKnob {18 blackPoint l "Black Point"}
+ blackPoint {0 0 0}
+ addUserKnob {18 pinPoint l Pin t "Pixel value where black levels adjustment will cease to have an effect.\n"}
+ pinPoint {0.1000000015 0.1000000015 0.1}
+ addUserKnob {26 ""}
+ addUserKnob {20 falloffGroup l Falloff n 1}
+ addUserKnob {7 rFall l Red R -1 5}
+ addUserKnob {7 gFall l Green R -1 5}
+ addUserKnob {7 bFall l Blue R -1 5}
+ addUserKnob {20 endFalloff n -1}
+ addUserKnob {26 ""}
+ addUserKnob {20 hardGroup l Hardness n 1}
+ hardGroup 0
+ addUserKnob {7 rHard l Red}
+ addUserKnob {7 gHard l Green}
+ addUserKnob {7 bHard l Blue}
+ addUserKnob {20 endHard n -1}
+ addUserKnob {26 ""}
+ addUserKnob {41 maskChannelMask l mask -STARTLINE T Plus.maskChannelMask}
+ addUserKnob {26 maskCache l maskcache +INVISIBLE T none}
+ addUserKnob {41 alpha l "(Un)premult by" T Unpremult1.alpha}
+ addUserKnob {7 mix l Mix}
+ mix 1
+ addUserKnob {6 doPreviewBlacks l "Preview Black Areas" t "Checking this box will display your control masks for each channel. It will additionally turn the ViewerIP off for proper channel viewing." -STARTLINE}
+}
+ Input {
+  inputs 0
+  name in
+  xpos 462
+  ypos 396
+ }
+ Unpremult {
+  alpha none
+  name Unpremult1
+  knobChanged "nuke.toNode(\"parent.Premult1\")\[\"alpha\"].setValue(nuke.thisNode()\[\"alpha\"].value()) "
+  xpos 462
+  ypos 466
+ }
+set N1cc8bfd0 [stack 0]
+ Clamp {
+  channels rgb
+  name Clamp1
+  xpos 216
+  ypos 466
+ }
+ Grade {
+  blackpoint {{"clamp( parent.rHard, 0, parent.pinPoint.r )"} {"clamp( parent.gHard, 0, parent.pinPoint.g )"} {"clamp( parent.bHard, 0, parent.pinPoint.b )"} 0}
+  whitepoint {{parent.pinPoint.r} {parent.pinPoint.g} {parent.pinPoint.b} 0}
+  gamma {{"parent.rFall + 1"} {"parent.gFall + 1"} {"parent.bFall + 1"} 0}
+  white_clamp true
+  name blackLevelsMattesGen
+  selected true
+  xpos 216
+  ypos 494
+ }
+ Invert {
+  channels rgb
+  name Invert1
+  xpos 216
+  ypos 540
+ }
+set N1ebc2a80 [stack 0]
+ Dot {
+  name Dot1
+  xpos 250
+  ypos 684
+ }
+ Input {
+  inputs 0
+  name mask
+  xpos 797
+  ypos 514
+  number 1
+ }
+push $N1ebc2a80
+ Multiply {
+  channels rgb
+  value {{parent.blackPoint.r i} {parent.blackPoint.g i} {parent.blackPoint.b i} 0}
+  name Multiply1
+  xpos 334
+  ypos 540
+ }
+push $N1cc8bfd0
+ Merge2 {
+  inputs 2+1
+  operation plus
+  Achannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+  Bchannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+  output {rgba.red rgba.green rgba.blue -rgba.alpha}
+  maskChannelMask none
+  mix {{parent.mix i}}
+  name Plus
+  xpos 462
+  ypos 540
+ }
+ Premult {
+  alpha none
+  name Premult1
+  xpos 462
+  ypos 582
+ }
+ Switch {
+  inputs 2
+  which {{parent.doPreviewBlacks i}}
+  name Switch1
+  xpos 462
+  ypos 681
+ }
+ Output {
+  name Output1
+  xpos 462
+  ypos 749
+ }
+end_group
