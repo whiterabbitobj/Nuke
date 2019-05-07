@@ -2,10 +2,16 @@ import os
 import pyseq
 import subprocess
 from argparse import ArgumentParser
+import glob
+
+### THIS SCRIPT WILL USE THE 'PYSEQ' MODULE TO COLLECT AND SUCCINCTLY PRINT
+### ALL FILESETS LOCATED UNDER EITHER THE CURRENT (DEFAULT) OR PROVIDED PATH
 
 
 # Recursively collect filsets below provided directory
 def get_seqs(path, ext="", concise=True):
+    num = len(glob.glob(path + "/**/*", recursive=True))
+    print("Total files to search: {}".format(num))
     seq_list = []
     for root, dirs, seq in pyseq.walk(path):
         root = root.replace('\\', '/')
