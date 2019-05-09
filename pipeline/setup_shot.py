@@ -6,12 +6,8 @@ from argparse import ArgumentParser
 parser = ArgumentParser()
 parser.add_argument("-path", type=str, default=os.getcwd())
 parser.add_argument("shot", nargs="+", type=str)
-#parser.add_argument("shot", type=str)
-
-
 
 args = parser.parse_args()
-# seq = args.seq
 shot = args.shot
 
 if len(shot) == 1:
@@ -35,7 +31,6 @@ shots_loc = os.path.join("production", "shot")
 dir_structure = os.walk(os.path.join(show_path, standard_loc))
 
 for root, dirs, files in dir_structure:
-    # print(root, dir, files)
     for dir in dirs:
         dir = os.path.join(root, dir)
         fp = dir.replace(standard_loc, shots_loc)
