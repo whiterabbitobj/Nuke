@@ -1,0 +1,54 @@
+set cut_paste_input [stack 0]
+version 6.1 v3
+push $cut_paste_input
+Group {
+ name edgeGrad_v01_1
+ selected true
+ xpos 762
+ ypos 9358
+ addUserKnob {20 User}
+ addUserKnob {7 blurAmt l "Edge Size:" R 12 120}
+ blurAmt 12
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos 568
+  ypos 480
+ }
+ Dot {
+  name Dot354
+  xpos 602
+  ypos 520
+ }
+set N3afc1650 [stack 0]
+ Blur {
+  channels alpha
+  size {{parent.blurAmt}}
+  name Blur12
+  selected true
+  xpos 529
+  ypos 542
+ }
+push $N3afc1650
+ ChannelMerge {
+  inputs 2
+  operation stencil
+  name ChannelMerge50
+  xpos 529
+  ypos 584
+ }
+push $N3afc1650
+ ChannelMerge {
+  inputs 2
+  operation divide
+  name ChannelMerge51
+  xpos 529
+  ypos 640
+ }
+ Output {
+  name Output1
+  xpos 529
+  ypos 740
+ }
+end_group

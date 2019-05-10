@@ -1,0 +1,71 @@
+set cut_paste_input [stack 0]
+version 7.0 v10
+push $cut_paste_input
+Group {
+ name scaledBlur_v2_1
+ help "This gizmo will scale down by the chosen multiplier, blur, then scale back up to full size. It will crop the image to maintain proper bounding box."
+ knobChanged "\nk = nuke.thisKnob()\nif (k.name() == \"scale\") and (k.value() > 0.75):\n    k.setValue(0.75)\n    nuke.message(\"Setting the scaling higher than 0.75 defeats the purpose of this node. Either choose a lower scale setting, or use a regular blur.\") \n"
+ tile_color 0xcc7f4cff
+ note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ selected true
+ xpos -495
+ ypos -101
+ addUserKnob {20 User}
+ addUserKnob {7 scale l "Scale: " R 0.1 0.75}
+ scale 0.33333
+ addUserKnob {14 blurSize l "Blur Size: " R 0 100}
+ blurSize 200
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -63
+  ypos -571
+ }
+ Dot {
+  name Dot125
+  note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic"
+  note_font_size 22
+  note_font_color 0xff0000ff
+  xpos -29
+  ypos -531
+ }
+ Transform {
+  scale {{parent.scale i}}
+  center {914 778}
+  black_outside false
+  motionblur {{root.motionblur i}}
+  shutter {{root.shutter i}}
+  shutteroffset centred
+  name Transform30
+  xpos -63
+  ypos -491
+ }
+ Blur {
+  size {{parent.blurSize i} {parent.blurSize i}}
+  name Blur27
+  xpos -63
+  ypos -463
+ }
+ Transform {
+  scale {{1/parent.Transform30.scale i}}
+  center {914 778}
+  motionblur {{root.motionblur i}}
+  shutter {{root.shutter i}}
+  shutteroffset centred
+  name Transform31
+  xpos -63
+  ypos -421
+ }
+ Crop {
+  box {0 0 {width i} {height i}}
+  name Crop27
+  xpos -63
+  ypos -393
+ }
+ Output {
+  name Output1
+  xpos -63
+  ypos -293
+ }
+end_group

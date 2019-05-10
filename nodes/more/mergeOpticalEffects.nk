@@ -1,0 +1,86 @@
+set cut_paste_input [stack 0]
+version 6.2 v4
+push $cut_paste_input
+push 0
+Group {
+ inputs 2
+ name mergeOpticalEffects
+ tile_color 0x284d6bff
+ note_font "Bitstream Vera Sans Bold"
+ note_font_size 13
+ note_font_color 0xff00ff
+ selected true
+ xpos 6590
+ ypos 6355
+ addUserKnob {20 User}
+ addUserKnob {7 mixPlus l "Dissolve to Plus"}
+ mixPlus 0.43
+}
+ Input {
+  inputs 0
+  name A
+  selected true
+  xpos 568
+  ypos 428
+  number 1
+ }
+ Dot {
+  name Dot60
+  note_font "Bitstream Vera Sans Italic Italic Italic"
+  note_font_size 22
+  note_font_color 0xff0000ff
+  xpos 602
+  ypos 520
+ }
+set N3f6c4eb0 [stack 0]
+ Input {
+  inputs 0
+  name B
+  xpos 307
+  ypos 385
+ }
+ Dot {
+  name Dot45
+  note_font "Bitstream Vera Sans Italic Italic Italic"
+  note_font_size 22
+  note_font_color 0xff0000ff
+  xpos 341
+  ypos 468
+ }
+set N932cad0 [stack 0]
+ Merge2 {
+  inputs 2
+  operation plus
+  name Merge15
+  note_font "Bitstream Vera Sans Bold Bold Bold"
+  note_font_size 13
+  note_font_color 0xff00ff
+  xpos 217
+  ypos 573
+ }
+push $N3f6c4eb0
+push $N932cad0
+ Merge2 {
+  inputs 2
+  operation hypot
+  bbox B
+  name bling_hypot
+  note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+  note_font_size 13
+  note_font_color 0xff00ff
+  xpos 410
+  ypos 577
+ }
+ Dissolve {
+  inputs 2
+  which {{parent.mixPlus i}}
+  name Dissolve2
+  xpos 307
+  ypos 667
+ }
+ Output {
+  name Output1
+  xpos 307
+  ypos 767
+ }
+end_group

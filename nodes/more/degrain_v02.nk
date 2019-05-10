@@ -1,0 +1,110 @@
+set cut_paste_input [stack 0]
+version 6.3 v2
+push $cut_paste_input
+Shuffle {
+ alpha white
+ name Shuffle2
+ selected true
+ xpos -461
+ ypos -82
+}
+Log2Lin {
+ operation lin2log
+ name Log2Lin3
+ selected true
+ xpos -461
+ ypos -56
+}
+set Nd80f5680 [stack 0]
+Colorspace {
+ colorspace_out YCbCr
+ name Colorspace7
+ selected true
+ xpos -363
+ ypos -23
+}
+OFXuk.co.thefoundry.furnace.f_denoise_v403 {
+ colourSpace sRGB
+ amount 1
+ plateSize 4K
+ suppRinging false
+ output Result
+ noise 10
+ "Analysis Region" 0
+ centre {1765.399902 949.4995193}
+ frame 1
+ Advanced 0
+ redAmount 1
+ greenAmount 1
+ blueAmount 1
+ needToAnalyse true
+ sampleFrameHasBeenInitialised true
+ notBeenMoved false
+ beenHereBefore true
+ inputHasChanged false
+ beenHereBefore2 true
+ dontAnalyse false
+ cacheBreaker false
+ name F_DeNoise6
+ selected true
+ xpos -363
+ ypos 3
+}
+Blur {
+ channels {-rgba.red rgba.green -rgba.blue}
+ size 5
+ name Blur4
+ selected true
+ xpos -363
+ ypos 29
+}
+Colorspace {
+ colorspace_in YCbCr
+ name Colorspace8
+ selected true
+ xpos -363
+ ypos 71
+}
+push $Nd80f5680
+OFXuk.co.thefoundry.furnace.f_denoise_v403 {
+ colourSpace Linear
+ amount 1
+ plateSize 4K
+ suppRinging false
+ output Result
+ noise 10
+ "Analysis Region" 1
+ centre {1764.85022 949.5000687}
+ frame 1
+ Advanced 1
+ redAmount 1
+ greenAmount 1
+ blueAmount 1
+ needToAnalyse true
+ sampleFrameHasBeenInitialised true
+ notBeenMoved false
+ beenHereBefore true
+ inputHasChanged false
+ beenHereBefore2 true
+ dontAnalyse false
+ cacheBreaker false
+ name F_DeNoise7
+ selected true
+ xpos -461
+ ypos 6
+}
+Copy {
+ inputs 2
+ from0 rgba.blue
+ to0 rgba.blue
+ name Copy3
+ selected true
+ xpos -461
+ ypos 65
+}
+Log2Lin {
+ name Log2Lin4
+ selected true
+ xpos -461
+ ypos 107
+}

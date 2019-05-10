@@ -1,0 +1,85 @@
+set cut_paste_input [stack 0]
+version 6.3 v8
+push $cut_paste_input
+push 0
+Group {
+ inputs 2
+ name switcheroo1
+ tile_color 0xff0000ff
+ note_font "Bitstream Vera Sans Bold Italic"
+ note_font_size 12
+ note_font_color 0xff
+ selected true
+ xpos -1556
+ ypos -471
+ addUserKnob {20 User}
+ addUserKnob {26 txt1 l "" +STARTLINE T "Activate \"A\" "}
+ addUserKnob {6 doFirst l from -STARTLINE}
+ doFirst true
+ addUserKnob {3 firstFrame l "" -STARTLINE}
+ firstFrame 822
+ addUserKnob {6 doLast l " to" -STARTLINE}
+ addUserKnob {3 lastFrame l "" -STARTLINE}
+ lastFrame 882
+}
+ Constant {
+  inputs 0
+  channels rgb
+  first 1001
+  last 1032
+  name Constant1
+  xpos 167
+  ypos -517
+ }
+ Input {
+  inputs 0
+  name A
+  xpos 57
+  ypos -596
+  number 1
+ }
+ Switch {
+  inputs 2
+  which {{hasError i}}
+  name Switch2
+  xpos 57
+  ypos -494
+ }
+ Dot {
+  name Dot1
+  note_font "Bitstream Vera Sans Italic Italic"
+  note_font_size 22
+  note_font_color 0xff0000ff
+  xpos 91
+  ypos -435
+ }
+ Input {
+  inputs 0
+  name B
+  xpos -156
+  ypos -586
+ }
+ Switch {
+  inputs 2
+  which {{"(frame < firstFrame) && doFirst ? 0 : (frame > lastFrame) && doLast ? 0 : (doFirst + doLast) > 0 ? 1 : 0" i}}
+  name Switch3
+  selected true
+  xpos -156
+  ypos -347
+ }
+ Dot {
+  name Dot3
+  note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic Italic Italic"
+  note_font_size 22
+  note_font_color 0xff0000ff
+  selected true
+  xpos -122
+  ypos -263
+ }
+ Output {
+  name Output1
+  selected true
+  xpos -156
+  ypos -192
+ }
+end_group

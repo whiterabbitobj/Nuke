@@ -1,0 +1,80 @@
+set cut_paste_input [stack 0]
+version 6.3 v8
+push $cut_paste_input
+Group {
+ name ROTO_CHECKER
+ selected true
+ xpos -3143
+ ypos -3315
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -650
+  ypos -110
+ }
+ Dot {
+  name Dot20
+  note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic"
+  note_font_size 22
+  note_font_color 0xff0000ff
+  xpos -616
+  ypos -70
+ }
+set N62fe160 [stack 0]
+ EdgeDetectWrapper {
+  channels alpha
+  name EdgeDetectWrapper1
+  xpos -650
+  ypos 61
+ }
+ FilterErode {
+  size -1
+  name FilterErode1
+  xpos -650
+  ypos 99
+  disable true
+ }
+push $N62fe160
+ Clamp {
+  channels alpha
+  name Clamp3
+  xpos -766
+  ypos -60
+ }
+ Input {
+  inputs 0
+  name Input2
+  xpos -894
+  ypos -100
+  number 1
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy1
+  xpos -894
+  ypos -60
+ }
+ Grade {
+  white {1 1 1 1}
+  add {0.04399999976 -0.03799999878 0.009499999695 0}
+  maskChannelInput rgba.alpha
+  name Grade1
+  xpos -894
+  ypos -22
+ }
+ Grade {
+  inputs 1+1
+  add 0.48
+  name Grade2
+  xpos -894
+  ypos 67
+ }
+ Output {
+  name Output1
+  xpos -894
+  ypos 167
+ }
+end_group

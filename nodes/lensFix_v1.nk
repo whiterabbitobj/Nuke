@@ -1,0 +1,65 @@
+set cut_paste_input [stack 0]
+version 7.0 v6
+push $cut_paste_input
+Group {
+ name LensFix_v1_1
+ knobChanged "\nn = nuke.thisNode()\nk = nuke.thisKnob()\nn.begin()\nif k.name() == \"whichMap\":\n    c = nuke.toNode(\"Read1\")\n    if int(k.getValue()):\n        x = \"UD\"\n    else:\n        x = \"Dist\"\n    c\['file'].setValue(\"\[value root.VIEWER_INPUT.read\" + x + \"]\")\n\n\n"
+ tile_color 0xff4600ff
+ note_font "Bitstream Vera Sans Bold"
+ selected true
+ xpos 1420
+ ypos 286
+ addUserKnob {20 lensFixTab l "Lens Fix"}
+ addUserKnob {4 whichMap l " " M {Distort Undistort ""}}
+ addUserKnob {26 "" +STARTLINE}
+ addUserKnob {41 filter T STMap1.filter}
+ addUserKnob {41 colorspace_in l in T Colorspace2.colorspace_in}
+ addUserKnob {41 illuminant_in l "" -STARTLINE T Colorspace2.illuminant_in}
+ addUserKnob {41 primary_in l "" -STARTLINE T Colorspace2.primary_in}
+ addUserKnob {41 colorspace_out l out T Colorspace2.colorspace_out}
+ addUserKnob {41 illuminant_out l "" -STARTLINE T Colorspace2.illuminant_out}
+ addUserKnob {41 primary_out l "" -STARTLINE T Colorspace2.primary_out}
+ addUserKnob {20 aboutTab l About}
+ addUserKnob {26 descKnob l Description: T "Apply this node to all rendered or 3D generated elements to apply the lens distortion from the plate.\n\nver.:1\nAuthor: MDoll\nLast Rev.: Aug 22, 2013"}
+}
+ Read {
+  inputs 0
+  file "\[value root.VIEWER_INPUT.readDist]"
+  origset true
+  raw true
+  name Read1
+  xpos 632
+  ypos 463
+ }
+ Input {
+  inputs 0
+  name img
+  xpos 465
+  ypos 426
+ }
+ Colorspace {
+  colorspace_out AlexaV3LogC
+  name Colorspace2
+  knobChanged "\n\n\nn2 = nuke.thisNode()\nk  = nuke.thisKnob()\nc  = nuke.toNode(\"Colorspace3\")\n\nif k.name() == \"colorspace_in\":\n    print k.name()\n    c\['colorspace_out'].setValue(k.value())\nif k.name() == \"colorspace_out\":\n    c\['colorspace_in'].setValue(k.value())\nif k.name() == \"illuminant_in\":\n    c\['illuminant_out'].setValue(k.value())\nif k.name() == \"illuminant_out\":\n    c\['illuminant_in'].setValue(k.value())\nif k.name() == \"primary_in\":\n    c\['primary_out'].setValue(k.value())\nif k.name() == \"primary_out\":\n    c\['primary_in'].setValue(k.value())\n\n"
+  xpos 465
+  ypos 522
+ }
+ STMap {
+  inputs 2
+  uv rgb
+  name STMap1
+  xpos 465
+  ypos 580
+ }
+ Colorspace {
+  colorspace_in AlexaV3LogC
+  name Colorspace3
+  xpos 465
+  ypos 638
+ }
+ Output {
+  name Output1
+  xpos 465
+  ypos 754
+ }
+end_group

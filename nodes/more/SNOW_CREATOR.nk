@@ -1,0 +1,1136 @@
+set cut_paste_input [stack 0]
+version 6.3 v2
+Read {
+ inputs 0
+ file /job/TRD/shot/test/test006/plate/test006_iod_elem_v001/1920×1080/jpg/test006_iod_elem_v001.####.jpg
+ format "1920 1080 0 0 1920 1080 1 HD"
+ last 230
+ origlast 230
+ origset true
+ raw true
+ name Read2
+ selected true
+ xpos -162
+ ypos -359
+}
+Read {
+ inputs 0
+ file /job/TRD/shot/test/test006/plate/test006_iod_elem_v001/1920×1080/dpx/test006_iod_elem_v001.####.dpx
+ format "1920 1080 0 0 1920 1080 1 HD"
+ last 230
+ origlast 230
+ origset true
+ raw true
+ timecode 01:09:35:18
+ name Read1
+ selected true
+ xpos -445
+ ypos -347
+}
+Group {
+ inputs 2
+ name snow_creator_v1
+ selected true
+ xpos -319
+ ypos -175
+ addUserKnob {20 User}
+ addUserKnob {4 rez l Rez: M {"DPX HD" "JPG HD"}}
+ addUserKnob {7 centreOffs l "Centre Offset" -STARTLINE R -1000 1000}
+ addUserKnob {26 ""}
+ addUserKnob {7 flickerAmt l "Flicker amt"}
+ flickerAmt 1.5
+ addUserKnob {3 flickerSeed l seed -STARTLINE}
+ addUserKnob {26 ""}
+ addUserKnob {7 smallFritz l "Small Fritz"}
+ smallFritz {{curve i x7 1 x11 0 x20 0 x22 1 x50 1 x51 0 x63 0 x66 1 x83 0 1 x124 1 x125 0 x128 0 x129 1 x132 0 x183 0 x184 1 x192 1 x196 0}}
+ addUserKnob {26 ""}
+ addUserKnob {7 bigFritzAmt l "Big Fritz"}
+ bigFritzAmt {{curve i x11 0 0.5 x19 0.5 x20 0 x51 0 x52 1 x55 1 x56 0 0 1 x67 1 x68 0 x101 0 x102 1 x114 1 x115 0 x130 0 x131 1 x133 1 x134 0 x137 0 x138 1 x141 1 x142 0 x161 0 x162 1 x165 1 x166 0 x183 0 x192 1 x193 0 x199 0 x200 1 x202 1 x203 0}}
+ addUserKnob {7 bigFritzScale l Scale}
+ bigFritzScale 1
+ addUserKnob {7 bigFritzSpeed l Speed -STARTLINE R -1 1}
+ bigFritzSpeed {{curve i L 0 x73.75215149 212.0412292 x142.3652802 7.41027832 x230 230}}
+ addUserKnob {26 ""}
+ addUserKnob {6 doSnow1 l Snow1 +STARTLINE}
+ doSnow1 {{curve i R k x12 1 s0 x14 0 s0 x36 0 s0 x37 1 s0 x61 1 s0 x63 0 s0 x67 0 s0 x69 1 s0 x78 1 s0 x80 0 s0 x87 0 s0 x89 1 s0 1 s0 0 s0 x98 0 s0 x100 0.9793787599 s0 0 s0 x130 0 s0 x133 1 s0 x134 1 s0 x136 0.01160030346 s0 x143 0 s0 x145 1 s0 x157 1 s0 x159 0 s0 x163 0 s0 x165 1 s0 x170 1 s0 x172 0 s0 x186 0 s0 x188 1 s0 x194 1 s0 x196 0 s0 x207 0 s0 x208 1 s0 x221 1 s0 x223 0 s0 x229 0 s0}}
+ addUserKnob {12 snow1Trans l trans -STARTLINE}
+ snow1Trans {10 240}
+ addUserKnob {14 snow1Scale l scale -STARTLINE R 0 100}
+ snow1Scale {1.2 0.6}
+ addUserKnob {7 snowFlickerAmp l "Flicker Amt" R 0 5}
+ snowFlickerAmp 2
+ addUserKnob {7 snowGamma l gamma -STARTLINE}
+ snowGamma 0.2
+ addUserKnob {26 ""}
+ addUserKnob {41 ghost_amp l "Ghost Amp" T S_TVDamage2.ghost_amp}
+ addUserKnob {41 bars_brightness l "Bars Brightness" T S_TVDamage2.bars_brightness}
+ addUserKnob {41 color_stripes_amplitude l "Color Stripes Amplitude" T S_TVDamage2.color_stripes_amplitude}
+ addUserKnob {26 ""}
+ addUserKnob {6 doRoll l Roll +STARTLINE}
+ doRoll {{curve i K x5 0 1 x11 0 x19 1 x49 0 x68 1 x70 0 x106 0 x118 1 x121 0 x151 0 x155 1 x163 0 x172 1 x178 0 x194 0 x216 0}}
+ addUserKnob {26 ""}
+ addUserKnob {7 staticAmt l "Static: amt"}
+ staticAmt 0.06
+ addUserKnob {7 statisSat l sat -STARTLINE}
+ statisSat 0.36
+ addUserKnob {7 staticScale l scale -STARTLINE R 0.8 1.5}
+ staticScale 1.42
+}
+ Read {
+  inputs 0
+  file /job/LIB/comp_elem/other/bad_tv_000001/bad_tv_000001.####.tga
+  format "1000 1000 0 0 1000 1000 1 "
+  last 300
+  origlast 300
+  origset true
+  raw true
+  name Read1
+  xpos -1549
+  ypos -105
+ }
+ Read {
+  inputs 0
+  file /job/LIB/comp_elem/other/bad_tv_000005/bad_tv_000005.####.tga
+  format "1000 1000 0 0 1000 1000 1 "
+  last 300
+  origlast 300
+  origset true
+  raw true
+  name Read6
+  xpos -999
+  ypos -105
+ }
+ Read {
+  inputs 0
+  file /job/LIB/comp_elem/other/bad_tv_000006/bad_tv_000006.####.tga
+  format "1000 1000 0 0 1000 1000 1 "
+  last 300
+  origlast 300
+  origset true
+  raw true
+  name Read7
+  xpos -889
+  ypos -105
+ }
+ Read {
+  inputs 0
+  file /job/LIB/comp_elem/other/bad_tv_000003/bad_tv_000003.####.tga
+  format "1000 1000 0 0 1000 1000 1 "
+  last 300
+  origlast 300
+  origset true
+  raw true
+  name Read4
+  xpos -1028
+  ypos 155
+ }
+ Reformat {
+  black_outside true
+  name Reformat8
+  xpos -1028
+  ypos 251
+ }
+add_layer {rgba redguard1.glow rgba.beta rgba.family rgba.noise rgba.eyes rgba.test rgba.x rgba.water rgb.raw}
+ Grade {
+  gamma 0.32
+  name Grade2
+  xpos -1028
+  ypos 277
+ }
+ Dot {
+  inputs 0
+  name Dot2
+  xpos 113
+  ypos 356
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  name Merge5
+  label "\[value mix]"
+  xpos -910
+  ypos 285
+ }
+ Read {
+  inputs 0
+  file /job/LIB/comp_elem/other/bad_tv_000002/bad_tv_000002.####.tga
+  format "1000 1000 0 0 1000 1000 1 "
+  before loop
+  last 300
+  after loop
+  origlast 300
+  origset true
+  raw true
+  name Read2
+  xpos 538
+  ypos -226
+ }
+ Reformat {
+  resize distort
+  black_outside true
+  name Reformat7
+  xpos 538
+  ypos -89
+ }
+ Grade {
+  whitepoint 0.78
+  gamma 0.32
+  name Grade1
+  xpos 538
+  ypos -63
+ }
+ Transform {
+  translate {{parent.snow1Trans i} {parent.snow1Trans i}}
+  scale {{parent.snow1Scale i} {parent.snow1Scale i}}
+  center {960 540}
+  name Transform2
+  xpos 538
+  ypos -37
+ }
+ EXPTool {
+  mode Stops
+  gang false
+  red {{random(frame) i}}
+  green {{red i}}
+  blue {{red i}}
+  name EXPTool1
+  label "\[value mode]"
+  xpos 538
+  ypos -11
+ }
+push 0
+ Merge2 {
+  inputs 2
+  operation plus
+  name Merge4
+  label "\[value mix]"
+  xpos 681
+  ypos 16
+ }
+ Read {
+  inputs 0
+  file /job/LIB/comp_elem/other/bad_tv_000007/bad_tv_000007.####.tga
+  format "1000 1000 0 0 1000 1000 1 "
+  before loop
+  last 105
+  after loop
+  origlast 300
+  origset true
+  raw true
+  name Read8
+  xpos 33
+  ypos -164
+ }
+ Reformat {
+  resize distort
+  name Reformat6
+  xpos 41
+  ypos -62
+ }
+ Grade {
+  blackpoint 0.28
+  whitepoint 0.42
+  white_clamp true
+  name Grade9
+  xpos 41
+  ypos -36
+ }
+ Constant {
+  inputs 0
+  channels rgb
+  name Constant1
+  xpos 1099
+  ypos 1236
+ }
+ Dither {
+  amount 1
+  name Dither1
+  xpos 1099
+  ypos 1345
+ }
+ ColorCorrect {
+  saturation {{parent.statisSat i}}
+  name ColorCorrect1
+  xpos 1099
+  ypos 1383
+ }
+ Reformat {
+  type scale
+  scale {{parent.staticScale i}}
+  filter Impulse
+  name Reformat10
+  xpos 1099
+  ypos 1409
+ }
+ Reformat {
+  inputs 0
+  name Reformat17
+  xpos 2576
+  ypos 385
+ }
+ Ramp {
+  output {-rgba.red rgba.green -rgba.blue -rgba.alpha}
+  p0 {100 -0.5}
+  p1 {100 {height-0.5 i}}
+  name Ramp3
+  xpos 2576
+  ypos 421
+ }
+ Ramp {
+  output {rgba.red -rgba.green -rgba.blue -rgba.alpha}
+  p0 {-0.5 0}
+  p1 {{"width - 0.5" i} 0}
+  name Ramp4
+  xpos 2576
+  ypos 463
+ }
+ Shuffle {
+  blue green
+  name Shuffle4
+  label "\[value in]"
+  xpos 2576
+  ypos 501
+ }
+ ColorLookup {
+  channels {-rgba.red -rgba.green rgba.blue -rgba.alpha}
+  lut {master {curve L 0 x0.5 1 0}
+    red {}
+    green {}
+    blue {}
+    alpha {}}
+  name ColorLookup2
+  xpos 2576
+  ypos 539
+ }
+ Dot {
+  name Dot4
+  xpos 2610
+  ypos 668
+ }
+set N17613d50 [stack 0]
+ Reformat {
+  resize distort
+  turn true
+  pbb true
+  name Reformat13
+  xpos 2719
+  ypos 716
+ }
+ SphericalTransform {
+  input "Lat Long map"
+  ry {{"sin(random(frame/5)*5) * 180" i}}
+  fix true
+  name SphericalTransform2
+  xpos 2719
+  ypos 742
+ }
+ Reformat {
+  resize distort
+  turn true
+  name Reformat14
+  xpos 2719
+  ypos 780
+ }
+ Mirror {
+  Vertical true
+  name Mirror1
+  xpos 2719
+  ypos 806
+ }
+ Crop {
+  box {0 0 1920 1080}
+  crop false
+  name Crop3
+  xpos 2719
+  ypos 836
+ }
+set N1763c6e0 [stack 0]
+ Grade {
+  gamma 4.65
+  name Grade12
+  xpos 2809
+  ypos 901
+ }
+ Reformat {
+  inputs 0
+  type "to box"
+  box_width 102
+  box_height {{box_width i}}
+  box_fixed true
+  name Reformat15
+  xpos 2943
+  ypos 657
+ }
+ Noise {
+  size {50 20000}
+  zoffset {{frame/5 i}}
+  lacunarity 3
+  gain 0.318
+  gamma 0.83
+  center {960 540}
+  name Noise4
+  xpos 2943
+  ypos 683
+ }
+ Reformat {
+  resize distort
+  filter Impulse
+  name Reformat16
+  xpos 2943
+  ypos 709
+ }
+ Posterize {
+  Colors 6
+  name Posterize2
+  xpos 2943
+  ypos 761
+ }
+ Grade {
+  channels alpha
+  blackpoint 0.3
+  whitepoint 0.41
+  gamma 0.29
+  black_clamp false
+  name Grade4
+  xpos 2943
+  ypos 807
+ }
+ Crop {
+  box {0 0 1920 1080}
+  softness 120
+  crop false
+  name Crop5
+  xpos 2943
+  ypos 845
+ }
+ ChannelMerge {
+  inputs 2
+  A rgba.blue
+  operation stencil
+  name ChannelMerge1
+  xpos 2855
+  ypos 958
+ }
+push $N1763c6e0
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 forward.u
+  from1 rgba.alpha
+  to1 forward.v
+  name Copy3
+  xpos 2719
+  ypos 1007
+ }
+ IDistort {
+  uv {-forward.u forward.v}
+  uv_scale 5
+  name IDistort1
+  xpos 2719
+  ypos 1057
+ }
+ Grade {
+  blackpoint -0.01
+  whitepoint 0.996
+  white_clamp true
+  name Grade11
+  xpos 2719
+  ypos 1095
+ }
+push $N17613d50
+ Copy {
+  inputs 2
+  from0 rgba.green
+  to0 rgba.green
+  name Copy1
+  xpos 2576
+  ypos 1089
+ }
+set N176aaca0 [stack 0]
+ Grade {
+  blackpoint 0.49
+  whitepoint 0.51
+  white_clamp true
+  name Grade15
+  xpos 2115
+  ypos 1246
+ }
+push $N176aaca0
+ Input {
+  inputs 0
+  name Input2
+  xpos 1496
+  ypos -123
+  number 1
+ }
+ Input {
+  inputs 0
+  name Input1
+  xpos 1267
+  ypos -101
+ }
+ Switch {
+  inputs 2
+  which {{parent.rez i}}
+  name Switch1
+  label "\[value which]"
+  xpos 1376
+  ypos 90
+ }
+ Reformat {
+  format "1920 1080 0 0 1920 1080 2 hd_ana"
+  resize distort
+  name Reformat1
+  xpos 1376
+  ypos 147
+ }
+ Transform {
+  translate {{parent.centreOffs i} 0}
+  center {960 540}
+  name Transform1
+  xpos 1376
+  ypos 185
+ }
+ Reformat {
+  resize height
+  name Reformat2
+  xpos 1376
+  ypos 232
+ }
+set N176da130 [stack 0]
+ Dot {
+  name Dot3
+  xpos 1273
+  ypos 745
+ }
+ Blur {
+  size 200
+  name Blur4
+  xpos 1239
+  ypos 836
+ }
+ Read {
+  inputs 0
+  file /job/LIB/comp_elem/other/bad_tv_000004/bad_tv_000004.####.tga
+  format "1000 1000 0 0 1000 1000 1 "
+  last 300
+  origlast 300
+  origset true
+  raw true
+  name Read5
+  xpos 1124
+  ypos 505
+ }
+ Reformat {
+  black_outside true
+  name Reformat9
+  xpos 1124
+  ypos 601
+ }
+ Grade {
+  gamma {{parent.snowGamma i}}
+  name Grade7
+  xpos 1124
+  ypos 627
+ }
+ Blur {
+  size {10 0}
+  name Blur2
+  xpos 1124
+  ypos 653
+ }
+ Shuffle {
+  alpha white
+  name Shuffle2
+  label "\[value in]"
+  xpos 1124
+  ypos 700
+ }
+ Transform {
+  translate {{parent.snow1Trans i} {parent.snow1Trans i}}
+  scale {{parent.snow1Scale i} {parent.snow1Scale i}}
+  center {960 540}
+  name Transform3
+  xpos 1124
+  ypos 802
+ }
+ EXPTool {
+  mode Stops
+  gang false
+  red {{"random(frame) * snowFlickerAmp" i}}
+  green {{red i}}
+  blue {{red i}}
+  name EXPTool2
+  label "\[value mode]"
+  xpos 1124
+  ypos 828
+ }
+ Crop {
+  box {0 0 1920 1080}
+  name Crop4
+  xpos 1124
+  ypos 866
+ }
+ Group {
+  inputs 2
+  name hueMix1
+  help "This node will transfer the Hue and Saturation from input A onto input B. Sliders alter amount. Advanced tab allows you to choose the HSV conversion algorithms."
+  knobChanged "\ndef doHueMixCallback():\n    k = nuke.thisKnob()\n    g = nuke.thisNode()\['doGang'].value()\n    if k.name() == 'amtHue' and g:\n        nuke.thisNode()\['amtSat'].setValue(k.value())\n    if k.name() == 'amtSat' and g:\n        nuke.thisNode()\['amtHue'].setValue(k.value())\ndoHueMixCallback()\n"
+  tile_color 0x77a8ffff
+  note_font "Verdana Bold Bold Bold Bold Bold Bold Bold"
+  xpos 1124
+  ypos 892
+  addUserKnob {20 huemixTab l "Hue Mix"}
+  addUserKnob {7 blurAmt l "Blur: " -STARTLINE R 0 200}
+  addUserKnob {4 doBlurChoice l "" -STARTLINE M {"Before conversion" "After conversion" "" ""}}
+  doBlurChoice "After conversion"
+  addUserKnob {26 ""}
+  addUserKnob {6 doGang l gang +STARTLINE}
+  doGang true
+  addUserKnob {7 amtHue l "Hue Transfer:"}
+  amtHue 1
+  addUserKnob {7 amtSat l "Sat Transfer:"}
+  amtSat 1
+  addUserKnob {26 ""}
+  addUserKnob {7 mix}
+  mix 0.63
+  addUserKnob {20 advTab l Advanced}
+  addUserKnob {26 descTxt l "" +STARTLINE T "These conversions will apply to both inputs and be reversed for the output."}
+  addUserKnob {26 ""}
+  addUserKnob {41 illuminant_in l in t "This will be the Out conversion after the H/S transfer." T bToHSV.illuminant_in}
+  addUserKnob {41 primary_in l "" -STARTLINE T bToHSV.primary_in}
+  addUserKnob {41 illuminant_out l out t "This will be the In conversion after the H/S transfer." T bToHSV.illuminant_out}
+  addUserKnob {41 primary_out l "" -STARTLINE T bToHSV.primary_out}
+  addUserKnob {26 ""}
+ }
+  Input {
+   inputs 0
+   name A
+   xpos -106
+   ypos -182
+   number 1
+  }
+  Blur {
+   channels rgb
+   size {{blurAmt i}}
+   filter triangle
+   name blurBefore
+   xpos -106
+   ypos -61
+   disable {{parent.doBlurChoice i}}
+  }
+  Colorspace {
+   colorspace_out HSV
+   name aToHSV
+   xpos -106
+   ypos -37
+  }
+  Blur {
+   channels rgb
+   size {{parent.blurAmt i}}
+   filter triangle
+   name blurAfter
+   xpos -106
+   ypos -13
+   disable {{!parent.doBlurChoice i}}
+  }
+  Dot {
+   name Dot2
+   xpos -72
+   ypos 51
+  }
+set N17768510 [stack 0]
+  Dot {
+   name Dot3
+   xpos -72
+   ypos 113
+  }
+push $N17768510
+  Input {
+   inputs 0
+   name B
+   xpos 163
+   ypos -190
+  }
+  Dot {
+   name Dot4
+   xpos 197
+   ypos -101
+  }
+set N17771c00 [stack 0]
+  Colorspace {
+   colorspace_out HSV
+   name bToHSV
+   knobChanged "\ndef doConvCallback():\n    k = nuke.thisKnob()\n    aConv = nuke.toNode('aToHSV')\n    oConv = nuke.toNode('resultToRGB')\n    if k.name() == 'illuminant_in':\n        aConv\['illuminant_in'].setValue(k.value())\n        oConv\['illuminant_out'].setValue(k.value())\n    if k.name() == 'illuminant_out':\n        aConv\['illuminant_out'].setValue(k.value())\n        oConv\['illuminant_in'].setValue(k.value())\n    if k.name() == 'primary_in':\n        aConv\['primary_in'].setValue(k.value())\n        oConv\['primary_out'].setValue(k.value())\n    if k.name() == 'primary_out':\n        aConv\['primary_out'].setValue(k.value())\n        oConv\['primary_in'].setValue(k.value())\ndoConvCallback()\n"
+   xpos 163
+   ypos -39
+  }
+  Dissolve {
+   inputs 2
+   channels {rgba.red -rgba.green -rgba.blue}
+   which {{parent.amtHue i}}
+   name dissolveHue
+   xpos 163
+   ypos 43
+  }
+  Dissolve {
+   inputs 2
+   channels {-rgba.red rgba.green -rgba.blue}
+   which {{parent.amtSat i}}
+   name dissolveSat
+   xpos 163
+   ypos 105
+  }
+  Colorspace {
+   colorspace_in HSV
+   name resultToRGB
+   xpos 163
+   ypos 181
+  }
+push $N17771c00
+  Dot {
+   name Dot1
+   xpos 436
+   ypos -101
+  }
+  Dot {
+   name Dot5
+   xpos 436
+   ypos 260
+  }
+  Dissolve {
+   inputs 2
+   channels rgb
+   which {{parent.mix i}}
+   name Dissolve1
+   selected true
+   xpos 163
+   ypos 257
+  }
+  Output {
+   name Output1
+   xpos 163
+   ypos 380
+  }
+ end_group
+ Reformat {
+  inputs 0
+  type "to box"
+  box_width 102
+  box_height {{box_width i}}
+  box_fixed true
+  name Reformat3
+  xpos 2448
+  ypos -192
+ }
+ Noise {
+  output alpha
+  type turbulence
+  size {2500 20}
+  zoffset {{frame/50 i}}
+  lacunarity 1
+  gain 0.71
+  gamma 0.17
+  translate {0 {parent.bigFritzSpeed i}}
+  center {960 540}
+  name Noise1
+  xpos 2448
+  ypos -166
+ }
+ Grade {
+  whitepoint 0.62
+  white_clamp true
+  name Grade3
+  xpos 2448
+  ypos -108
+ }
+ Reformat {
+  resize distort
+  filter Impulse
+  name Reformat4
+  xpos 2448
+  ypos -43
+ }
+ Grade {
+  channels alpha
+  multiply {{parent.bigFritzAmt i}}
+  name Grade5
+  xpos 2448
+  ypos -17
+ }
+ Reformat {
+  inputs 0
+  name Reformat5
+  xpos 2257
+  ypos -179
+ }
+ Ramp {
+  output {-rgba.red rgba.green -rgba.blue -rgba.alpha}
+  p0 {100 -0.5}
+  p1 {100 {height-0.5 i}}
+  name Ramp39
+  xpos 2257
+  ypos -143
+ }
+ Ramp {
+  output {rgba.red -rgba.green -rgba.blue -rgba.alpha}
+  p0 {-0.5 0}
+  p1 {{"width - 0.5" i} 0}
+  name Ramp42
+  xpos 2257
+  ypos -101
+ }
+ Grade {
+  inputs 1+1
+  channels {-rgba.red rgba.green -rgba.blue}
+  white 1.4
+  name Grade6
+  xpos 2257
+  ypos 26
+ }
+ Expression {
+  expr0 "r > 1 ? r-1 : r"
+  expr1 "g > 1.02 ? g-1 : g"
+  name Expression1
+  xpos 2257
+  ypos 64
+ }
+ Dot {
+  name Dot1
+  xpos 2291
+  ypos 501
+ }
+ Noise {
+  inputs 0
+  output alpha
+  size {2000 6}
+  zoffset {{frame i}}
+  gain 0.104
+  gamma 0.91
+  center {960 540}
+  name Noise2
+  xpos 1765
+  ypos 177
+ }
+ Grade {
+  channels alpha
+  whitepoint 0.7
+  add -0.5
+  black_clamp false
+  name Grade10
+  xpos 1765
+  ypos 215
+ }
+ Shuffle {
+  red alpha
+  green alpha
+  name Shuffle1
+  label "\[value in]"
+  xpos 1765
+  ypos 253
+ }
+ Grade {
+  multiply {0.015 0.007 0.02 0.02}
+  black_clamp false
+  name Grade8
+  xpos 1765
+  ypos 291
+ }
+ Crop {
+  box {0 0 1920 1080}
+  softness 50
+  name Crop2
+  xpos 1765
+  ypos 356
+ }
+ Ramp {
+  inputs 0
+  output {-rgba.red rgba.green -rgba.blue -rgba.alpha}
+  p0 {100 -0.5}
+  p1 {100 {height-0.5 i}}
+  name Ramp1
+  xpos 1628
+  ypos 284
+ }
+ Ramp {
+  output {rgba.red -rgba.green -rgba.blue -rgba.alpha}
+  p0 {-0.5 0}
+  p1 {{"width - 0.5" i} 0}
+  name Ramp2
+  xpos 1628
+  ypos 326
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  mix {{parent.smallFritz i}}
+  name Merge1
+  label "\[value mix]"
+  xpos 1628
+  ypos 364
+ }
+ Reformat {
+  inputs 0
+  type "to box"
+  box_width 102
+  box_height {{box_width i}}
+  box_fixed true
+  name Reformat11
+  xpos 1166
+  ypos 114
+ }
+ Noise {
+  size {13000 70}
+  zoffset {{"sin(frame/5) + (random(frame/10)*5)" i}}
+  lacunarity 1
+  translate {0 {"parent.flickerSeed - 49" i}}
+  center {960 540}
+  name Noise3
+  xpos 1166
+  ypos 140
+ }
+ Reformat {
+  resize distort
+  filter Impulse
+  name Reformat12
+  xpos 1166
+  ypos 166
+ }
+ Posterize {
+  Colors 6
+  name Posterize1
+  xpos 1166
+  ypos 218
+ }
+ Blur {
+  size 10
+  name Blur3
+  xpos 1166
+  ypos 256
+ }
+push $N176da130
+ EXPTool {
+  inputs 1+1
+  mode Stops
+  gang false
+  red {{"random(frame+6465465) * flickerAmt" i}}
+  green {{red i}}
+  blue {{red i}}
+  name EXPTool3
+  label "\[value mode]"
+  xpos 1376
+  ypos 281
+ }
+ STMap {
+  inputs 2
+  uv rgb
+  name STMap1
+  xpos 1376
+  ypos 364
+ }
+ Crop {
+  box {0 0 1920 1080}
+  name Crop1
+  xpos 1376
+  ypos 402
+ }
+ STMap {
+  inputs 2
+  uv rgb
+  name STMap17
+  xpos 1376
+  ypos 491
+ }
+ OFXcom.genarts.sapphire.stylize.s_tvdamage_v1 {
+  Mode "TVDamage Color"
+  reception_master 0.2
+  interference_amp 0
+  ghost_amp {{curve i x8 0 x11 2.84 x70 5 x73 0 x106 0 x108 2.04 x116 0 x117 4.3 x119 0 x182 0 x193 3.02 x195 3.02 x196 0 x212 1.5 x213 5 x215 0 x223 0 x224 1.9 x229 0.5}}
+  horizontal_hold 0.06
+  vertical_hold 0.165
+  bars_brightness {{curve i x15 0.46 x66 0.66 0 x193 0.19 x199 0 x219 0.2 x224 0.06}}
+  color_stripes_amplitude {{curve i x66 0.42 x117 0 x193 0 x195 0.42 x212 0.32 x223 0.2 x224 0.9 x226 0 x229 0.32}}
+  fast_forward_amount 0
+  tape_dropout_brightness 0
+  vignette_darkness 0
+  Static 1
+  static_amplitude 0
+  static_density 0.625
+  "Interference Details" 1
+  interference_frequency 42
+  dots_speed_x 100
+  dots_speed_y -10
+  jitter_amount 5
+  "Ghosting Details" 0
+  num_ghosts 5
+  negative_ghosts 0.5
+  spacing 0.2
+  vary_position 0.3
+  shift 0.5
+  blur_ 0
+  "Horiz. Hold Details" 0
+  h_frequency 1.25
+  h_time_vary 0.5
+  h_octaves 3
+  border_width 0.05
+  "Vert. Hold Details" 0
+  v_frequency 2
+  v_speed 2
+  v_random 0.1
+  border_height 0.1
+  border_data 1
+  "Bars Details" 1
+  bar_roll_speed 0.5
+  bar_sharpness 0.5
+  bar_frequency 1
+  bar1_width 0.35
+  bar2_rel_frequency 6
+  bar2_sharpness 0.5
+  "Stripes Details" 0
+  color_frequency 10
+  color_angle 160
+  roll_speed 3
+  "Fast Forward Details" 0
+  FF_band_frequency 4
+  FF_band_shift 0.1
+  FF_band_height 0.16
+  "Dropouts Details" 0
+  dropout_length 0.25
+  dropout_gap_length 0.2
+  dropout_y_freq 5
+  dropout_y_threshold 0.75
+  dropouts_always 1
+  "Vignette Details" 0
+  vignette_radius 1
+  vignette_edge_softness 0.5
+  vignette_rel_height 0.75
+  Scanlines 1
+  scanlines 0.1
+  scanlines_rel_freq 2
+  Orthicon 0
+  orthicon 0
+  threshold 0.7
+  darks_width 0.2
+  "Color Correct" 0
+  hue_shift 0
+  saturation 1
+  scale_lights 1
+  offset_darks 0
+  tint_lights 1
+  tint_darks 0
+  turn_off 0
+  "TurnOff Details" 0
+  flare_width 201.6
+  flare_brightness 2
+  fade_out_time 0.7
+  fish_eye 0
+  tv_pixels 720
+  seed 0.123
+  Enable_GPU true
+  version 5
+  version2 12131562
+  name S_TVDamage2
+  xpos 1376
+  ypos 739
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  bbox B
+  output {rgba.red rgba.green rgba.blue -rgba.alpha}
+  mix {{parent.doSnow1 i}}
+  name Merge6
+  label "\[value mix]"
+  xpos 1376
+  ypos 923
+ }
+ Dot {
+  name Dot5
+  xpos 1410
+  ypos 1134
+ }
+set N17a8a670 [stack 0]
+ STMap {
+  inputs 2
+  uv rgb
+  name STMap2
+  xpos 1451
+  ypos 1190
+ }
+ Grade {
+  inputs 1+1
+  whitepoint 0.58
+  maskChannelMask rgba.green
+  name Grade14
+  xpos 1451
+  ypos 1228
+ }
+set N17a251a0 [stack 0]
+push $N17a8a670
+ Switch {
+  inputs 2
+  which {{parent.doRoll i}}
+  name Switch2
+  label "\[value which]"
+  xpos 1376
+  ypos 1299
+ }
+set N17c09510 [stack 0]
+ Merge2 {
+  inputs 2
+  operation plus
+  bbox B
+  output {rgba.red rgba.green rgba.blue -rgba.alpha}
+  mix {{parent.staticAmt i}}
+  name Merge2
+  label "\[value mix]"
+  xpos 1376
+  ypos 1458
+ }
+ Output {
+  name Output1
+  xpos 1376
+  ypos 1585
+ }
+push $N17c09510
+push $N1763c6e0
+push $N17a251a0
+ Viewer {
+  inputs 3
+  frame_range 150-200
+  frame_range_lock true
+  input_number 2
+  viewerProcess rec709
+  input_process false
+  name Viewer1
+  xpos -299
+  ypos -52
+ }
+end_group
+Crop {
+ box {0 0 1920 1080}
+ name Crop1
+ selected true
+ xpos -319
+ ypos -149
+}
+set N180312a0 [stack 0]
+ColorCorrect {
+ saturation 0.105
+ name ColorCorrect1
+ selected true
+ xpos -319
+ ypos -52
+}
+push $N180312a0
+Write {
+ file /isilon/TRD/shot/test/test006/cmp/img/precomp/fritzed_screen_v1/fritzed_screen_v1.%d.exr
+ proxy /isilon/TRD/shot/test/test006/cmp/img/precomp/fritzed_screen_v1/fritzed_screen_v1.%d.exr
+ raw true
+ file_type exr
+ version 3
+ name Write1
+ selected true
+ xpos -504
+ ypos -76
+}

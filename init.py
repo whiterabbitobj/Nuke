@@ -1,14 +1,32 @@
 import os
+import nuke
 
-
+sep = "#"*30
+print(sep)
 # Import NODES/PLUGINS in init.py
-nuke.pluginAddPath("E:/Google Drive/WORK/VFX/Nuke/REPO/nodes")
+facility_plugins = "E:/Google Drive/WORK/VFX/Nuke/REPO/nodes"
+nuke.pluginAddPath(facility_plugins)
+print("Loading nodes from " + facility_plugins)
 
 # Load show-specific init.py/menu.py
-show_path = os.environ['SHOW_PATH']
-show_path = os.path.join(show_path, 'pipeline', 'nuke')
-if os.path.isdir(show_path):
-	nuke.pluginAddPath(show_path)
+try:
+	show_path = os.environ['SHOW_PATH']
+	show_path = os.path.join(show_path, 'pipeline', 'nuke')
+	if os.path.isdir(show_path):
+		print("Loading scripts from " + show_path.replace('\\','/'))
+		nuke.pluginAddPath(show_path)
+except:
+	print("Could not load a show-based plugin repository.")
+print(sep)
 
 
-# Other imports happen in menu.py for GUI-loading only
+# Implement callbacks
+#
+# def writeNodeDirs():
+	import os, nuke
+# 	file = nuke.filename(nuke.thisNode())
+# 	dir = os.path.dirname(file)
+# 	osdir = nuke.callbacks.filenameFilter(dir)
+# 	os.makedirs(osdir)
+#
+# nuke.addBeforeRender(writeNodeDirs)

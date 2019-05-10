@@ -1,0 +1,102 @@
+set cut_paste_input [stack 0]
+version 6.2 v4
+push $cut_paste_input
+Group {
+ name arbitraryRetime_b01_1
+ tile_color 0xd1b730ff
+ label "curSpd: \[value customSpeed] / curFr: \[value curFrame]"
+ note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 13
+ selected true
+ xpos -4178
+ ypos 1287
+ addUserKnob {20 User}
+ addUserKnob {7 curFrame l "Current Frame:"}
+ curFrame {{arbitraryRetime_v3_timeWarpCustom.lookup}}
+ addUserKnob {26 txt1 l (read-only) T " "}
+ addUserKnob {26 ""}
+ addUserKnob {7 customSpeed l speed: R 0 2}
+ customSpeed {{curve x23 1 x30 2.5}}
+ addUserKnob {41 multiplier l multiplier: T arbitraryRetime_v3_timeWarpCustom.multiplier}
+ addUserKnob {41 heroFrame l heroFrame: T arbitraryRetime_v3_timeWarpCustom.heroFrame}
+ addUserKnob {41 heroAt l heroAt: T arbitraryRetime_v3_timeWarpCustom.heroAt}
+ addUserKnob {41 py_setKeys l "Set Keyframes" T arbitraryRetime_v3_timeWarpCustom.py_setKeys}
+ addUserKnob {6 noOflow l "Use oFlow?" -STARTLINE}
+ noOflow true
+ addUserKnob {6 doOflow l "in GUI?" -STARTLINE}
+ addUserKnob {26 "" +STARTLINE}
+ addUserKnob {26 txt1_1 l "Shutter Stuff" T " "}
+ addUserKnob {41 shutterTime l "OFlow Shutter Time" T OFlow6.shutterTime}
+ addUserKnob {41 filter l "TimeWarp Filter" T arbitraryRetime_v3_timeWarpCustom.filter}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -30
+  ypos 489
+ }
+set Nf022670 [stack 0]
+ TimeWarp {
+  lookup {{curve 776 778 780 782 784 786 788 790 792 794 796 798 800 802 804 806 808 810 812 814 816 818 820 822 824.4285714 827.2857143 830.5714286 834.2857143 838.4285714 843 848 853 858 863 868 873 878 883 888 893 898 903 908}}
+  name arbitraryRetime_v3_timeWarpCustom
+  xpos -141
+  ypos 546
+  addUserKnob {20 User}
+  addUserKnob {7 customSpeed l Speed:}
+  customSpeed {{parent.customSpeed}}
+  addUserKnob {7 multiplier l multiplier: R 0.5 5}
+  multiplier 2
+  addUserKnob {3 heroFrame l heroFrame:}
+  heroFrame 778
+  addUserKnob {3 heroAt l heroAt:}
+  heroAt 1
+  addUserKnob {22 py_setKeys l "Set Keyframes" T "ff = nuke.root()\['first_frame'].value()\nlf = nuke.root()\['last_frame'].value()\ncur = nuke.thisNode()\nheroFr = nuke.thisNode()\['heroFrame'].value()\nheroAt = nuke.thisNode()\['heroAt'].value()\n\ncur\['lookup'].clearAnimated()\ncur\['lookup'].setAnimated()\ncur\['lookup'].setValueAt(heroFr, heroAt, 0)\n\n\nfor fr in range(heroAt+1, lf+1):\n\tcurVal = cur\['lookup'].valueAt(fr-1)\n\tincr = cur\['customSpeed'].valueAt(fr) * nuke.thisNode()\['multiplier'].value()\n\tnewVal = curVal + incr\n\tcur\['lookup'].setValueAt(newVal,fr,0)\n\nfor fr in range(ff, heroAt+1):\n\tadjFr = heroAt - fr\n\tcurVal = cur\['lookup'].valueAt(adjFr)\n\tincr = cur\['customSpeed'].valueAt(adjFr) * nuke.thisNode()\['multiplier'].value()\n\tnewVal = curVal - incr\n\tcur\['lookup'].setValueAt(newVal,adjFr,0)" +STARTLINE}
+ }
+set N1032d180 [stack 0]
+push $Nf022670
+ OFXuk.co.thefoundry.time.oflow_v100 {
+  method Motion
+  timing "Source Frame"
+  timingFrame {{parent.arbitraryRetime_v3_timeWarpCustom.lookup i}}
+  timingSpeed 1
+  filtering Normal
+  warpMode Normal
+  correctLuminance false
+  automaticShutterTime false
+  shutterTime 1
+  shutterSamples 10
+  vectorDetail 0.2
+  smoothness 0.5
+  blockSize 6
+  Tolerances 0
+  weightRed 0.3
+  weightGreen 0.6
+  weightBlue 0.1
+  showVectors false
+  cacheBreaker false
+  name OFlow6
+  selected true
+  xpos -30
+  ypos 557
+ }
+ Switch {
+  inputs 2
+  which {{"parent.doOflow ? 0 : \$gui"}}
+  name Switch1
+  xpos -30
+  ypos 613
+ }
+push $N1032d180
+ Switch {
+  inputs 2
+  which {{parent.noOflow i}}
+  name Switch2
+  xpos -30
+  ypos 663
+ }
+ Output {
+  name Output1
+  xpos -30
+  ypos 725
+ }
+end_group

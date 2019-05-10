@@ -1,4 +1,3 @@
-
 def vectorDistance():
 	nodelist = nuke.selectedNodes()
 	if len(nodelist) != 2:

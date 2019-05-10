@@ -1,0 +1,80 @@
+set cut_paste_input [stack 0]
+version 6.3 v4
+push $cut_paste_input
+add_layer {aov_util_z_closest aov_util_z_closest.red aov_util_z_closest.green aov_util_z_closest.blue aov_util_z_closest.alpha}
+add_layer {aov_util_p aov_util_p.red aov_util_p.green aov_util_p.blue aov_util_p.alpha}
+add_layer {aov_util_n aov_util_n.red aov_util_n.green aov_util_n.blue aov_util_n.alpha}
+add_layer {aov_util_motionvector aov_util_motionvector.red aov_util_motionvector.green aov_util_motionvector.blue aov_util_motionvector.alpha}
+Group {
+ name UnpremultExcept4
+ selected true
+ xpos -4672
+ ypos -148
+ addUserKnob {20 UnpremultExcept}
+ addUserKnob {41 alpha l "divide all by" T Unpremult1.alpha}
+ addUserKnob {41 invert -STARTLINE T Unpremult1.invert}
+ addUserKnob {41 channels l except T Copy1.channels}
+ addUserKnob {41 channels_2 l " " T Copy2.channels}
+ addUserKnob {41 channels_3 l " " T Copy3.channels}
+ addUserKnob {41 channels_4 l " " T Copy4.channels}
+ addUserKnob {41 channels_5 l " " T Copy6.channels}
+}
+ Input {
+  inputs 0
+  name Input
+  xpos -40
+  ypos 278
+ }
+set Ne7539d0 [stack 0]
+push $Ne7539d0
+push $Ne7539d0
+push $Ne7539d0
+push $Ne7539d0
+push $Ne7539d0
+ Unpremult {
+  channels all
+  name Unpremult1
+  xpos -40
+  ypos 368
+ }
+ Copy {
+  inputs 2
+  channels aov_util_z_closest
+  name Copy1
+  xpos 70
+  ypos 362
+ }
+ Copy {
+  inputs 2
+  channels aov_util_p
+  name Copy2
+  xpos 187
+  ypos 368
+ }
+ Copy {
+  inputs 2
+  channels aov_util_n
+  name Copy3
+  xpos 290
+  ypos 368
+ }
+ Copy {
+  inputs 2
+  channels aov_util_motionvector
+  name Copy4
+  xpos 400
+  ypos 368
+ }
+ Copy {
+  inputs 2
+  name Copy6
+  selected true
+  xpos 510
+  ypos 368
+ }
+ Output {
+  name Output1
+  xpos 620
+  ypos 374
+ }
+end_group

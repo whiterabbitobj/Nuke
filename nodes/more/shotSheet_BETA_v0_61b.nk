@@ -1,0 +1,787 @@
+set cut_paste_input [stack 0]
+version 7.0 v10
+Group {
+ inputs 0
+ name shotSheet_BETA_
+ knobChanged "\nssMain()\n"
+ label "\[value shotName]\n"
+ note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 22
+ selected true
+ xpos -293
+ ypos -290
+ postage_stamp_frame 2
+ addUserKnob {20 shotSheetTab l "Shot Sheet"}
+ addUserKnob {1 shotName l "Shot Name:"}
+ addUserKnob {26 frangeTxt l " |  frange" -STARTLINE T ""}
+ addUserKnob {3 firstFrm l " " -STARTLINE}
+ firstFrm 1001
+ addUserKnob {3 lastFrm l "to " -STARTLINE}
+ lastFrm 1002
+ addUserKnob {26 divTxt l " | " -STARTLINE T " "}
+ addUserKnob {6 doOCIO l "Plates use CC" -STARTLINE}
+ doOCIO true
+ addUserKnob {26 ""}
+ addUserKnob {4 whichOutput l Output M {plate degrain dpr lay lgt cmp "hirez check" "" "" "" "" "" "" ""}}
+ addUserKnob {26 rgbaTxt l "to RGBA" -STARTLINE T " "}
+ addUserKnob {26 enableTxt l "Enable layers:" T " "}
+ addUserKnob {6 enableDgrn l Degrain -STARTLINE}
+ addUserKnob {6 enableDPR l DPR -STARTLINE}
+ addUserKnob {6 enableLay l LAY -STARTLINE}
+ addUserKnob {6 enableLgt l LGT -STARTLINE}
+ addUserKnob {6 enableCmp l "CMP   | " -STARTLINE}
+ enableCmp true
+ addUserKnob {6 enableHirezCheck l "Hirez Check" -STARTLINE}
+ addUserKnob {26 ""}
+ addUserKnob {20 cmpGroup l CMP n 1}
+ addUserKnob {22 doCmpAuto l Update -STARTLINE}
+ addUserKnob {3 cmpVerLatest l Latest: -STARTLINE}
+ addUserKnob {3 cmpVerPrevious l "  |   Previous:" -STARTLINE}
+ addUserKnob {6 revPrevious l "  | " -STARTLINE}
+ addUserKnob {3 cmpVerClient l Client: -STARTLINE}
+ addUserKnob {6 revClient l " " -STARTLINE}
+ addUserKnob {26 txtDiv1 l " | " -STARTLINE T " "}
+ addUserKnob {22 cmp2RV l "RV Check" -STARTLINE}
+ addUserKnob {2 lCmpFP l "latest cmp:"}
+ addUserKnob {4 lCmpWhich l " " -STARTLINE +HIDDEN M {""}}
+ addUserKnob {6 lockLCmp l lock -STARTLINE}
+ addUserKnob {2 pCmpFP l "previous cmp:"}
+ addUserKnob {4 pCmpWhich l " " -STARTLINE +HIDDEN M {""}}
+ addUserKnob {6 lockPCmp l lock -STARTLINE}
+ addUserKnob {2 cCmpFP l "client cmp:"}
+ addUserKnob {4 cCmpWhich l " " -STARTLINE +HIDDEN M {""}}
+ addUserKnob {6 lockCCmp l lock -STARTLINE}
+ addUserKnob {20 endGroup n -1}
+ addUserKnob {26 ""}
+ addUserKnob {20 lgtGroup l LGT n 1}
+ lgtGroup 0
+ addUserKnob {22 doLgtAuto l Update +STARTLINE}
+ addUserKnob {3 lgtVerLatest l Latest: -STARTLINE}
+ addUserKnob {3 lgtVerPrevious l Previous: -STARTLINE}
+ addUserKnob {2 lLgtFP l "latest lgt:"}
+ addUserKnob {4 lLgtWhich l " " -STARTLINE +HIDDEN M {""}}
+ addUserKnob {6 lockLLgt l lock -STARTLINE}
+ addUserKnob {2 pLgtFP l "previous lgt:"}
+ addUserKnob {4 pLgtWhich l " " -STARTLINE +HIDDEN M {""}}
+ addUserKnob {6 lockPLgt l lock -STARTLINE}
+ addUserKnob {20 endGroup_1 l endGroup n -1}
+ addUserKnob {26 ""}
+ addUserKnob {20 layGroup l LAY n 1}
+ layGroup 0
+ addUserKnob {22 doLayAuto l Update +STARTLINE}
+ addUserKnob {3 layVerLatest l Latest: -STARTLINE}
+ addUserKnob {3 layVerClient l Client: -STARTLINE}
+ addUserKnob {2 lLayFP l "latest lay:"}
+ addUserKnob {4 lLayWhich l " " -STARTLINE M {""}}
+ addUserKnob {6 lockLLay l lock -STARTLINE}
+ addUserKnob {2 cLayFP l "client lay:"}
+ addUserKnob {4 cLayWhich l " " -STARTLINE M {""}}
+ addUserKnob {6 lockCLay l lock -STARTLINE}
+ addUserKnob {20 endGroup_2 l endGroup n -1}
+ addUserKnob {26 ""}
+ addUserKnob {20 plateGroup l Plate n 1}
+ plateGroup 0
+ addUserKnob {2 plateFP l Plate:}
+ addUserKnob {2 dgrnFP l Degrain:}
+ addUserKnob {2 dprFP l DPR:}
+ addUserKnob {26 ""}
+ addUserKnob {2 plateCC l "Plate CC:"}
+ addUserKnob {20 endGroup_3 l endGroup n -1}
+ addUserKnob {26 ""}
+ addUserKnob {20 miscTab l Misc}
+ addUserKnob {6 doLabel l "label layers       " -STARTLINE}
+ doLabel true
+ addUserKnob {3 labelSize l size -STARTLINE}
+ labelSize 50
+ addUserKnob {18 labelColor l color -STARTLINE}
+ labelColor {10 1 1}
+ addUserKnob {26 ""}
+ addUserKnob {3 shotLabelSize l "Shot Label Size"}
+ shotLabelSize 250
+ addUserKnob {26 ""}
+ addUserKnob {26 aboutTxt l " " T "Show: FRZ\nVer: 0.61b\n"}
+ addUserKnob {26 ""}
+ addUserKnob {22 resetDefaults l "Reset all knobs" +STARTLINE}
+}
+ Read {
+  inputs 0
+  file "\[value parent.cCmpFP]"
+  format "2158 1806 0 0 2158 1806 2 "
+  first {{"\[value parent.firstFrm]"}}
+  last {{"\[value parent.lastFrm]"}}
+  origfirst 1001
+  origlast 1160
+  origset true
+  on_error checkerboard
+  version 1
+  raw true
+  name client_cmp
+  xpos 705
+  ypos -602
+  disable {{hasError}}
+ }
+ Text {
+  message "client CMP - \[lindex \[split \[value \[input this 0].file] /] end]"
+  font /usr/share/fonts/bitstream-vera/Vera.ttf
+  size {{parent.labelSize}}
+  xjustify right
+  yjustify bottom
+  Transform 1
+  box {539 0 {width} 1354}
+  center {1079 903}
+  color {{parent.labelColor} {parent.labelColor} {parent.labelColor} 1}
+  name Text13
+  xpos 705
+  ypos -506
+  disable {{!parent.doLabel}}
+  addUserKnob {20 bookmarkTab l bookmark}
+  addUserKnob {1 mark l "" +STARTLINE}
+  mark Bookmark1
+ }
+ Dot {
+  name clientCmpDot
+  note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic"
+  note_font_size 22
+  note_font_color 0xff0000ff
+  xpos 739
+  ypos -459
+ }
+ Read {
+  inputs 0
+  file "\[value parent.pCmpFP]"
+  format "2158 1806 0 0 2158 1806 2 "
+  first {{"\[value parent.firstFrm]"}}
+  last {{"\[value parent.lastFrm]"}}
+  origfirst 1001
+  origlast 1160
+  origset true
+  on_error checkerboard
+  version 1
+  raw true
+  name previous_cmp
+  xpos 549
+  ypos -602
+  disable {{hasError}}
+ }
+ Text {
+  message "previous CMP - \[lindex \[split \[value \[input this 0].file] /] end]"
+  font /usr/share/fonts/bitstream-vera/Vera.ttf
+  size {{parent.labelSize}}
+  xjustify right
+  yjustify bottom
+  Transform 1
+  box {539 0 {width} 1354}
+  center {1079 903}
+  color {{parent.labelColor} {parent.labelColor} {parent.labelColor} 1}
+  name Text4
+  xpos 549
+  ypos -506
+  disable {{!parent.doLabel}}
+  addUserKnob {20 bookmarkTab l bookmark}
+  addUserKnob {1 mark l "" +STARTLINE}
+  mark Bookmark1
+ }
+ Dot {
+  name previousCmpDot
+  note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic"
+  note_font_size 22
+  note_font_color 0xff0000ff
+  xpos 583
+  ypos -459
+ }
+ Read {
+  inputs 0
+  file "\[value parent.plateFP]"
+  format "2158 1806 0 0 2158 1806 2 "
+  first {{"\[value parent.firstFrm]"}}
+  last {{"\[value parent.lastFrm]"}}
+  origfirst 1001
+  origlast 1160
+  origset true
+  on_error checkerboard
+  version 4
+  raw true
+  name raw_plate
+  xpos 142
+  ypos -1399
+  disable {{hasError}}
+  addUserKnob {20 bookmarkTab l bookmark}
+  addUserKnob {1 mark l "" +STARTLINE}
+  mark Bookmark1
+ }
+ OCIOFileTransform {
+  channels all
+  file "\[value parent.plateCC]"
+  cccid cha
+  name OCIOFileTransform2
+  xpos 142
+  ypos -1303
+  disable {{"hasError ? 1 : !parent.doOCIO"}}
+  addUserKnob {20 bookmarkTab l bookmark}
+  addUserKnob {1 mark l "" +STARTLINE}
+  mark Bookmark1
+ }
+set N15a0e3e0 [stack 0]
+ Dot {
+  name Dot10
+  tile_color 0xd1ffff
+  note_font "Bitstream Vera Sans Italic Italic Italic Italic"
+  note_font_size 22
+  note_font_color 0xff0000ff
+  xpos 252
+  ypos -1293
+ }
+set N15a05410 [stack 0]
+ Read {
+  inputs 0
+  file "\[value parent.lCmpFP]"
+  format "2158 1806 0 0 2158 1806 2 "
+  first {{"\[value parent.firstFrm]"}}
+  last {{"\[value parent.lastFrm]"}}
+  origfirst 1001
+  origlast 1160
+  origset true
+  on_error checkerboard
+  version 1
+  raw true
+  name latest_cmp
+  xpos 381
+  ypos -601
+  disable {{hasError}}
+  addUserKnob {20 bookmarkTab l bookmark}
+  addUserKnob {1 mark l "" +STARTLINE}
+  mark Bookmark1
+ }
+set N15a129a0 [stack 0]
+ Dot {
+  name Dot14
+  tile_color 0xd1ffff
+  note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic"
+  note_font_size 22
+  note_font_color 0xff0000ff
+  xpos 330
+  ypos -562
+ }
+set N15a2bd10 [stack 0]
+ Merge2 {
+  inputs 2
+  operation difference
+  name Merge1
+  label "\[value mix]"
+  note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+  note_font_size 13
+  note_font_color 0xff00ff
+  xpos 296
+  ypos -324
+ }
+set N15a2f1a0 [stack 0]
+push $N15a2bd10
+ Read {
+  inputs 0
+  file "\[value parent.lLgtFP]"
+  first {{"\[value parent.firstFrm]"}}
+  last {{"\[value parent.lastFrm]"}}
+  origset true
+  on_error checkerboard
+  raw true
+  name latest_lgt
+  xpos -180
+  ypos -745
+  disable {{hasError}}
+  addUserKnob {20 bookmarkTab l bookmark}
+  addUserKnob {1 mark l "" +STARTLINE}
+  mark Bookmark1
+ }
+set N15a39520 [stack 0]
+ Dot {
+  name Dot15
+  tile_color 0xd1ffff
+  note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic"
+  note_font_size 22
+  note_font_color 0xff0000ff
+  xpos -55
+  ypos -706
+ }
+ Read {
+  inputs 0
+  file "\[value parent.lLayFP]"
+  format "2158 1806 0 0 2158 1806 2 "
+  first {{"\[value parent.firstFrm]"}}
+  last {{"\[value parent.lastFrm]"}}
+  origfirst 1001
+  origlast 1160
+  origset true
+  on_error checkerboard
+  raw true
+  name latest_lay
+  xpos 375
+  ypos -900
+  disable {{hasError}}
+  addUserKnob {20 bookmarkTab l bookmark}
+  addUserKnob {1 mark l "" +STARTLINE}
+  mark Bookmark1
+ }
+set N15a52ea0 [stack 0]
+ Dot {
+  name Dot13
+  tile_color 0xd1ffff
+  note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic"
+  note_font_size 22
+  note_font_color 0xff0000ff
+  xpos 307
+  ypos -861
+ }
+ Read {
+  inputs 0
+  file "\[value parent.dprFP]"
+  format "2158 1806 0 0 2158 1806 2 "
+  first {{"\[value parent.firstFrm]"}}
+  last {{"\[value parent.lastFrm]"}}
+  origset true
+  on_error checkerboard
+  version 73
+  raw true
+  name dpr
+  tile_color 0xff00ff
+  label approved
+  xpos 298
+  ypos -1218
+  disable {{hasError}}
+  addUserKnob {20 bookmarkTab l bookmark}
+  addUserKnob {1 mark l "" +STARTLINE}
+  mark Bookmark1
+ }
+ OCIOFileTransform {
+  channels all
+  file "\[value parent.plateCC]"
+  cccid cha
+  name OCIOFileTransform8
+  xpos 298
+  ypos -1110
+  disable {{"hasError ? 1 : !parent.doOCIO"}}
+  addUserKnob {20 bookmarkTab l bookmark}
+  addUserKnob {1 mark l "" +STARTLINE}
+  mark Bookmark1
+ }
+set N15a77fe0 [stack 0]
+ Dot {
+  name Dot11
+  tile_color 0xd1ffff
+  note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic"
+  note_font_size 22
+  note_font_color 0xff0000ff
+  xpos 408
+  ypos -1100
+ }
+ Read {
+  inputs 0
+  file "\[value parent.dgrnFP]"
+  format "2158 1806 0 0 2158 1806 2 "
+  first {{"\[value parent.firstFrm]"}}
+  last {{"\[value parent.lastFrm]"}}
+  origfirst 1001
+  origlast 1160
+  origset true
+  on_error checkerboard
+  version 73
+  raw true
+  name dgrn_plate
+  tile_color 0xff00ff
+  label approved
+  xpos -42
+  ypos -1285
+  disable {{hasError}}
+  addUserKnob {20 bookmarkTab l bookmark}
+  addUserKnob {1 mark l "" +STARTLINE}
+  mark Bookmark1
+ }
+ OCIOFileTransform {
+  channels all
+  file "\[value parent.plateCC]"
+  cccid cha
+  name OCIOFileTransform1
+  xpos -42
+  ypos -1177
+  disable {{"hasError ? 1 : !parent.doOCIO"}}
+  addUserKnob {20 bookmarkTab l bookmark}
+  addUserKnob {1 mark l "" +STARTLINE}
+  mark Bookmark1
+ }
+set N15a971e0 [stack 0]
+ Dot {
+  name Dot12
+  tile_color 0xd1ffff
+  note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic"
+  note_font_size 22
+  note_font_color 0xff0000ff
+  xpos -160
+  ypos -1167
+ }
+push $N15a05410
+ Switch {
+  inputs 7
+  which {{parent.whichOutput x1026 1 x1045 1 x1327 6}}
+  name rgbSwitch
+  label "\[value which]"
+  xpos 296
+  ypos -143
+  hide_input true
+ }
+push $N15a2f1a0
+push $N15a129a0
+ Text {
+  message "latest CMP - \[lindex \[split \[value \[input this 0].file] /] end]"
+  font /usr/share/fonts/bitstream-vera/Vera.ttf
+  size {{parent.labelSize}}
+  xjustify right
+  yjustify bottom
+  Transform 1
+  box {539 0 {width} 1354}
+  center {1079 903}
+  color {{parent.labelColor} {parent.labelColor} {parent.labelColor} 1}
+  name Text12
+  xpos 381
+  ypos -505
+  disable {{!parent.doLabel}}
+  addUserKnob {20 bookmarkTab l bookmark}
+  addUserKnob {1 mark l "" +STARTLINE}
+  mark Bookmark1
+ }
+push $N15a77fe0
+ Text {
+  message "dpr - \[lindex \[split \[value \[input this 0].file] /] end]"
+  font /usr/share/fonts/bitstream-vera/Vera.ttf
+  size {{parent.labelSize}}
+  xjustify right
+  yjustify bottom
+  Transform 1
+  box {539 0 {width} 1354}
+  center {1079 903}
+  color {{parent.labelColor} {parent.labelColor} {parent.labelColor} 1}
+  name Text16
+  xpos 298
+  ypos -1061
+  disable {{!parent.doLabel}}
+  addUserKnob {20 bookmarkTab l bookmark}
+  addUserKnob {1 mark l "" +STARTLINE}
+  mark Bookmark1
+ }
+push $N15a971e0
+ Text {
+  message "dgrn - \[lindex \[split \[value \[input this 0].file] /] end]"
+  font /usr/share/fonts/bitstream-vera/Vera.ttf
+  size {{parent.labelSize}}
+  xjustify right
+  yjustify bottom
+  Transform 1
+  box {539 0 {width} 1354}
+  center {1079 903}
+  color {{parent.labelColor} {parent.labelColor} {parent.labelColor} 1}
+  name Text17
+  xpos -42
+  ypos -1128
+  disable {{!parent.doLabel}}
+  addUserKnob {20 bookmarkTab l bookmark}
+  addUserKnob {1 mark l "" +STARTLINE}
+  mark Bookmark1
+ }
+push $N15a0e3e0
+ Text {
+  message "plate - \[lindex \[split \[value \[input this 0].file] /] end]"
+  font /usr/share/fonts/bitstream-vera/Vera.ttf
+  xjustify right
+  yjustify bottom
+  Transform 1
+  box {539 0 {width} 1354}
+  center {1079 903}
+  color {10 1 0 1}
+  name Text10
+  xpos 142
+  ypos -1242
+  disable {{!parent.doLabel}}
+  addUserKnob {20 bookmarkTab l bookmark}
+  addUserKnob {1 mark l "" +STARTLINE}
+  mark Bookmark1
+ }
+add_layer {plate plate.red plate.green plate.blue plate.alpha}
+ Shuffle {
+  out plate
+  name Shuffle1
+  label "\[value in]"
+  xpos 142
+  ypos -1216
+ }
+add_layer {degrained degrained.red degrained.green degrained.blue degrained.alpha}
+ ShuffleCopy {
+  inputs 2
+  red red
+  green green
+  blue blue
+  out degrained
+  name ShuffleCopy1
+  xpos 142
+  ypos -1128
+  disable {{!parent.enableDgrn}}
+ }
+add_layer {dpr dpr.red dpr.green dpr.blue dpr.alpha}
+ ShuffleCopy {
+  inputs 2
+  red red
+  green green
+  blue blue
+  out dpr
+  name ShuffleCopy5
+  xpos 142
+  ypos -1061
+  disable {{!parent.enableDPR}}
+ }
+ Dot {
+  name Dot4
+  note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic"
+  note_font_size 22
+  note_font_color 0xff0000ff
+  xpos 176
+  ypos -838
+ }
+set N15b15960 [stack 0]
+ Switch {
+  inputs 2
+  which 1
+  name compSwitch
+  label "\[value which]"
+  xpos 381
+  ypos -421
+ }
+ Dot {
+  name Dot2
+  note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic"
+  note_font_size 22
+  note_font_color 0xff0000ff
+  xpos 415
+  ypos -372
+  addUserKnob {20 bookmarkTab l bookmark}
+  addUserKnob {1 mark l "" +STARTLINE}
+  mark Bookmark1
+ }
+ Read {
+  inputs 0
+  file "\[value parent.pLgtFP]"
+  first {{"\[value parent.firstFrm]"}}
+  last {{"\[value parent.lastFrm]"}}
+  origset true
+  on_error checkerboard
+  raw true
+  name previous_lgt
+  xpos -330
+  ypos -745
+  disable {{hasError}}
+ }
+ Text {
+  message "client LGT - \[lindex \[split \[value \[input this 0].file] /] end]"
+  font /usr/share/fonts/bitstream-vera/Vera.ttf
+  size {{parent.labelSize}}
+  xjustify right
+  yjustify bottom
+  Transform 1
+  box {539 0 {width} 1354}
+  center {1079 903}
+  color {{parent.labelColor} {parent.labelColor} {parent.labelColor} 1}
+  name Text19
+  xpos -330
+  ypos -649
+  disable {{!parent.doLabel}}
+  addUserKnob {20 bookmarkTab l bookmark}
+  addUserKnob {1 mark l "" +STARTLINE}
+  mark Bookmark1
+ }
+push $N15a39520
+ Text {
+  message "latest LGT - \[lindex \[split \[value \[input this 0].file] /] end]"
+  font /usr/share/fonts/bitstream-vera/Vera.ttf
+  size {{parent.labelSize}}
+  xjustify right
+  yjustify bottom
+  Transform 1
+  box {539 0 {width} 1354}
+  center {1079 903}
+  color {{parent.labelColor} {parent.labelColor} {parent.labelColor} 1}
+  name Text18
+  xpos -180
+  ypos -649
+  disable {{!parent.doLabel}}
+  addUserKnob {20 bookmarkTab l bookmark}
+  addUserKnob {1 mark l "" +STARTLINE}
+  mark Bookmark1
+ }
+push $N15b15960
+ Switch {
+  inputs 3
+  name lgtSwitch
+  label "\[value which]"
+  xpos -180
+  ypos -600
+ }
+ Dot {
+  name Dot1
+  note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic"
+  note_font_size 22
+  note_font_color 0xff0000ff
+  xpos -146
+  ypos -540
+  addUserKnob {20 bookmarkTab l bookmark}
+  addUserKnob {1 mark l "" +STARTLINE}
+  mark Bookmark1
+ }
+ Read {
+  inputs 0
+  file "\[value parent.cLayFP]"
+  format "2158 1806 0 0 2158 1806 2 "
+  first {{"\[value parent.firstFrm]"}}
+  last {{"\[value parent.lastFrm]"}}
+  origfirst 1001
+  origlast 1160
+  origset true
+  on_error checkerboard
+  raw true
+  name client_lay
+  xpos 534
+  ypos -900
+  disable {{hasError}}
+ }
+ Text {
+  message "client LAY - \[lindex \[split \[value \[input this 0].file] /] end]"
+  font /usr/share/fonts/bitstream-vera/Vera.ttf
+  size {{parent.labelSize}}
+  xjustify right
+  yjustify bottom
+  Transform 1
+  box {539 0 {width} 1354}
+  center {1079 903}
+  color {{parent.labelColor} {parent.labelColor} {parent.labelColor} 1}
+  name Text14
+  xpos 534
+  ypos -804
+  disable {{!parent.doLabel}}
+  addUserKnob {20 bookmarkTab l bookmark}
+  addUserKnob {1 mark l "" +STARTLINE}
+  mark Bookmark1
+ }
+push $N15a52ea0
+ Text {
+  message "latest LAY - \[lindex \[split \[value \[input this 0].file] /] end]"
+  font /usr/share/fonts/bitstream-vera/Vera.ttf
+  size {{parent.labelSize}}
+  xjustify right
+  yjustify bottom
+  Transform 1
+  box {539 0 {width} 1354}
+  center {1079 903}
+  color {{parent.labelColor} {parent.labelColor} {parent.labelColor} 1}
+  name Text15
+  xpos 375
+  ypos -804
+  disable {{!parent.doLabel}}
+  addUserKnob {20 bookmarkTab l bookmark}
+  addUserKnob {1 mark l "" +STARTLINE}
+  mark Bookmark1
+ }
+push $N15b15960
+ Switch {
+  inputs 3
+  name laySwitch
+  label "\[value which]"
+  xpos 375
+  ypos -717
+ }
+ Dot {
+  name Dot3
+  note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic"
+  note_font_size 22
+  note_font_color 0xff0000ff
+  xpos 409
+  ypos -668
+  addUserKnob {20 bookmarkTab l bookmark}
+  addUserKnob {1 mark l "" +STARTLINE}
+  mark Bookmark1
+ }
+push $N15b15960
+add_layer {layout layout.red layout.green layout.blue layout.alpha}
+ ShuffleCopy {
+  inputs 2
+  red red
+  green green
+  blue blue
+  out layout
+  name ShuffleCopy2
+  xpos 142
+  ypos -672
+  disable {{!parent.enableLay}}
+ }
+add_layer {lighting lighting.red lighting.green lighting.blue lighting.alpha}
+ ShuffleCopy {
+  inputs 2
+  red red
+  green green
+  blue blue
+  out lighting
+  name ShuffleCopy3
+  xpos 142
+  ypos -544
+  disable {{!parent.enableLgt}}
+ }
+add_layer {comp comp.red comp.green comp.blue comp.alpha}
+ ShuffleCopy {
+  inputs 2
+  red red
+  green green
+  blue blue
+  out comp
+  name ShuffleCopy4
+  xpos 142
+  ypos -376
+  disable {{!parent.enableCmp}}
+ }
+add_layer {hirezCheck hirezCheck.red hirezCheck.green hirezCheck.blue hirezCheck.alpha}
+ ShuffleCopy {
+  inputs 2
+  red red
+  green green
+  blue blue
+  out hirezCheck
+  name ShuffleCopy6
+  xpos 142
+  ypos -316
+  disable {{!parent.enableHirezCheck}}
+ }
+ ShuffleCopy {
+  inputs 2
+  red red
+  green green
+  blue blue
+  name ShuffleCopy7
+  xpos 142
+  ypos -137
+ }
+ Text {
+  message "\[value parent.shotName]"
+  font /usr/share/fonts/bitstream-vera/Vera.ttf
+  size {{parent.shotLabelSize}}
+  kerning -0.116
+  leading 0.041
+  yjustify bottom
+  Transform 1
+  box {0 0 1618 1354}
+  center {1079 903}
+  color {{parent.labelColor} {parent.labelColor} {parent.labelColor} 1}
+  name Text1
+  selected true
+  xpos 142
+  ypos -111
+  disable {{!parent.doLabel}}
+ }
+ Output {
+  name Output1
+  xpos 142
+  ypos -8
+ }
+end_group

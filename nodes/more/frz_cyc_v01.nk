@@ -1,0 +1,796 @@
+set cut_paste_input [stack 0]
+version 7.0 v6
+push $cut_paste_input
+Group {
+ name FRZ_CYC1
+ knobChanged frzCyc_callback()
+ tile_color 0x9dc6ddff
+ note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 33
+ note_font_color 0xffffffff
+ selected true
+ xpos -721
+ ypos 109
+ addUserKnob {20 workingTab l FRZ_CYC}
+ addUserKnob {4 cycSize l "Cyc Size:" M {"Full (18k)" WORK "Test (1K)" "" ""}}
+ cycSize "Test (1K)"
+ addUserKnob {6 useCropCyc l Cropped -STARTLINE}
+ useCropCyc true
+ addUserKnob {6 cycLive l "Use Cached Files" -STARTLINE}
+ cycLive true
+ addUserKnob {6 useScanline l "Render using 3D" t "Normally this node will output the cyc transformed by an STMap. If you check this option box, it will instead use the 3D system." -STARTLINE}
+ addUserKnob {26 div3d l "" +STARTLINE +HIDDEN}
+ addUserKnob {26 scanlineSettingsTxt l " " +HIDDEN T "ScanlineRender Settings"}
+ addUserKnob {4 scFilter l filter +HIDDEN M {Impulse Cubic Keys Simon Rifman Mitchell Parzen Notch ""}}
+ scFilter Cubic
+ addUserKnob {7 scSamples l samples +HIDDEN R 1 12}
+ scSamples 1
+ addUserKnob {7 scShutter l Shutter +HIDDEN}
+ scShutter 0.5
+ addUserKnob {4 scShutterOffset l "shutter offset" +HIDDEN M {center start end custom ""}}
+ addUserKnob {7 scOffsetCustom l " " -STARTLINE +HIDDEN}
+ addUserKnob {26 ""}
+ addUserKnob {26 altWarningTxt l "" +STARTLINE +HIDDEN T "WARNING: You have connected an input to \"ALT\".\n\nYou are currently bypassing the internal optimization workflow."}
+ addUserKnob {20 Setup}
+ addUserKnob {26 descTxt l " " T "Run the following steps:"}
+ addUserKnob {6 doAutocrop l Autocrop +STARTLINE}
+ doAutocrop true
+ addUserKnob {6 doAnalyze l "Analyze Work Rez" -STARTLINE}
+ doAnalyze true
+ addUserKnob {6 doCycWrite l "Cache Cyc" -STARTLINE}
+ doCycWrite true
+ addUserKnob {22 pyRunKnob l "DO IT!" t "Click this button to run the automates steps above." T cycAuto() +STARTLINE}
+ addUserKnob {26 ""}
+ addUserKnob {20 AdvancedGroup l Advanced n 1}
+ addUserKnob {7 worksizeScale l "Work Rez Scale" R 0.1 0.75}
+ worksizeScale 0.2
+ addUserKnob {7 maxError l "Max Error:" t "Usually you should leave this around 0.002-0.003." R 0.001 0.01}
+ maxError 0.003
+ addUserKnob {6 doMirror l "Mirror Cyc" +STARTLINE}
+ doMirror true
+ addUserKnob {20 endAdvancedGroup l endGroup n -1}
+ addUserKnob {20 SCENETAB l Scene}
+ addUserKnob {26 cycTxt l "Cyc Transform:" T " "}
+ addUserKnob {12 cycTransform l translate}
+ addUserKnob {7 cycRotate l rotate R -180 180}
+ addUserKnob {14 cycScale l scale R 0 100}
+ cycScale 1
+ addUserKnob {4 cycFilter l filter M {Impulse Cubic Keys Simon Rifman Mitchell Parzen Notch ""}}
+ cycFilter Cubic
+ addUserKnob {26 ""}
+ addUserKnob {26 fbxTxt l "FBX Read:" T " "}
+ addUserKnob {2 fbxFilepath l file}
+ addUserKnob {4 cycGeoNodeName l "node name" M {""}}
+ addUserKnob {26 ""}
+ addUserKnob {26 fbxTransTxt l "FBX Transform:" T " "}
+ addUserKnob {41 translate T TransformGeo1.translate}
+ addUserKnob {41 rotate T TransformGeo1.rotate}
+ addUserKnob {41 scaling l scale T TransformGeo1.scaling}
+ addUserKnob {41 uniform_scale l "uniform scale" T TransformGeo1.uniform_scale}
+ addUserKnob {41 pivot T TransformGeo1.pivot}
+ addUserKnob {20 FILEPATHSTAB l Filepaths}
+ addUserKnob {2 fullSize l Full:}
+ fullSize /ibrix3/FRZ/asset/env/env_washington_cyc/reference/envwashingtoncyc_500.18k.exr
+ addUserKnob {2 loSize l "Low (1k):"}
+ loSize /ibrix3/FRZ/asset/env/env_washington_cyc/task/mdoll/envwashingtoncyc_500.1k.exr
+ addUserKnob {26 ""}
+ addUserKnob {2 workSize l "Work (no crop):"}
+ addUserKnob {2 workSizeCropped l "Work (cropped):"}
+ addUserKnob {2 fullSizeCropped l "Full (cropped):"}
+ addUserKnob {2 loSizeCropped l "(Active) - Low (cropped):"}
+ addUserKnob {20 About}
+ addUserKnob {26 aboutCyc l " " T "Ver.:0.5b\nAuthor: MDoll\nDate: July 23, 2013\nSHOW VER: FRZ\n"}
+ addUserKnob {26 descrKnob l Description: T "When uisng this node for the first time, first\nattach your camera to the CAM arrow, and then\nload your FBX under the \"Scene\" tab. \n\nIf this is the first time runthrough for a shot, leave \"Autocrop\"/\"Analyze Work Rez\"/\"Cache\nCyc\" all checked, and then hit \"DO IT!\".\n\nThe CYC node will run through your shot and \nfind which part of the cyc is needs, determine\nthe minimum resolution without noticable\nquality loss, and then output baked files to\nspeed up your workflow.\n\nYou can manually tune your WORK\nresolution using the \"work rez scale\" option\nto increase or decrease the resolution of the \nbaked image. You must uncheck \"analyze\nwork rez\" to utilize the manual controls. In most case, leave \"Mirror Cyc\" checked.\n\n"}
+}
+ BackdropNode {
+  inputs 0
+  name BackdropNode1
+  tile_color 0x262626ff
+  label "generate work rez"
+  note_font_size 42
+  xpos -2133
+  ypos -813
+  bdwidth 642
+  bdheight 1031
+ }
+ BackdropNode {
+  inputs 0
+  name BackdropNode2
+  tile_color 0x262626ff
+  label "generate autocrop"
+  note_font_size 42
+  xpos -2927
+  ypos -803
+  bdwidth 492
+  bdheight 998
+ }
+ Read {
+  inputs 0
+  file /ibrix3/FRZ/asset/env/env_washington_cyc/task/mdoll/envwashingtoncyc_500.1k.exr
+  format "1037 442 0 0 1037 442 1 "
+  origset true
+  raw true
+  name loRead
+  xpos 101
+  ypos -829
+ }
+ Dot {
+  name Dot5
+  label "lo rez"
+  note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic"
+  note_font_size 22
+  note_font_color 0xff0000ff
+  xpos 135
+  ypos -705.6666667
+ }
+set N1ca927a0 [stack 0]
+ Read {
+  inputs 0
+  file /ibrix3/FRZ/asset/env/env_washington_cyc/reference/envwashingtoncyc_500_skyMatte.exr
+  format "18432 7867 0 0 18432 7867 1 "
+  origset true
+  raw true
+  name Read4
+  xpos -161
+  ypos -1108
+ }
+ Read {
+  inputs 0
+  file /ibrix3/FRZ/asset/env/env_washington_cyc/reference/envwashingtoncyc_500.18k.exr
+  format "18432 7867 0 0 18432 7867 1 "
+  origset true
+  raw true
+  name fullRead
+  xpos -388
+  ypos -1107
+ }
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 rgba.alpha
+  name Copy1
+  xpos -388
+  ypos -1011
+ }
+ Dot {
+  name Dot13
+  note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic"
+  note_font_size 22
+  note_font_color 0xff0000ff
+  xpos -354
+  ypos -903
+ }
+set N1c9fc680 [stack 0]
+ Colorspace {
+  colorspace_out Cineon
+  name Colorspace1
+  xpos -257
+  ypos -845
+ }
+ Reformat {
+  type scale
+  scale {{parent.worksizeScale}}
+  filter Simon
+  name createWorkReformat
+  xpos -257
+  ypos -819
+ }
+ Clamp {
+  channels rgb
+  maximum_enable false
+  name Clamp2
+  xpos -257
+  ypos -793
+ }
+ Colorspace {
+  colorspace_in Cineon
+  name Colorspace2
+  xpos -257
+  ypos -731
+ }
+ Dot {
+  name Dot2
+  label "work rez"
+  note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic"
+  note_font_size 22
+  note_font_color 0xff0000ff
+  xpos -223
+  ypos -705.6666667
+ }
+set N1ca8eb60 [stack 0]
+push $N1c9fc680
+ Dot {
+  name Dot10
+  label "full rez"
+  note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic"
+  note_font_size 22
+  note_font_color 0xff0000ff
+  xpos -553
+  ypos -705.6666667
+ }
+set N1caab630 [stack 0]
+ Switch {
+  inputs 3
+  which {{parent.cycSize}}
+  name Switch1
+  label "\[value which]"
+  xpos -257
+  ypos -408
+ }
+ Mirror {
+  Horizontal {{!parent.doMirror}}
+  name Mirror1
+  xpos -257
+  ypos -370
+ }
+ Dot {
+  name Dot4
+  note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic"
+  note_font_size 22
+  note_font_color 0xff0000ff
+  xpos -223
+  ypos -287
+ }
+ Crop {
+  box {34 166 678 264}
+  name mainCrop
+  xpos -257
+  ypos -228
+ }
+set N1cadd7d0 [stack 0]
+ Write {
+  file /isilon/FRZ/shot/zzz/zzz01/cmp/img/precomp/CYC_AUTO/workCropped.exr
+  raw true
+  file_type exr
+  version 168
+  name filesOutputter
+  xpos -374
+  ypos -174
+  disable true
+ }
+ Camera2 {
+  inputs 0
+  far 10000000
+  name Camera1
+  xpos -2875
+  ypos -481
+ }
+ Input {
+  inputs 0
+  name CAM
+  tile_color 0xffffff
+  note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+  note_font_size 40
+  xpos -1474
+  ypos -1536
+ }
+ Dot {
+  name Dot6
+  note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic"
+  note_font_size 22
+  note_font_color 0xff0000ff
+  xpos -1440
+  ypos -1429
+ }
+set N1cace530 [stack 0]
+ Read {
+  inputs 0
+  format "5530 2360 0 0 5530 2360 1 "
+  origset true
+  version 23
+  raw true
+  name readLocalCyc
+  xpos -374
+  ypos -106
+  disable {{hasError}}
+ }
+push $N1cadd7d0
+ Switch {
+  inputs 2
+  which {{parent.cycLive}}
+  name Switch4
+  xpos -257
+  ypos 11
+ }
+ Colorspace {
+  colorspace_out Cineon
+  name Colorspace3
+  xpos -257
+  ypos 225
+ }
+ Transform {
+  translate {{parent.cycTransform} {parent.cycTransform}}
+  rotate {{parent.cycRotate}}
+  scale {{parent.cycScale}}
+  center {{width/2} {height/2}}
+  name cyc2dTransform
+  xpos -257
+  ypos 259
+ }
+ Dot {
+  name readDot
+  note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic"
+  note_font_size 22
+  note_font_color 0xff0000ff
+  xpos -223
+  ypos 368
+ }
+set N1cb773a0 [stack 0]
+ Reformat {
+  inputs 0
+  type "to box"
+  box_width {{createWorkReformat.width()}}
+  box_height {{createWorkReformat.height()}}
+  box_fixed true
+  scale {{parent.worksizeScale}}
+  filter Simon
+  name createWorkReformat1
+  xpos -596
+  ypos 143
+ }
+ Shuffle {
+  red black
+  green black
+  blue black
+  alpha white
+  name Shuffle4
+  label "\[value in]"
+  xpos -596
+  ypos 169
+ }
+ Ramp {
+  output {-rgba.red rgba.green -rgba.blue -rgba.alpha}
+  replace true
+  p0 {100 -0.5}
+  p1 {100 {height-0.5}}
+  name Ramp3
+  xpos -596
+  ypos 207
+ }
+ Ramp {
+  output {rgba.red -rgba.green -rgba.blue -rgba.alpha}
+  p0 {-0.5 0}
+  p1 {{"width - 0.5" i} 0}
+  name Ramp4
+  xpos -596
+  ypos 245
+ }
+ Crop {
+  box {0 0 {width} {height}}
+  name Crop2
+  xpos -596
+  ypos 283
+ }
+ Switch {
+  inputs 2
+  which {{parent.useScanline}}
+  name Switch5
+  label "\[value which]"
+  xpos -596
+  ypos 358
+ }
+ ReadGeo2 {
+  version 1
+  range_first 1000
+  range_last 1438
+  cast_shadow false
+  receive_shadow false
+  name fbxRead1
+  xpos -596
+  ypos 415
+ }
+ TransformGeo {
+  name TransformGeo1
+  xpos -596
+  ypos 483
+ }
+ Input {
+  inputs 0
+  name format
+  tile_color 0xffffff
+  note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+  note_font_size 40
+  xpos -822
+  ypos 565
+  number 1
+ }
+ Dot {
+  name Dot11
+  note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic"
+  note_font_size 22
+  note_font_color 0xff0000ff
+  xpos -788
+  ypos 668
+ }
+set N1cc81c60 [stack 0]
+ ScanlineRender {
+  inputs 3
+  samples {{parent.scSamples}}
+  shutter {{parent.scShutter}}
+  shutteroffset centred
+  shuttercustomoffset {{parent.scOffsetCustom}}
+  motion_vectors_type distance
+  name cycScanline
+  label "\[value projection_mode]"
+  xpos -596
+  ypos 658
+ }
+ Remove {
+  operation keep
+  channels rgb
+  channels2 forward
+  name Remove2
+  xpos -596
+  ypos 696
+ }
+set N1cca04c0 [stack 0]
+push $N1cca04c0
+ Dot {
+  name Dot12
+  note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic"
+  note_font_size 22
+  note_font_color 0xff0000ff
+  xpos -562
+  ypos 739
+ }
+set N1cca76a0 [stack 0]
+push $N1cca76a0
+push $N1cb773a0
+ STMap {
+  inputs 2
+  uv rgb
+  filter Simon
+  name STMap3
+  xpos -257
+  ypos 729
+ }
+ Copy {
+  inputs 2
+  from0 forward.u
+  to0 forward.u
+  from1 forward.v
+  to1 backward.v
+  name Copy2
+  xpos -257
+  ypos 767
+ }
+ Remove {
+  operation keep
+  channels rgba
+  channels2 forward
+  name Remove1
+  xpos -257
+  ypos 817
+ }
+ Switch {
+  inputs 2
+  which {{parent.useScanline}}
+  name Switch2
+  label "\[value which]"
+  xpos -257
+  ypos 880
+ }
+ Colorspace {
+  colorspace_in Cineon
+  name Colorspace4
+  xpos -257
+  ypos 918
+ }
+ Output {
+  name Output1
+  xpos -257
+  ypos 1125
+ }
+ Input {
+  inputs 0
+  name alt
+  xpos 94
+  ypos 78
+  number 2
+ }
+ Colorspace {
+  colorspace_out Cineon
+  name Colorspace5
+  xpos 94
+  ypos 220
+ }
+ Dot {
+  name altDot
+  note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic Italic Italic"
+  note_font_size 22
+  note_font_color 0xff0000ff
+  xpos 128
+  ypos 291
+ }
+push $N1cace530
+ Dot {
+  name Dot14
+  note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic"
+  note_font_size 22
+  note_font_color 0xff0000ff
+  xpos -2571
+  ypos -457
+ }
+set N1ccfedb0 [stack 0]
+push $N1ccfedb0
+ Constant {
+  inputs 0
+  color 1
+  name Constant1
+  xpos -2744
+  ypos -522
+ }
+ Shuffle {
+  alpha white
+  name Shuffle5
+  label "\[value in]"
+  xpos -2744
+  ypos -450
+ }
+ Project3D {
+  inputs 2
+  name Project3D1
+  xpos -2744
+  ypos -406
+ }
+ ReadGeo2 {
+  version 1
+  range_first 1000
+  range_last 1438
+  cast_shadow false
+  receive_shadow false
+  name fbxRead2
+  xpos -2744
+  ypos -361
+ }
+ TransformGeo {
+  translate {{parent.TransformGeo1.translate} {parent.TransformGeo1.translate} {parent.TransformGeo1.translate}}
+  rotate {{parent.TransformGeo1.rotate} {parent.TransformGeo1.rotate} {parent.TransformGeo1.rotate}}
+  scaling {{parent.TransformGeo1.scaling} {parent.TransformGeo1.scaling} {parent.TransformGeo1.scaling}}
+  uniform_scale {{parent.TransformGeo1.uniform_scale}}
+  pivot {{parent.TransformGeo1.pivot} {parent.TransformGeo1.pivot} {parent.TransformGeo1.pivot}}
+  name TransformGeo4
+  xpos -2744
+  ypos -311
+ }
+push $N1ca927a0
+ ScanlineRender {
+  inputs 3
+  projection_mode uv
+  motion_vectors_type distance
+  name ScanlineRender1
+  label "\[value projection_mode]"
+  xpos -2744
+  ypos -269
+ }
+ Shuffle {
+  red alpha
+  green alpha
+  blue alpha
+  name Shuffle1
+  label "\[value in]"
+  xpos -2744
+  ypos -231
+ }
+ CurveTool {
+  operation "Auto Crop"
+  ROI {0 0 2048 2048}
+  autocropdata {{curve x1 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 232 x1001 44 x1002 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 44 x1200 43 x1201 43 43 43 43 43 43 43 43 43 43 43 43 43 43 43 43 43 42 42 42 42 42 42 42 42 42 42 42 42 42 42 42 42 42 42 42 42 42 42 42 42 42 41 41 41 41 41 41 41 41 41 41 41 41 41 41 41 41 41 41 41 41 41 41 41 41 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 39 39 39 39 39 39 39 39 39 39 39 39 39 39 39 38 38 38 38 38 38 38 37 37 37 36 36 37 37 38 38 39 43 50 62 76 93 112 133 157 182 209 234 259 282 306 325 343 360 373 382 389 395 400 405 410 414 417 420 423 425 427 428 429 429 430 431 432 432 433 434 434 434 435 435 435 435 436} {curve x1 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 160 x1001 173 x1002 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 x1200 171 x1201 171 171 171 171 171 171 171 171 171 171 171 171 171 171 171 171 171 171 171 171 171 171 171 171 171 171 171 171 171 171 171 171 171 171 171 171 171 171 171 171 171 171 171 171 171 171 171 171 171 171 171 171 171 172 172 172 172 172 172 172 172 172 172 172 172 172 172 172 172 172 172 172 172 172 172 172 172 172 172 172 172 172 172 172 172 172 172 173 173 173 173 172 172 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 173 172 172 171 171 171 171 171 171 171 171 171 171 172 172 173 173 173 173 173 173 173 172 171 171 171 172 172 172 171 171 171 171 170 170 170 170 170 169 169 169 169 169 169 169 169 169 169 169 169 168} {curve x1 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 472 x1001 282 x1002 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 282 x1200 282 x1201 282 281 281 281 281 281 281 281 281 281 281 281 281 281 281 281 281 281 281 281 281 281 281 280 280 280 280 280 280 280 280 280 280 280 280 280 280 280 280 280 280 280 280 280 280 280 280 280 279 279 279 279 279 279 279 279 279 279 279 279 279 279 279 279 279 279 279 279 278 278 278 278 278 278 278 278 278 278 278 278 278 278 278 278 278 278 278 278 278 278 278 278 278 278 278 278 278 278 277 277 277 277 277 277 277 277 277 277 277 277 277 277 276 276 276 276 276 276 275 275 275 275 274 274 275 275 276 276 278 281 289 300 314 331 350 371 395 420 447 473 497 521 544 563 581 598 611 623 630 635 640 645 650 654 658 661 664 666 667 668 669 670 671 672 672 673 674 674 675 675 675 676 676 676 676} {curve x1 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 248 x1001 261 x1002 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 x1200 259 x1201 259 259 259 259 259 259 259 259 259 259 259 259 259 259 259 259 259 259 259 259 259 259 259 259 259 259 259 259 259 259 259 259 259 259 259 259 259 259 259 259 259 259 259 259 259 259 259 259 259 259 259 259 259 259 259 259 259 259 259 259 260 260 260 260 260 260 260 260 260 260 260 260 260 260 260 260 260 260 260 260 260 260 260 260 260 260 260 260 260 260 260 260 260 260 260 260 260 260 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 261 260 260 260 259 259 259 259 259 259 259 259 259 259 259 260 260 261 262 261 261 261 261 260 260 261 261 262 262 262 262 261 261 261 261 260 260 260 260 260 260 259 259 259 259 259 259 259 259 259 259 259}}
+  intensitydata {{curve}}
+  name digimatte_autocrop
+  xpos -2744
+  ypos -125
+  addUserKnob {20 User}
+  addUserKnob {15 calcBBox}
+  calcBBox {34 166 678 264}
+ }
+push $N1cace530
+push $N1caab630
+ Dot {
+  name Dot7
+  note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic"
+  note_font_size 22
+  note_font_color 0xff0000ff
+  xpos -1923
+  ypos -705
+ }
+ Dot {
+  name Dot1
+  note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic"
+  note_font_size 22
+  note_font_color 0xff0000ff
+  xpos -1923
+  ypos -335
+ }
+set N1cd8e2d0 [stack 0]
+ Shuffle {
+  red black
+  green black
+  blue black
+  alpha white
+  name Shuffle3
+  label "\[value in]"
+  xpos -2061
+  ypos -345
+ }
+ Ramp {
+  output {-rgba.red rgba.green -rgba.blue -rgba.alpha}
+  replace true
+  p0 {100 -0.5}
+  p1 {100 {height-0.5}}
+  name Ramp1
+  xpos -2061
+  ypos -307
+ }
+ Ramp {
+  output {rgba.red -rgba.green -rgba.blue -rgba.alpha}
+  p0 {-0.5 0}
+  p1 {{"width - 0.5" i} 0}
+  name Ramp2
+  xpos -2061
+  ypos -269
+ }
+ Crop {
+  box {0 0 {width} {height}}
+  name Crop1
+  xpos -2061
+  ypos -231
+ }
+ ReadGeo2 {
+  range_first 1000
+  range_last 1438
+  cast_shadow false
+  receive_shadow false
+  name fbxRead3
+  xpos -2061
+  ypos -205
+ }
+ TransformGeo {
+  translate {{parent.TransformGeo1.translate} {parent.TransformGeo1.translate} {parent.TransformGeo1.translate}}
+  rotate {{parent.TransformGeo1.rotate} {parent.TransformGeo1.rotate} {parent.TransformGeo1.rotate}}
+  scaling {{parent.TransformGeo1.scaling} {parent.TransformGeo1.scaling} {parent.TransformGeo1.scaling}}
+  uniform_scale {{parent.TransformGeo1.uniform_scale}}
+  pivot {{parent.TransformGeo1.pivot} {parent.TransformGeo1.pivot} {parent.TransformGeo1.pivot}}
+  name TransformGeo3
+  xpos -2061
+  ypos -167
+ }
+push $N1cc81c60
+ ScanlineRender {
+  inputs 3
+  motion_vectors_type distance
+  name ScanlineRender2
+  label "\[value projection_mode]"
+  xpos -2061
+  ypos -97
+ }
+push $N1cd8e2d0
+ STMap {
+  inputs 2
+  uv rgb
+  filter Simon
+  name STMap2
+  xpos -1957
+  ypos -18
+ }
+ Saturation {
+  saturation 0
+  name Saturation1
+  xpos -1957
+  ypos 20
+ }
+push $N1cace530
+push $N1ca8eb60
+ Dot {
+  name Dot3
+  note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic"
+  note_font_size 22
+  note_font_color 0xff0000ff
+  xpos -1747
+  ypos -422
+ }
+ Dot {
+  name Dot9
+  note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic"
+  note_font_size 22
+  note_font_color 0xff0000ff
+  xpos -1747
+  ypos -340
+ }
+set N1cebf3a0 [stack 0]
+ Shuffle {
+  red black
+  green black
+  blue black
+  alpha white
+  name Shuffle2
+  label "\[value in]"
+  xpos -1662
+  ypos -350
+ }
+ Ramp {
+  output {-rgba.red rgba.green -rgba.blue -rgba.alpha}
+  replace true
+  p0 {100 -0.5}
+  p1 {100 {height-0.5}}
+  name Ramp39
+  xpos -1662
+  ypos -312
+ }
+ Ramp {
+  output {rgba.red -rgba.green -rgba.blue -rgba.alpha}
+  p0 {-0.5 0}
+  p1 {{"width - 0.5" i} 0}
+  name Ramp42
+  xpos -1662
+  ypos -274
+ }
+ Crop {
+  box {0 0 {width} {height}}
+  name Crop7
+  xpos -1662
+  ypos -236
+ }
+ ReadGeo2 {
+  range_first 1000
+  range_last 1438
+  cast_shadow false
+  receive_shadow false
+  name fbxRead4
+  xpos -1662
+  ypos -210
+ }
+ TransformGeo {
+  translate {{parent.TransformGeo1.translate} {parent.TransformGeo1.translate} {parent.TransformGeo1.translate}}
+  rotate {{parent.TransformGeo1.rotate} {parent.TransformGeo1.rotate} {parent.TransformGeo1.rotate}}
+  scaling {{parent.TransformGeo1.scaling} {parent.TransformGeo1.scaling} {parent.TransformGeo1.scaling}}
+  uniform_scale {{parent.TransformGeo1.uniform_scale}}
+  pivot {{parent.TransformGeo1.pivot} {parent.TransformGeo1.pivot} {parent.TransformGeo1.pivot}}
+  name TransformGeo2
+  xpos -1662
+  ypos -172
+ }
+push $N1cc81c60
+ ScanlineRender {
+  inputs 3
+  motion_vectors_type distance
+  name ScanlineRender4
+  label "\[value projection_mode]"
+  xpos -1662
+  ypos -88
+ }
+push $N1cebf3a0
+ STMap {
+  inputs 2
+  uv rgb
+  filter Simon
+  name STMap1
+  xpos -1781
+  ypos -15
+ }
+ Saturation {
+  saturation 0
+  name Saturation2
+  xpos -1781
+  ypos 23
+ }
+ Merge2 {
+  inputs 2
+  operation difference
+  name Merge1
+  label "\[value mix]"
+  note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+  note_font_size 13
+  note_font_color 0xff00ff
+  xpos -1879
+  ypos 117
+ }
+ CurveTool {
+  ROI {0 0 {width} {height}}
+  autocropdata {480 270 1440 810}
+  intensitydata {{curve x5 0.002212831673 x52 0.002051672805 x74 0.003243545625 x94 0.00225961698 x1002 0.002049431105 x1006 0.002606889893 x1031 0.002676872643 x1064 0.002012538788 x1090 0.002959052421 x1199 0.002021463421 x1254 0.002580154785 x1373 0.005045288545} {curve x5 0.002212831673 x52 0.002051672805 x74 0.002803926119 x94 0.00225961698 x1002 0.002049431105 x1006 0.002606889893 x1031 0.002676872643 x1064 0.002012538788 x1090 0.002959052421 x1199 0.002021463421 x1254 0.002580154785 x1373 0.005045288545} {curve x5 0.002212831673 x52 0.002051672805 x74 0.002509785735 x94 0.00225961698 x1002 0.002049431105 x1006 0.002606889893 x1031 0.002676872643 x1064 0.002012538788 x1090 0.002959052421 x1199 0.002021463421 x1254 0.002580154785 x1373 0.005045288545} {curve x74 0.003533721484}}
+  name autoAnalyzer
+  xpos -1879
+  ypos 159
+ }
+end_group

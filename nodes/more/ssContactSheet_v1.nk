@@ -1,0 +1,21 @@
+set cut_paste_input [stack 0]
+version 7.0 v6
+push $cut_paste_input
+ContactSheet {
+ rows 5
+ columns 5
+ name shotSheetContactSheet1
+ knobChanged "\nif nuke.thisKnob().name() == 'whichOutput':\n    ssContactSheetLayerSwap()\nif nuke.thisKnob().name() == 'shotLabelSize':\n    print \"changing label size\"\n    for i in range(nuke.thisNode().inputs()):\n        try:\n            nuke.thisNode().input(i)\['shotLabelSize'].setValue(nuke.thisKnob().value())\n        except:\n            pass\n"
+ tile_color 0xc68400ff
+ selected true
+ xpos 114
+ ypos 4626
+ addUserKnob {20 User}
+ addUserKnob {22 setupRowsColumns l "Do Row/Column setup" T "s = math.sqrt(int(nuke.thisNode().inputs()))\nnuke.thisNode()\['rows'].setValue(int(math.ceil(s)))\nnuke.thisNode()\['columns'].setValue(int(math.floor(s)))" +STARTLINE}
+ addUserKnob {3 shotLabelSize l "Shot Label Size" -STARTLINE}
+ shotLabelSize 250
+ addUserKnob {4 whichOutput l "Which Layer?" M {plate degrain dpr lay lgt cmp "hirez check"}}
+ whichOutput cmp
+ addUserKnob {26 ""}
+ addUserKnob {22 updateCmps l "Update to latest CMP" T "ins =nuke.thisNode().inputs()\nt = \"Updating to latest CMPs\"\ntask = nuke.ProgressTask(t)\nprog = 0.0\ntinc = (1.0/ins)*100\nfor i in range(ins):\n\tn = nuke.thisNode().input(i)\n\ttm = str(n.name().split('_')\[-1])\n\ttask.setMessage(tm)\n\tn\['doCmpAuto'].execute()\n\ttask.setProgress(prog)\n\tprog = prog + tinc\n\t\ndel(task)\n" +STARTLINE}
+}

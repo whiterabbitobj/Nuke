@@ -3,18 +3,22 @@ import os
 ################################################################################
 # Add custom scripts/plugins
 ################################################################################
-facility_scripts = "E:/Google Drive/WORK/VFX/Nuke/REPO/nukescripts"
 
-# nuke.pluginAddPath(facility_scripts)
-for file in os.listdir(facility_scripts):
-	if file.endswidth(".py"):
-		from file import *
+# importing all scripts from the scrips folder, as a module, and batch importing
+# this is bad form, against PEP, etc... but too handy and low risk for this app
+# from scripts import *
+#
+#
+import scripts
 
 # Adds file handling functionality from dragAndDrop.py
 # (must exist in the .../REPO/nukescripts folder!)
-nukescripts.drop.addDropDataCallback(fileHandler)
-nukescripts.drop.addDropDataCallback(pathHandler)
-nukescripts.drop.addDropDataCallback(dropHandler)
+
+### !!! CURRENTLY THIS SCRIPT BUGS OUT COPY/PASTA. DISABLED UNTIL FURTHER
+### !!! DEBUGGING CAN BE DONE
+# nukescripts.drop.addDropDataCallback(scripts.fileHandler)
+# nukescripts.drop.addDropDataCallback(scripts.pathHandler)
+# nukescripts.drop.addDropDataCallback(scripts.dropHandler)
 
 
 ################################################################################
@@ -42,8 +46,15 @@ nuke.knobDefault('Merge2.note_font_size', '13')
 nuke.knobDefault('Merge2.note_font_color', '16711935')
 nuke.knobDefault('Merge2.note_font', 'Bitstream Vera Sans Bold')
 
-nuke.knobDefault('Write.raw', 'True')
-nuke.knobDefault('Read.raw', 'True')
+# nuke.knobDefault('Write.raw', 'True')
+nuke.knobDefault('Write.file', '[getenv RENDER_PATH]/[value root.rootname]/exr/[value root.rootname]_mdo.%04d.exr')
+nuke.knobDefault('Write.label', '[value file]')
+nuke.knobDefault('Write.channels', 'rgba')
+nuke.knobDefault('Write.compression', 'dwaa')
+
+# nuke.knobDefault('Read.raw', 'True')
+nuke.knobDefault('Read.label', '[value width]x[value height]')
+
 
 
 ################################################################################
@@ -52,8 +63,8 @@ nuke.knobDefault('Read.raw', 'True')
 
 m = nuke.menu("Nuke").addMenu("&Mind:Machine")
 
-m.addCommand("Render selected", "renderThis(nuke.selectedNodes('Write'))")
-m.addCommand("RV selected", "rvFinalCheck(nuke.selectedNodes('Read'))", "Alt+r")
+# m.addCommand("Render selected", "renderThis(nuke.selectedNodes('Write'))")
+# m.addCommand("RV selected", "rvFinalCheck(nuke.selectedNodes('Read'))", "Alt+r")
 
 # Create a dictionary of aliases and the node class they reference to
 nodeAliases = {
@@ -74,7 +85,7 @@ for a,i in nodeAliases.items():
   p.addCommand(a, "nuke.createNode('"+i+"')")
 
 
-n.addCommand('Align to axis', "dollAlignNodes()", 'Alt+l')
+n.addCommand('Align to axis', "scripts.alignNodes()", 'Alt+l')
 #n.addCommand('Publish this shot', "publishThisShot(nuke.selectedNode())", 'Alt+p')
 n.addCommand('Open vIP', "nuke.show(nuke.toNode('vIP'))", 'Alt+v')
 #n.addCommand('Create Precomp setup', "dollPcompCreate()", 'Alt+p')

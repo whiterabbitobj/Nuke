@@ -1,0 +1,487 @@
+set cut_paste_input [stack 0]
+version 7.0 v10
+push $cut_paste_input
+Group {
+ name regrain1
+ knobChanged "\ndef doGrainCallback():\n    k = nuke.thisKnob()\n    if k.name() == 'inputChange':\n        n  = nuke.thisNode()\n        m1 = n.knob('maskCache')\n        m2 = n.knob('maskChannel')\n        print n.input(1)\n        if n.input(1) is None:\n            m1.setValue(m2.value())\n            m2.setValue(\"none\")\n        if n.input(1) is not None:\n            if m1.value() == '' or m1.value() == 'none':\n                m1.setValue('alpha')\n            m2.setValue(m1.value())\n    if k.name() == 'doConv':\n        if k.value() is False:\n            askTxt = \"Grain should always be applied in Log space to mimic the properties of film as it exposes. Do you really want to turn this off and apply in linear?\"\n            q = nuke.ask(askTxt)\n            if not q:\n                k.setValue(True)\n    if k.name() == 'doEdges':\n        n  = nuke.thisNode()\n        v1 = n.knob('doViewMattes')\n        v2 = n.knob('edgeWP')\n        v3 = n.knob('edgeMult')\n        v4 = n.knob('edgeGamma')\n        v5 = n.knob('edgesDivider')\n        v6 = n.knob('edgeGroup')\n        if k.value() is False:\n            v1.setVisible(False)\n            v2.setVisible(False)\n            v3.setVisible(False)\n            v4.setVisible(False)\n            v5.setVisible(False)\n            v6.setVisible(False)\n        else:\n            v1.setVisible(True)\n            v2.setVisible(True)\n            v3.setVisible(True)\n            v4.setVisible(True)        \n            v5.setVisible(True)\n            v6.setVisible(True)\ndoGrainCallback()\n"
+ tile_color 0xf7d9ff
+ note_font "Verdana Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 14
+ selected true
+ xpos -374
+ ypos -123
+ addUserKnob {20 "" l Grain}
+ addUserKnob {4 doViewChoice l Output M {"Grained Image" "Grain Only" Ranges ""}}
+ addUserKnob {26 div1 l "" -STARTLINE T " | "}
+ addUserKnob {6 doConv l "do lin2log conversion | " t "Internally convert to Log before graining. Converts back to Lin before output." -STARTLINE}
+ doConv true
+ addUserKnob {6 doEdges l INVISIBLE t "Check this box to add additional grain around the edges of your control matte. In general, this is a desirable thing to do in order to avoid the softness that usually results following merge operations using a layer with soft edge falloff." -STARTLINE +INVISIBLE}
+ addUserKnob {26 ""}
+ addUserKnob {20 edgeGroup l Edges +HIDDEN n 1}
+ addUserKnob {6 doViewMattes l "View Masks" +HIDDEN +STARTLINE}
+ addUserKnob {7 edgeWP l whitepoint +HIDDEN}
+ edgeWP 1
+ addUserKnob {7 edgeMult l gain +HIDDEN R 0 2}
+ edgeMult 1
+ addUserKnob {7 edgeGamma l gamma +HIDDEN R 0 4}
+ edgeGamma 1
+ addUserKnob {20 endGroup_1 l endGroup n -1}
+ addUserKnob {26 edgesDivider l "" +STARTLINE +HIDDEN}
+ addUserKnob {20 redGroup l Red n 1}
+ addUserKnob {7 rAmt l Amount}
+ addUserKnob {14 rScale l "Scale %" R 0 100}
+ rScale 100
+ addUserKnob {7 redSoft l Soft t "Controls the size/softness of the red grain." R 0 2}
+ redSoft 1
+ addUserKnob {20 endRed l endGroup n -1}
+ addUserKnob {20 greenGroup l Green n 1}
+ addUserKnob {7 gAmt l Amount}
+ addUserKnob {14 gScale l "Scale %" R 0 100}
+ gScale 115
+ addUserKnob {7 greenSoft l Soft t "Controls the size/softness of the green grain." R 0 2}
+ greenSoft 1
+ addUserKnob {20 endGreen l endGroup n -1}
+ addUserKnob {20 blueGroup l Blue n 1}
+ addUserKnob {7 bAmt l Amount}
+ addUserKnob {14 bScale l "Scale %" R 0 100}
+ bScale 120
+ addUserKnob {7 blueSoft l Soft t "Controls the size/softness of the blue grain." R 0 2}
+ blueSoft 0.94
+ addUserKnob {20 endBlue l endGroup n -1}
+ addUserKnob {20 advGroup l Advanced n 1}
+ addUserKnob {26 ""}
+ addUserKnob {26 advAdjTxt l "" +STARTLINE T "Manipulate channel curves to manually adjust grain luminance behavior."}
+ addUserKnob {41 lut_1 l "Grain Luma" T advancedAdjustments.lut}
+ addUserKnob {26 ""}
+ addUserKnob {6 doCrop l "Crop output" t "If checked (default), the output will be cropped to the resolution of the input." +STARTLINE}
+ doCrop true
+ addUserKnob {26 ""}
+ addUserKnob {20 endGroup l endAdv n -1}
+ addUserKnob {26 ""}
+ addUserKnob {41 maskChannel l mask T Keymix1.maskChannel}
+ addUserKnob {41 invertMask l invert -STARTLINE T Keymix1.invertMask}
+ addUserKnob {7 mix t "An overal mix for the grain. 0 = Off."}
+ mix 1
+ addUserKnob {20 "" l Ranges}
+ addUserKnob {26 ""}
+ addUserKnob {41 lut l "" -STARTLINE T applyToRanges_lookup.lut}
+ addUserKnob {1 maskCache l INVISIBLE +INVISIBLE}
+ maskCache alpha
+ addUserKnob {20 Info}
+ addUserKnob {26 infoTxt l "" +STARTLINE T "reGrain\nAuthor: Matt Doll\nVersion: 3b\nLast Modified: Dec 14, 2012"}
+}
+ Input {
+  inputs 0
+  name mask
+  xpos -325
+  ypos 186
+  number 1
+ }
+ Dot {
+  name Dot13
+  xpos -291
+  ypos 226
+ }
+set N18acfd80 [stack 0]
+ Dot {
+  name Dot11
+  xpos -449
+  ypos 226
+ }
+push $N18acfd80
+ ChannelMerge {
+  inputs 2
+  operation stencil
+  name ChannelMerge1
+  xpos -483
+  ypos 262
+ }
+ Grade {
+  channels alpha
+  whitepoint {{parent.edgeWP i}}
+  white {{parent.edgeMult i}}
+  gamma {{parent.edgeGamma i}}
+  white_clamp true
+  name Grade3
+  xpos -483
+  ypos 308
+ }
+set N18ae5cf0 [stack 0]
+push $N18ae5cf0
+push $N18acfd80
+ Merge2 {
+  inputs 2
+  operation screen
+  name Merge1
+  xpos -325
+  ypos 313
+  disable {{!parent.doEdges i}}
+ }
+ Dot {
+  name Dot9
+  xpos -291
+  ypos 433
+ }
+set N18aff980 [stack 0]
+ MergeExpression {
+  inputs 2
+  expr0 Aa
+  expr1 Ar
+  expr2 Ba
+  expr3 Aa
+  name MergeExpression1
+  xpos -325
+  ypos 492
+ }
+ Dot {
+  name Dot12
+  xpos -291
+  ypos 650
+ }
+ Input {
+  inputs 0
+  name Input
+  xpos -870
+  ypos -407
+ }
+ Dot {
+  name Dot6
+  xpos -836
+  ypos -285
+ }
+set N18b17740 [stack 0]
+ Dot {
+  name Dot14
+  xpos -1256
+  ypos -285
+ }
+set N18b1b890 [stack 0]
+ Dot {
+  name Dot3
+  xpos -1476
+  ypos -285
+ }
+ ColorLookup {
+  channels {rgba.red rgba.green rgba.blue -rgba.alpha}
+  lut {master {}
+    red {curve C k 0.5 s0 x0.25 0.5 s0 0.5 s0 0.5 s0 0.5 s-0}
+    green {curve C k 0.5 s0 x0.25 0.5 s0 0.5 s0 0.5 s0 0.5 s-0}
+    blue {curve C k 0.5 s0 x0.25 0.5 s0 0.5 s0 0.5 s0 0.5 s-0}
+    alpha {curve C k 0.5 s0 0.5 s-0}}
+  name applyToRanges_lookup
+  xpos -1510
+  ypos 219
+ }
+ Grade {
+  multiply 2
+  name Grade1
+  xpos -1510
+  ypos 247
+ }
+set N18b31cd0 [stack 0]
+ Dot {
+  name Dot1
+  label ranges
+  xpos -1476
+  ypos 584
+ }
+push $N18b31cd0
+push $N18b1b890
+ Multiply {
+  value 0
+  name black
+  xpos -1290
+  ypos -250
+ }
+ Dot {
+  name Dot10
+  xpos -1256
+  ypos -178
+ }
+set N18b4b7f0 [stack 0]
+ Reformat {
+  type scale
+  scale {{"1 / (bScale.w / 100)" i} {"1 / (bScale.h / 100)" i}}
+  resize none
+  filter Rifman
+  name Reformat6
+  xpos -1001
+  ypos -140
+ }
+ Crop {
+  box {0 0 {width i} {height i}}
+  name Crop3
+  xpos -1001
+  ypos -116
+ }
+ Dither {
+  channels {-rgba.red -rgba.green rgba.blue none}
+  amount 1
+  seed 4
+  name blueNoise
+  xpos -1001
+  ypos -92
+ }
+ Reformat {
+  type scale
+  scale {{"bScale.w / 100" i} {"bScale.h / 100" i}}
+  filter Rifman
+  name Reformat4
+  xpos -1001
+  ypos -58
+ }
+ Dot {
+  name Dot5
+  xpos -967
+  ypos 28
+ }
+push $N18b4b7f0
+ Reformat {
+  type scale
+  scale {{"1 / (gScale.w / 100)" i} {"1 / (gScale.h / 100)" i}}
+  resize none
+  filter Rifman
+  name Reformat5
+  xpos -1148
+  ypos -143
+ }
+ Crop {
+  box {0 0 {width i} {height i}}
+  name Crop1
+  xpos -1148
+  ypos -119
+ }
+ Dither {
+  channels {-rgba.red rgba.green -rgba.blue none}
+  amount 1
+  seed 3
+  name greenNoise
+  xpos -1148
+  ypos -95
+ }
+ Reformat {
+  type scale
+  scale {{"gScale.w / 100" i} {"gScale.h / 100" i}}
+  filter Rifman
+  name Reformat3
+  xpos -1148
+  ypos -61
+ }
+ Dot {
+  name Dot7
+  xpos -1114
+  ypos -6
+ }
+push $N18b4b7f0
+ Reformat {
+  type scale
+  scale {{"1 / (rScale.w / 100)" i} {"1 / (rScale.h / 100)" i}}
+  resize none
+  filter Rifman
+  name Reformat1
+  xpos -1290
+  ypos -142
+ }
+ Crop {
+  box {0 0 {width i} {height i}}
+  name Crop2
+  xpos -1290
+  ypos -118
+ }
+ Dither {
+  channels {rgba.red -rgba.green -rgba.blue none}
+  amount 1
+  seed 2
+  name redNoise1
+  xpos -1290
+  ypos -94
+ }
+ Reformat {
+  type scale
+  scale {{"rScale.w / 100" i} {"rScale.h / 100" i}}
+  filter Rifman
+  name Reformat2
+  xpos -1290
+  ypos -60
+ }
+ Copy {
+  inputs 2
+  from0 rgba.green
+  to0 rgba.green
+  name Copy1
+  xpos -1290
+  ypos -14
+ }
+ Copy {
+  inputs 2
+  from0 rgba.blue
+  to0 rgba.blue
+  name Copy2
+  xpos -1290
+  ypos 20
+ }
+ Add {
+  channels {rgba.red rgba.green rgba.blue none}
+  value 0.5
+  name changeTo0to1
+  xpos -1290
+  ypos 54
+ }
+ ColorLookup {
+  channels {rgba.red rgba.green rgba.blue none}
+  lut {master {}
+    red {}
+    green {}
+    blue {curve C 0 k x0.5061796904 0.5 s0 l x1 1}
+    alpha {}}
+  name advancedAdjustments
+  xpos -1290
+  ypos 78
+ }
+ Add {
+  channels {rgba.red rgba.green rgba.blue none}
+  value -0.5
+  name revertToFullDynRange
+  xpos -1290
+  ypos 102
+ }
+ Blur {
+  channels {rgba.red -rgba.green -rgba.blue none}
+  size {{parent.redSoft i x1 1}}
+  crop false
+  name redBlur
+  xpos -1290
+  ypos 126
+ }
+ Blur {
+  channels {-rgba.red rgba.green -rgba.blue none}
+  size {{parent.greenSoft i}}
+  crop false
+  name greenBlur
+  xpos -1290
+  ypos 160
+ }
+ Blur {
+  channels {-rgba.red -rgba.green rgba.blue none}
+  size {{parent.blueSoft}}
+  crop false
+  name blueBlur
+  xpos -1290
+  ypos 194
+ }
+ Merge2 {
+  inputs 2
+  operation multiply
+  name Merge10
+  xpos -1290
+  ypos 247
+ }
+ Grade {
+  white {{"parent.rAmt / 10" i} {"parent.gAmt / 10" i} {"parent.bAmt / 10" i} 0}
+  black_clamp false
+  name scaleAmounts
+  xpos -1290
+  ypos 291
+ }
+ Dot {
+  name Dot2
+  xpos -976
+  ypos 294
+ }
+set N18c500a0 [stack 0]
+ Dot {
+  name Dot4
+  label "over black"
+  xpos -976
+  ypos 521
+ }
+push $N18aff980
+ Invert {
+  channels alpha
+  name Invert1
+  xpos -580
+  ypos 421
+ }
+ Grade {
+  channels alpha
+  blackpoint 0.0001
+  name Grade2
+  xpos -580
+  ypos 459
+ }
+push $N18b17740
+ Dot {
+  name Dot8
+  xpos -689
+  ypos 395
+ }
+push $N18c500a0
+push $N18b17740
+ Dot {
+  name Dot15
+  xpos -836
+  ypos 131
+ }
+ Log2Lin {
+  operation lin2log
+  name Log2Lin1
+  xpos -870
+  ypos 219
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  Achannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+  Bchannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+  output {rgba.red rgba.green rgba.blue -rgba.alpha}
+  mix {{parent.mix i}}
+  name Merge13
+  xpos -870
+  ypos 291
+ }
+ Log2Lin {
+  name Log2Lin2
+  xpos -870
+  ypos 354
+ }
+ Keymix {
+  inputs 3
+  maskChannel none
+  name Keymix1
+  xpos -870
+  ypos 459
+ }
+ Clamp {
+  channels {rgba.red rgba.green rgba.blue none}
+  maximum_enable false
+  name Clamp_Blacks
+  xpos -870
+  ypos 500
+ }
+ Crop {
+  box {0 0 {width} {height}}
+  name Crop4
+  xpos -870
+  ypos 524
+  disable {{!parent.doCrop}}
+ }
+ Switch {
+  inputs 3
+  which {{parent.doViewChoice i}}
+  name Switch1
+  xpos -870
+  ypos 581
+ }
+ Switch {
+  inputs 2
+  which {{parent.doViewMattes i}}
+  name Switch2
+  xpos -870
+  ypos 647
+ }
+ Output {
+  name Output1
+  xpos -870
+  ypos 798
+ }
+end_group

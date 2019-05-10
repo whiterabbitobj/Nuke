@@ -1,4 +1,4 @@
-def dollAlignNodes():
+def alignNodes():
 	##################################################################
 	# figure out which axis the nodes are most likely to be aligned to
 	##################################################################
@@ -31,8 +31,8 @@ def dollAlignNodes():
 	for i in yDev:
 		yDevSum += abs(i)
 	xDevAvg = xDevSum / len(xDev)
-	yDevAvg = yDevSum / len(yDev)	
-	
+	yDevAvg = yDevSum / len(yDev)
+
 	#####################################
 	# ask user for which axis to align to
 	#####################################
@@ -47,7 +47,7 @@ def dollAlignNodes():
 	if not success:
 		return
 
-	############################		
+	############################
 	# align nodes to chosen axis
 	############################
 	chosen = p.value(alignChoice)

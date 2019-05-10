@@ -1,0 +1,51 @@
+set cut_paste_input [stack 0]
+version 7.0 v10
+push $cut_paste_input
+Group {
+ name wickedGlowBrah
+ tile_color 0xcc7f4cff
+ selected true
+ xpos -23479
+ ypos -1956
+ addUserKnob {20 User}
+ addUserKnob {7 glowWidth l "Glow Width" R 0 600}
+ glowWidth 600
+ addUserKnob {26 "" +STARTLINE}
+ addUserKnob {7 glowScalar l Scalar}
+ glowScalar 0.485
+ addUserKnob {7 glowMix l "Mix Adjust"}
+ glowMix 0.295
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -589
+  ypos -582
+ }
+ Blur {
+  size {{parent.glowWidth}}
+  mix {{"parent.Blur25.mix * parent.Blur25.mix"}}
+  name Blur24
+  selected true
+  xpos -589
+  ypos -542
+ }
+ Blur {
+  size {{"parent.Blur24.size * parent.glowScalar"}}
+  mix {{"0.9 * (1-parent.glowMix)"}}
+  name Blur25
+  xpos -589
+  ypos -504
+ }
+ Blur {
+  size {{"parent.Blur25.size * parent.glowScalar"}}
+  name Blur26
+  xpos -589
+  ypos -466
+ }
+ Output {
+  name Output1
+  xpos -589
+  ypos -366
+ }
+end_group

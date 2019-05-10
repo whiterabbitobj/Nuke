@@ -1,0 +1,367 @@
+#! /san/sww/rhel5/tools/foundry/Nuke6.2v4/Nuke6.2 -nx
+version 6.2 v4
+define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
+<layout version="1.0">
+    <window x="1600" y="0" w="1920" h="1197" screen="1">
+        <splitter orientation="1">
+            <split size="533"></split>
+            <splitter orientation="1">
+                <split size="0"></split>
+                <dock id="" hideTitles="1" activePageId="Toolbar.1">
+                    <page id="Toolbar.1"></page>
+                </dock>
+                <split size="529"></split>
+                <splitter orientation="2">
+                    <split size="1140"></split>
+                    <dock id="" activePageId="Properties.1">
+                        <page id="Properties.1"></page>
+                    </dock>
+                </splitter>
+            </splitter>
+            <split size="1375"></split>
+            <dock id="" activePageId="DAG.1">
+                <page id="DAG.1"></page>
+                <page id="Curve Editor.1"></page>
+                <page id="Script Editor.1"></page>
+                <page id="Progress.1"></page>
+            </dock>
+        </splitter>
+    </window>
+    <window x="0" y="0" w="1600" h="1200" screen="0">
+        <splitter orientation="2">
+            <split size="1185"></split>
+            <dock id="" activePageId="Viewer.1">
+                <page id="Viewer.1"></page>
+                <page id="Script Editor.2"></page>
+            </dock>
+        </splitter>
+    </window>
+</layout>
+}
+Root {
+ inputs 0
+ name /home/mdoll/nukeCustomNodes/sharpeningKernels.nk
+ last_frame 101
+ lock_range true
+ format "1828 1556 0 0 1828 1556 2 2K_Cinemascope"
+ proxy_type scale
+ proxy_format "914 778 0 0 914 778 2 1K_Cinemascope"
+ int8Lut linear
+ int16Lut linear
+ addUserKnob {20 GMS l "Global MotionBlur Settings"}
+ addUserKnob {20 TGC l "Transform Global Control" n 1}
+ addUserKnob {26 "" -STARTLINE T ""}
+ addUserKnob {7 motionblur t "reference the motionblur setting on the Transform node" R 0 4}
+ motionblur 1
+ addUserKnob {7 shutter R 0 4}
+ shutter 0.5
+ addUserKnob {22 batchoninteractiveon l " Int ON - Batch ON" T "n = nuke.thisNode()\nif n\['motionblur'].hasExpression():\n\tn\['motionblur'].clearAnimated()\n\tn\['motionblur'].setValue(n\['msamplert'].value())\nelse:\n\tn\['msamplert'].setValue(n\['motionblur'].value())\n\tn\['motionblur'].setValue(n\['msamplert'].value())\n\nn\['t_ind'].setValue('Interactive ON - Batch ON')" +STARTLINE}
+ addUserKnob {22 batchoninteractiveoff l " Int OFF - Batch ON" -STARTLINE T "n = nuke.thisNode()\nif n\['motionblur'].hasExpression() is False:\n\tvaluemb = n\['motionblur'].value()\n\tn\['msamplert'].setValue(valuemb)\nn\['motionblur'].clearAnimated()\nn\['motionblur'].setExpression(\"!\$gui ?  \[knob root.msamplert] : 0\")\nn\['t_ind'].setValue(\"Interactive OFF - Batch ON\")"}
+ addUserKnob {22 batchoffinteractiveoff l " Int OFF - Batch OFF" -STARTLINE T "n = nuke.thisNode()\nif n\['motionblur'].hasExpression():\n\tn\['motionblur'].clearAnimated()\nn\['motionblur'].setExpression(\"0\")\n#n\['motionblur'].setValue(0)\nn\['t_ind'].setValue(\"Interactive OFF - Batch OFF\")"}
+ addUserKnob {7 msamplert l INVISIBLE -STARTLINE +INVISIBLE}
+ msamplert 1
+ addUserKnob {1 t_ind l status:}
+ t_ind "Interactive ON - Batch ON"
+ addUserKnob {26 c l "" +STARTLINE}
+ addUserKnob {20 endGroup n -1}
+ addUserKnob {26 a l "" -STARTLINE T ""}
+ addUserKnob {20 RRGC l "Roto Render Global Control" n 1}
+ addUserKnob {6 motionBlur t "toggle motionBlur button on RotoRenders on or off\n" +STARTLINE}
+ motionBlur true
+ addUserKnob {6 motionBlurAllCrvs t "toggle motionBlurAllCrvs on/off" +STARTLINE}
+ motionBlurAllCrvs true
+ addUserKnob {7 shutterAngle R 0 360}
+ shutterAngle 180
+ addUserKnob {7 shutterStart R -180 180}
+ shutterStart -90
+ addUserKnob {7 motionBlurSteps R 0 2}
+ motionBlurSteps 15
+ addUserKnob {22 rrbatchoninteractiveon l " Int ON - Batch ON" T "n = nuke.thisNode()\nn\['motionBlur'].clearAnimated()\nn\['motionBlurAllCrvs'].clearAnimated()\nn\['motionBlur'].setValue(1)\nn\['motionBlurAllCrvs'].setValue(1)\nn\['rr_ind'].setValue(\"Interactive ON - Batch ON\")" +STARTLINE}
+ addUserKnob {22 rrbatchointeractiveoff l " Int OFF - Batch ON" -STARTLINE T "n = nuke.thisNode()\nn\['motionBlur'].setExpression(\"!\$gui ? 1: 0\")\nn\['motionBlurAllCrvs'].setExpression(\"!\$gui ? 1: 0\")\nn\['rr_ind'].setValue(\"Interactive OFF - Batch ON\")"}
+ addUserKnob {22 rrbatchoffinteractiveoff l " Int OFF - Batch OFF" -STARTLINE T "n = nuke.thisNode()\nn\['motionBlur'].clearAnimated()\nn\['motionBlur'].setValue(0)\nn\['motionBlurAllCrvs'].clearAnimated()\nn\['motionBlurAllCrvs'].setValue(0)\nn\['rr_ind'].setValue(\"Interactive OFF - Batch OFF\")"}
+ addUserKnob {1 rr_ind l status:}
+ rr_ind "Interactive ON - Batch ON"
+ addUserKnob {26 e l "" +STARTLINE}
+ addUserKnob {20 endGroup_2 l endGroup n -1}
+ addUserKnob {20 C3dGC l "Card3D Global Control" n 1}
+ addUserKnob {7 motionblurc3d l motionblur R 0 4}
+ motionblurc3d 1
+ addUserKnob {7 shutterc3d l shutter R 0 2}
+ shutterc3d 0.5
+ addUserKnob {22 c3dbatchoninteractiveon l " Int ON - Batch ON" T "n = nuke.thisNode()\nif n\['motionblurc3d'].hasExpression():\n\tn\['motionblurc3d'].clearAnimated()\n\tn\['motionblurc3d'].setValue(n\['msamplerc3d'].value())\nelse:\n\tn\['msamplerc3d'].setValue(n\['motionblurc3d'].value())\n\tn\['motionblurc3d'].setValue(n\['msamplerc3d'].value())\n\tn\['c3d_ind'].setValue(\"Interactive ON - Batch ON\")" +STARTLINE}
+ addUserKnob {22 crdbatchoninteractiveoff l " Int OFF - Batch ON" -STARTLINE T "n = nuke.thisNode()\nif n\['motionblurc3d'].hasExpression() is False:\n\tvaluemb = n\['motionblurc3d'].value()\n\tprint \"foo\", n\['msamplerc3d'].value()\n\tif n\['motionblurc3d'].value() != 0:\n\t\tn\['msamplerc3d'].setValue(valuemb)\n\tn\['motionblurc3d'].setExpression(\"!\$gui ?  \[knob root.msamplerc3d] : 0\")\nn\['c3d_ind'].setValue(\"Interactive OFF - Batch ON\")\n\n"}
+ addUserKnob {22 c3dbatchoffinteractiveoff l " Int OFF - Batch OFF" -STARTLINE T "n = nuke.thisNode()\nif n\['motionblurc3d'].hasExpression():\n\tn\['motionblurc3d'].clearAnimated()\nelse:\n\tn\['msamplerc3d'].setValue(n\['motionblurc3d'].value())\nn\['motionblurc3d'].setExpression(\"0\")\nn\['c3d_ind'].setValue(\"Interactive OFF - Batch OFF\")"}
+ addUserKnob {7 msamplerc3d l INVISIBLE +INVISIBLE}
+ msamplerc3d 1
+ addUserKnob {1 c3d_ind l status:}
+ c3d_ind "Interactive ON - Batch ON"
+ addUserKnob {26 b l "" +STARTLINE}
+ addUserKnob {20 endGroup_3 l endGroup n -1}
+ addUserKnob {20 sr l "Scanline Render" n 1}
+ addUserKnob {7 prescan_samples l samples R 0 50}
+ prescan_samples 5
+ addUserKnob {7 batch_samples l "batch samples" R 0 50}
+ batch_samples 5
+ addUserKnob {7 scan_shutter l shutter}
+ scan_shutter 0.5
+ addUserKnob {22 srbatchoninteractiveon l " Int ON - Batch ON" T "n = nuke.thisNode()\nif n\['scan_samples'].hasExpression():\n    n\['scan_samples'].clearAnimated()\nif n\['prescan_samples'].hasExpression():\n\tn\['prescan_samples'].clearAnimated()\n\tn\['prescan_samples'].setValue(n\['scan_sampler'].value())\nelse:\n\tn\['scan_sampler'].setValue(n\['prescan_samples'].value())\n\n\nif n\['batch_samples'].hasExpression():\n\tn\['batch_samples'].clearAnimated()\n\tn\['batch_samples'].setValue(n\['batch_sampler'].value())\nelse:\n\tn\['batch_sampler'].setValue(n\['batch_samples'].value())\n\n\nn\['batch_samples'].setValue(n\['batch_sampler'].value())\nn\['prescan_samples'].setValue(n\['scan_sampler'].value())\nn\['scan_samples'].setExpression(\"\$gui ? %s : %s\" % (\"root.prescan_samples\",\"root.batch_samples\" ))\nn\['sr_ind'].setValue(\"Interactive ON - Batch ON\")\n" +STARTLINE}
+ addUserKnob {22 srbatchoninteractiveoff l " Int OFF - Batch ON" -STARTLINE T "n = nuke.thisNode()\n\nif n\['prescan_samples'].hasExpression():\n\tn\['prescan_samples'].clearAnimated()\n\tn\['prescan_samples'].setExpression(\"0\")\nelse:\n\tn\['scan_sampler'].setValue(n\['prescan_samples'].value())\n\tn\['prescan_samples'].setExpression(\"0\")\n\nif n\['batch_samples'].hasExpression():\n\tn\['batch_samples'].clearAnimated()\nelse:\n\tn\['batch_sampler'].setValue(n\['batch_samples'].value())\n\nn\['batch_samples'].setValue(n\['batch_sampler'].value())\nn\['scan_samples'].setExpression(\"!\$gui ? root.batch_samples : root.prescan_samples\")\nn\['sr_ind'].setValue(\"Interactive OFF - Batch ON\")"}
+ addUserKnob {22 srbatchoffinteractiveoff l " Int OFF - Batch OFF" -STARTLINE T "n = nuke.thisNode()\nif n\['prescan_samples'].hasExpression() is False:\n\tn\['scan_sampler'].setValue(n\['prescan_samples'].value())\n\nif n\['batch_samples'].hasExpression() is False:\n\tn\['batch_sampler'].setValue(n\['batch_samples'].value())\n\nn\['scan_samples'].setExpression(\"!\$gui ?  root.batch_samples : root.prescan_samples\")\nn\['prescan_samples'].setExpression(\"0\")\nn\['batch_samples'].setExpression(\"0\")\n\nn\['sr_ind'].setValue(\"Interactive OFF - Batch OFF\")"}
+ addUserKnob {7 scan_sampler l INVISIBLE -STARTLINE +INVISIBLE}
+ scan_sampler 10
+ addUserKnob {7 scan_samples l INVISIBLE -STARTLINE +INVISIBLE}
+ scan_samples {{"\$gui ? root.prescan_samples : root.batch_samples"}}
+ addUserKnob {7 batch_sampler l INVISIBLE -STARTLINE +INVISIBLE}
+ batch_sampler 10
+ addUserKnob {1 sr_ind l status:}
+ sr_ind "Interactive ON - Batch ON"
+ addUserKnob {26 "" -STARTLINE T ""}
+ addUserKnob {26 "" -STARTLINE T ""}
+ addUserKnob {26 "" -STARTLINE T ""}
+ addUserKnob {26 "" -STARTLINE T ""}
+ addUserKnob {26 f l "" +STARTLINE}
+ addUserKnob {20 endGroup_4 l endGroup n -1}
+ addUserKnob {20 rn l "Roto Node Global Control" n 1}
+ addUserKnob {6 rotoMotionBlur_on l motionblur t "toggle motionBlur button on Roto nodes on or off\n" +STARTLINE}
+ rotoMotionBlur_on true
+ addUserKnob {7 rotoMotionBlur_samples l "motionblur samples" t "Sets the number of motion blur samples" R 0 4}
+ rotoMotionBlur_samples 1
+ addUserKnob {7 rotoMotionBlur_shutter l "motionblur shutter" t "This sets how long the shutter should be open. The value is in frames, so 0.5 is half a frame" R 0 2}
+ rotoMotionBlur_shutter 0.5
+ addUserKnob {4 rotoShutterOffsetType l "shutter offset type" t "The value of this controls how the shutter behaves with respect to the current frame value" M {centred start end custom}}
+ addUserKnob {7 rotoShutterOffset l "shutter offset" t "If the \"shutter offset type\" is set to 'custom', this parameter is used to set the time the shutter opens by adding it to the current frame. \nValues are in frames, so -0.5 would open the shutter half a frame before the current frame" R -1 1}
+ addUserKnob {22 rnbatchoninteractiveon l " Int ON - Batch ON" T "n = nuke.thisNode()\nn\['rotoMotionBlur_on'].clearAnimated()\nn\['rotoMotionBlur_on'].setValue(1)\nn\['rn_ind'].setValue(\"Interactive ON - Batch ON\")" +STARTLINE}
+ addUserKnob {22 rnbatchointeractiveoff l " Int OFF - Batch ON" -STARTLINE T "n = nuke.thisNode()\nn\['rotoMotionBlur_on'].setExpression(\"!\$gui ? 1: 0\")\nn\['rn_ind'].setValue(\"Interactive OFF - Batch ON\")"}
+ addUserKnob {22 rnbatchoffinteractiveoff l " Int OFF - Batch OFF" -STARTLINE T "n = nuke.thisNode()\nn\['rotoMotionBlur_on'].clearAnimated()\nn\['rotoMotionBlur_on'].setValue(0)\nn\['rn_ind'].setValue(\"Interactive OFF - Batch OFF\")"}
+ addUserKnob {1 rn_ind l status:}
+ rn_ind "Interactive ON - Batch ON"
+ addUserKnob {26 "" -STARTLINE T ""}
+ addUserKnob {26 "" -STARTLINE T ""}
+ addUserKnob {20 endGroup_5 l endGroup n -1}
+}
+Log2Lin {
+ inputs 0
+ gamma 1
+ name VIEWER_INPUT
+ xpos -462
+ ypos -212
+}
+Matrix {
+ name Matrix1
+ xpos -462
+ ypos -184
+}
+marcie_v01 {
+ inputs 0
+ name marcie_v01_1
+ selected true
+ xpos 410
+ ypos -438
+ format "1828 1332 0 0 1828 1332 1 "
+}
+Dot {
+ name Dot1
+ xpos 355
+ ypos -39
+}
+set N400ae50 [stack 0]
+Matrix {
+ matrix {
+     {-1 -1 -1}
+     {-1 24 -1}
+     {-1 -1 -1}
+   }
+ normalize true
+ name Matrix_sharpen_medium_weak
+ xpos 324
+ ypos -226
+}
+push $N400ae50
+Matrix {
+ matrix {
+     {-1 -1 -1}
+     {-1 16 -1}
+     {-1 -1 -1}
+   }
+ normalize true
+ name Matrix_sharpen_medium_intermediate
+ xpos 474
+ ypos -225
+}
+push $N400ae50
+Matrix {
+ matrix {
+     {-3 -3 -3}
+     {-3 40 -3}
+     {-3 -3 -3}
+   }
+ normalize true
+ name Matrix_sharpen_medium_strong
+ xpos 647
+ ypos -225
+}
+push $N400ae50
+Matrix {
+ matrix {
+     {0 0 -1 0 0}
+     {0 -1 -1 -1 0}
+     {-1 -1 20 -1 -1}
+     {0 -1 -1 -1 0}
+     {0 0 -1 0 0}
+   }
+ normalize true
+ name Matrix_sharpen_large_strong
+ xpos 192
+ ypos -93
+}
+push $N400ae50
+Matrix {
+ matrix {
+     {-1 -2 -1}
+     {-2 44 -2}
+     {-1 -2 -1}
+   }
+ normalize true
+ name Matrix_sharpen_bin_small_weak
+ xpos -137
+ ypos 26
+}
+push $N400ae50
+Matrix {
+ matrix {
+     {-1 -2 -1}
+     {-2 28 -2}
+     {-1 -2 -1}
+   }
+ normalize true
+ name Matrix_sharpen_bin_small_intermediate
+ xpos 31
+ ypos 24
+}
+push $N400ae50
+Matrix {
+ matrix {
+     {-1 -2 -1}
+     {-2 20 -2}
+     {-1 -2 -1}
+   }
+ normalize true
+ name Matrix_sharpen_bin_small_strong
+ xpos 189
+ ypos 20
+}
+push $N400ae50
+Matrix {
+ matrix {
+     {-1 -4 -6 -4 -1}
+     {-4 -16 -24 -16 -4}
+     {-6 -24 732 -24 -6}
+     {-4 -16 -24 -16 -4}
+     {-1 -4 -6 -4 -1}
+   }
+ normalize true
+ name Matrix_bin_medium_weak
+ xpos -143
+ ypos 128
+}
+push $N400ae50
+Matrix {
+ matrix {
+     {-1 -4 -6 -4 -1}
+     {-4 -16 -24 -16 -4}
+     {-6 -24 476 -24 -6}
+     {-4 -16 -24 -16 -4}
+     {-1 -4 -6 -4 -1}
+   }
+ normalize true
+ name Matrix_bin_medium_intermediate
+ xpos 26
+ ypos 126
+}
+push $N400ae50
+Matrix {
+ matrix {
+     {0 -5 0}
+     {-5 36 -5}
+     {0 -5 0}
+   }
+ normalize true
+ name Matrix_sharpen_small_strong
+ xpos 161
+ ypos -227
+}
+push $N400ae50
+Matrix {
+ matrix {
+     {0 -1 0}
+     {-1 12 -1}
+     {0 1 0}
+   }
+ normalize true
+ name Matrix_sharpen_small_weak
+ xpos -134
+ ypos -232
+}
+push $N400ae50
+Matrix {
+ matrix {
+     {0 0 -1 0 0}
+     {0 -1 -1 -1 0}
+     {-1 -1 28 -1 -1}
+     {0 -1 -1 -1 0}
+     {0 0 -1 0 0}
+   }
+ normalize true
+ name Matrix_sharpen_large_intermediate
+ xpos 28
+ ypos -92
+}
+push $N400ae50
+Matrix {
+ matrix {
+     {-1 -4 -6 -4 -1}
+     {-4 -16 -24 -16 -4}
+     {-6 -24 348 -24 -6}
+     {-4 -16 -24 -16 -4}
+     {-1 -4 -6 -4 -1}
+   }
+ normalize true
+ name Matrix_bin_medium_strong
+ xpos 188
+ ypos 127
+}
+push $N400ae50
+Matrix {
+ matrix {
+     {0 0 -1 0 0}
+     {0 -1 -1 -1 0}
+     {-1 -1 44 -1 -1}
+     {0 -1 -1 -1 0}
+     {0 0 -1 0 0}
+   }
+ normalize true
+ name Matrix_sharpen_large_weak
+ xpos -134
+ ypos -91
+}
+push $N400ae50
+Matrix {
+ matrix {
+     {0 -1 0}
+     {-1 8 -1}
+     {0 -1 0}
+   }
+ normalize true
+ name Matrix_sharpen_small_intermediate
+ xpos 3
+ ypos -229
+}
+Viewer {
+ inputs 3
+ frame 1
+ input_number 2
+ viewerProcess None
+ name Viewer1
+ xpos -454
+ ypos -744
+}

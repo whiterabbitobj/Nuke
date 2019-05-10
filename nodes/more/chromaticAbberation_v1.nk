@@ -1,0 +1,136 @@
+set cut_paste_input [stack 0]
+version 6.3 v2
+Dot {
+ inputs 0
+ name Dot47
+ label "CG ALPHA"
+ note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic"
+ note_font_size 22
+ note_font_color 0xff0000ff
+ selected true
+ xpos 221
+ ypos 2087
+}
+add_layer {rgba redguard1.glow rgba.beta rgba.family rgba.noise rgba.eyes rgba.test rgba.x rgba.water rgb.raw}
+FilterErode {
+ size -2
+ name FilterErode1
+ selected true
+ xpos 187
+ ypos 2338
+}
+Dot {
+ name Dot1
+ note_font "Bitstream Vera Sans Italic Italic Italic Italic"
+ note_font_size 22
+ note_font_color 0xff0000ff
+ selected true
+ xpos 221
+ ypos 2394
+}
+add_layer {rgb rgb.alpha rgb.r rgb.g rgb.b rgb.a rgb.red rgb.green rgb.blue rgb.UV}
+Ramp {
+ inputs 0
+ output {-rgba.red rgba.green -rgba.blue -rgba.alpha}
+ p0 {100 -0.5}
+ p1 {100 {height-0.5}}
+ name Ramp5
+ selected true
+ xpos 71
+ ypos 2207
+}
+Ramp {
+ output {rgba.red -rgba.green -rgba.blue -rgba.alpha}
+ p0 {-0.5 0}
+ p1 {{"width - 0.5" i} 0}
+ name Ramp6
+ selected true
+ xpos 71
+ ypos 2245
+}
+Dot {
+ name Dot8
+ note_font "Bitstream Vera Sans Italic Italic Italic Italic"
+ note_font_size 22
+ note_font_color 0xff0000ff
+ selected true
+ xpos 38
+ ypos 2255
+}
+set N2dd567e0 [stack 0]
+Dot {
+ name Dot9
+ note_font "Bitstream Vera Sans Italic Italic Italic Italic"
+ note_font_size 22
+ note_font_color 0xff0000ff
+ selected true
+ xpos 38
+ ypos 2298
+}
+Grade {
+ channels {rgba.red -rgba.green rgba.blue none}
+ add {{parent.Grade42.add/2}}
+ reverse true
+ name Grade41
+ selected true
+ xpos -70
+ ypos 2288
+}
+push $N2dd567e0
+Grade {
+ channels {rgba.red -rgba.green rgba.blue none}
+ add -0.002
+ name Grade42
+ label "change this offset to change the amount of chroma shift"
+ note_font_color 0xa8001eff
+ selected true
+ xpos -70
+ ypos 2239
+}
+push $cut_paste_input
+Dot {
+ name Dot46
+ label "CG COMBINED WITH PLATE"
+ note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic"
+ note_font_size 22
+ note_font_color 0xff0000ff
+ selected true
+ xpos -359
+ ypos 2091
+}
+Dot {
+ name Dot11
+ note_font "Bitstream Vera Sans Italic Italic Italic Italic"
+ note_font_size 22
+ note_font_color 0xff0000ff
+ selected true
+ xpos -359
+ ypos 2220
+}
+set N2ddd2ee0 [stack 0]
+STMap {
+ inputs 2
+ channels {rgba.red -rgba.green -rgba.blue -rgb.alpha}
+ uv rgb
+ name STMap9
+ selected true
+ xpos -283
+ ypos 2245
+}
+STMap {
+ inputs 2
+ channels {-rgba.red -rgba.green rgba.blue -rgb.alpha}
+ uv {rgba.red rgba.green}
+ name STMap2
+ selected true
+ xpos -283
+ ypos 2288
+}
+push $N2ddd2ee0
+Keymix {
+ inputs 3
+ name Keymix2
+ selected true
+ xpos -393
+ ypos 2384
+}

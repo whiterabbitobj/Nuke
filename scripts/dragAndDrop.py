@@ -16,7 +16,7 @@
 #
 # TODO: extend chan file import to give user options for node to create
 #
-
+#
 import os
 import nuke
 import nukescripts

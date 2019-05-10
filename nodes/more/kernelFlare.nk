@@ -1,0 +1,43 @@
+set cut_paste_input [stack 0]
+version 6.3 v8
+Flare {
+inputs 0
+position {{width/2 i} {height/2 i}}
+ring_color {1 1 1}
+inner_color {0.5 0.5 0.5}
+outer_falloff {1 1 1}
+inner_falloff {1 1 1}
+brightness {1 1 1}
+mult_offset 0
+name Flare5
+selected true
+xpos -4651
+ypos -1675
+}
+Crop {
+box {{width/2-(boxWidth/2) i} {height/2-(boxWidth/2) i} {width/2+(boxWidth/2) i} {height/2+(boxWidth/2) i}}
+name Crop1
+selected true
+xpos -4651
+ypos -1647
+addUserKnob {20 User}
+addUserKnob {3 boxWidth}
+boxWidth 240
+}
+Transform {
+scale 0.15
+center {{width/2 i} {height/2 i}}
+shutteroffset centred
+name Transform17
+selected true
+xpos -4651
+ypos -1619
+}
+push $cut_paste_input
+Convolve {
+inputs 2
+name Convolve5
+selected true
+xpos -4603
+ypos -1539
+}

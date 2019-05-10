@@ -1,4 +1,4 @@
-def rvFinalCheck(nodelist):
+def sendToRV(nodelist):
     cmd = ['/Applications/RV64.app/Contents/MacOS/RV64']
     for node in nodelist:
         cmd.append(node['file'].value())

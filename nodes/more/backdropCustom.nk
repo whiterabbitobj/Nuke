@@ -1,0 +1,16 @@
+set cut_paste_input [stack 0]
+version 6.2 v4
+BackdropNode {
+ inputs 0
+ name BackdropNode2
+ tile_color 0x262626ff
+ label output
+ note_font "Bitstream Vera Sans Bold Bold"
+ note_font_size 125
+ note_font_color 0x545454ff
+ selected true
+ xpos -134
+ ypos 8366
+ bdwidth 893
+ bdheight 483
+}
