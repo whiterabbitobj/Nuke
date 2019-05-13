@@ -1,3 +1,5 @@
+import nuke
+
 def alignNodes():
 	##################################################################
 	# figure out which axis the nodes are most likely to be aligned to

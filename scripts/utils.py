@@ -1,19 +1,14 @@
+import re
+import os
+import nuke
+
 def refreshAllReads():
     for node in nuke.allNodes("Read"):
     	node['reload'].execute()
-
-
-
 def rar():
 	refreshAllReads()
-
-
-
 def refreshreads():
 	refreshAllReads()
-
-
-
 def refreshallreads():
 	refreshAllReads()
 
@@ -59,3 +54,31 @@ def centerOnTarget(selNode):
     y = selNode['ypos'].value()
     nuke.zoom(1,(x,y))
     selNode['selected'].setValue(False)
+
+
+def readFromWrite():
+    nodes = nuke.selectedNodes()
+    for node in nodes:
+        assert node.Class() == 'Write'
+        filename = nuke.filename(node)
+
+        while True:
+            dir = os.path.dirname(filename)
+            print("Looking for:", filename)
+
+            try:
+                fileset = nuke.getFileNameList(dir)[0]
+                print("Found fileset on disk: ", fileset)
+                break
+            except:
+                print("Version not found, searching for previous takes.")
+                prefix, num = re.search(r'(v)(\d+)', filename,
+                                        re.IGNORECASE).groups()
+                new_ver = str(int(num) - 1).zfill(len(num))
+                assert int(new_ver) > 0, "NO VERSIONS FOUND"
+                filename = re.sub(r'v(\d+)', prefix + new_ver, filename)
+
+        fileset = os.path.join(dir, fileset)
+        read = nuke.createNode('Read')
+        read['file'].fromUserText(fileset)
+        read.setXYpos(node.xpos(), node.ypos() + 120)

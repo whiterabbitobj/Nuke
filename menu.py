@@ -87,6 +87,8 @@ for a,i in nodeAliases.items():
 
 n.addCommand('Align to axis', "scripts.alignNodes()", 'Alt+l')
 #n.addCommand('Publish this shot', "publishThisShot(nuke.selectedNode())", 'Alt+p')
-n.addCommand('Open vIP', "nuke.show(nuke.toNode('vIP'))", 'Alt+v')
+n.addCommand('Open Viewer Input', "nuke.show(nuke.toNode('VIEWER_INPUT'))", 'Alt+v')
+n.addCommand('Create Read from Write', "scripts.readFromWrite()", 'Alt+r')
+
 #n.addCommand('Create Precomp setup', "dollPcompCreate()", 'Alt+p')
 #n.addCommand('Make hero links', 'makeHeroLinks(nuke.selectedNode())', 'Alt+h')

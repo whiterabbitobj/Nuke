@@ -1,7 +1,11 @@
-def sendToRV(nodelist):
-    cmd = ['/Applications/RV64.app/Contents/MacOS/RV64']
+import subprocess
+import os
+
+def sendToRV(nodelist, mode=''):
+    cmd = os.environ['RV_VER']
     for node in nodelist:
         cmd.append(node['file'].value())
-    cmd.append('-over')
+    if mode=='over':
+        cmd.append('-over')
     ocmd = ' '.join(cmd)
     subprocess.Popen(ocmd, shell=True)
