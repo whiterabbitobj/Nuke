@@ -1,0 +1,1364 @@
+#! /mill3d/server/apps/FOUNDRY/linux-x86-64/Nuke11.2v6/libnuke-11.2.6.so -nx
+version 11.2 v6
+define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
+<layout version="1.0">
+    <window x="0" y="0" w="1902" h="1137" screen="0">
+        <splitter orientation="1">
+            <split size="40"/>
+            <dock id="" hideTitles="1" activePageId="Toolbar.1">
+                <page id="Toolbar.1"/>
+            </dock>
+            <split size="577" stretch="1"/>
+            <splitter orientation="2">
+                <split size="1093"/>
+                <dock id="" activePageId="Properties.1" focus="true">
+                    <page id="Properties.1"/>
+                </dock>
+            </splitter>
+            <split size="1277"/>
+            <splitter orientation="2">
+                <split size="978"/>
+                <splitter orientation="1">
+                    <split size="637"/>
+                    <dock id="" activePageId="DAG.1">
+                        <page id="DAG.1"/>
+                    </dock>
+                    <split size="636"/>
+                    <dock id="" activePageId="DAG.2">
+                        <page id="DAG.2"/>
+                    </dock>
+                </splitter>
+                <split size="111"/>
+                <dock id="" activePageId="Curve Editor.1">
+                    <page id="uk.co.thefoundry.scripteditor.1"/>
+                    <page id="Curve Editor.1"/>
+                </dock>
+            </splitter>
+        </splitter>
+    </window>
+    <window x="1921" y="1" w="1900" h="1137" screen="1">
+        <splitter orientation="2">
+            <split size="1137"/>
+            <dock id="" activePageId="Viewer.1">
+                <page id="Viewer.1"/>
+            </dock>
+        </splitter>
+    </window>
+</layout>
+}
+Root {
+ inputs 0
+ name /usr/people/dollm/Nuke/gaussFill_smart_v3.nk
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ proxy_type scale
+ proxy_format "1024 778 0 0 1024 778 1 1K_Super_35(full-ap)"
+ colorManagement OCIO
+ defaultViewerLUT "OCIO LUTs"
+ workingSpaceLUT linear
+ monitorLut MillView
+ int8Lut rec709
+ int16Lut rec709
+ logLut AlexaV3LogC
+ floatLut linear
+ luts {linear {}
+   sRGB {}
+   rec709 {}
+   Cineon {}
+   Gamma1.8 {}
+   Gamma2.2 {}
+   Gamma2.4 {}
+   Gamma2.6 {}
+   Panalog {}
+   REDLog {}
+   ViperLog {}
+   AlexaV3LogC {}
+   PLogLin {}
+   SLog {}
+   SLog1 {}
+   SLog2 {}
+   SLog3 {}
+   CLog {}
+   Log3G10 {}
+   Log3G12 {}
+   HybridLogGamma {}
+   Protune {}
+   BT1886 {}
+   HDR2084 {}
+   REDSpace {}
+   FlameVideo {pow((x+0.1498438276617182)/1.1498438276617182,1.0/0.45)*1.0109156157307528-0.0109156157307528}}
+}
+Read {
+ inputs 0
+ file_type exr
+ file /jobs/ads/capitalone_quicksilver_J603529/CPE/sh009/n_009/live_action/exr/CPE_sh009_flatlin.####.exr
+ format "2224 1548 0 0 2224 1548 1 "
+ first 1001
+ last 1135
+ origfirst 1001
+ origlast 1135
+ origset true
+ name Read13
+ xpos -548
+ ypos -519
+}
+Primatte3 {
+ data { 5
+    29931 54907 50203
+    65552
+    0 5
+    30234 30234 30234 0
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+    31325.3 130560 130560 130560 14891.2 130560 130560 130560 130560 130560 65609.7 130560 130560 13155 15558.6 26320.9 130560 12944.1 130560 108358 130560 130560 130560 130560 130560 130560 39205.5 70221.5 130560 130560 130560 130560 19491.6 30166.7 21733.2 8638.37 62167.2 11569 130560 14197.9 16866.5 15187 130560 130560 130560 130560 130560 130560 130560 130560 130560 22912.9 130560 29281.1 19059.3 12041.5 42335.9 130560 33066.2 130560 130560 17211.5 130560 15083.9 10425.2 13661.5
+    31325.3 130560 130560 130560 14891.2 130560 130560 130560 130560 130560 65609.7 130560 130560 14358 16923.8 27907.2 130560 12944.1 130560 108358 130560 130560 130560 130560 130560 130560 39205.5 70221.5 130560 130560 130560 130560 19491.6 30166.7 21733.2 11327.3 62167.2 15538 130560 14197.9 16866.5 15187 130560 130560 130560 130560 130560 130560 130560 130560 130560 27325.8 130560 29281.1 19059.3 19965.1 42335.9 130560 34999.4 130560 130560 17211.5 130560 15083.9 10812.9 13763.2
+    -0.0998535 -2.44596e+11 -3.2851e+11 6784.45 1.94021e+12 1.45434e+12
+    -0.100342 -1.48818e+11 -2.62091e+11 5822.62 3.52516e+11 3.83837e+11
+    -0.0998535 -2.22551e+14 -2.22551e+14 -4209.35 -7.14276e+13 -7.14276e+13
+    -0.0998535 -2.22551e+14 -2.22551e+14 -5171.18 -8.79864e+13 -8.79864e+13
+    -0.100342 -3.21089e+11 -3.21089e+11 5171.18 1.27932e+12 1.27932e+12
+    -0.100342 -1.95359e+11 -2.5617e+11 4209.35 -3.08518e+11 2.61748e+11
+    -0.100342 -2.22551e+14 -2.22551e+14 -5822.62 -9.92016e+13 -9.92016e+13
+    -0.100342 -2.22551e+14 -2.22551e+14 -6784.45 -1.1576e+14 -1.1576e+14
+    -0.183228 -4.06321e+14 -4.06321e+14 11714.3 1.98914e+14 1.98914e+14
+    -0.182129 -1.26477e+13 -1.34099e+13 12560.1 3.52927e+13 3.44617e+13
+    -0.182617 -4.06321e+14 -4.06321e+14 3450.12 5.92723e+13 5.92723e+13
+    -0.183228 -3.37226e+14 -3.37226e+14 -8784.97 -1.4438e+14 -1.4438e+14
+    -0.182617 -5.20411e+12 -5.20411e+12 -1703.66 -1.03667e+13 -1.03667e+13
+    -0.18396 -8.43397e+11 -9.24231e+11 -805.955 -3.31407e+11 -1.13136e+12
+    -0.183472 -4.06321e+14 -4.06321e+14 -2123.37 -3.60823e+13 -3.60823e+13
+    -0.182129 -9.1127e+13 -9.1127e+13 -14306.5 -2.31693e+14 -2.31693e+14
+    -0.183105 -3.90042e+13 -4.13549e+13 14306.5 7.6178e+13 7.54273e+13
+    -0.183716 -1.17663e+12 -1.27988e+12 2123.37 3.75632e+12 3.40813e+12
+    -0.183716 -4.06321e+14 -4.06321e+14 805.955 1.4303e+13 1.4303e+13
+    -0.182617 -4.06321e+14 -4.06321e+14 1703.66 2.92326e+13 2.92326e+13
+    -0.18396 -4.06321e+14 -4.06321e+14 8784.97 1.48528e+14 1.48528e+14
+    -0.183105 -6.01243e+11 -6.01243e+11 -3450.12 8.82471e+11 8.82471e+11
+    -0.183105 -4.06321e+14 -4.06321e+14 -12560.1 -2.13843e+14 -2.13843e+14
+    -0.18396 -5.91821e+13 -7.05803e+13 -11714.3 -2.79816e+14 -2.72534e+14
+    -0.235352 -5.24559e+14 -5.24559e+14 17606.8 3.00055e+14 3.00055e+14
+    -0.236328 -1.24781e+13 -1.24781e+13 7632.26 9.09349e+12 9.09349e+12
+    -0.236328 -5.24559e+14 -5.24559e+14 9178.42 1.55264e+14 1.55264e+14
+    -0.236328 -2.63604e+14 -2.63604e+14 -796.147 2.54015e+14 2.54015e+14
+    -0.236328 -5.24559e+14 -5.24559e+14 796.147 1.48028e+13 1.48028e+13
+    -0.235352 -6.38949e+11 -7.02572e+11 -9178.42 -2.30627e+12 -1.79615e+12
+    -0.236328 -5.24559e+14 -5.24559e+14 -7632.26 -1.29988e+14 -1.29988e+14
+    -0.237305 -2.08028e+12 -2.70781e+12 -17606.8 -9.34307e+11 -1.43813e+12
+    -0.18335 -1.11907e+13 -1.1845e+13 13258.6 9.25042e+12 7.35808e+12
+    -0.182129 -6.69447e+11 -1.5806e+12 12845.1 1.35235e+12 4.79793e+12
+    -0.182617 -4.06321e+14 -4.06321e+14 -2918.78 -4.9936e+13 -4.9936e+13
+    -0.182373 -4.06321e+14 -4.06321e+14 -10281.8 -1.74478e+14 -1.74478e+14
+    -0.182617 -6.17734e+11 -6.17734e+11 4665.24 -4.78905e+11 -4.78905e+11
+    -0.183838 -2.55815e+11 -3.78447e+11 4335.45 2.20695e+12 1.33553e+12
+    -0.182861 -4.06321e+14 -4.06321e+14 -7312.27 -1.24228e+14 -1.24228e+14
+    -0.183105 -4.06321e+14 -4.06321e+14 -14591.5 -2.48771e+14 -2.48771e+14
+    -0.0998535 -2.22551e+14 -2.22551e+14 4685.33 8.00954e+13 8.00954e+13
+    -0.0996094 -5.69956e+13 -5.69956e+13 5427.27 7.15703e+13 7.15703e+13
+    -0.100586 -2.22551e+14 -2.22551e+14 4624.67 7.86668e+13 7.86668e+13
+    -0.100098 -1.33077e+13 -1.33077e+13 -3072.06 2.58429e+13 2.58429e+13
+    -0.100586 -2.87505e+13 -2.87505e+13 -3662.83 2.49712e+14 2.49712e+14
+    -0.100098 -2.05375e+12 -2.05375e+12 -2920.9 2.71219e+12 2.71219e+12
+    -0.100342 -2.22551e+14 -2.22551e+14 1307.62 2.19449e+13 2.19449e+13
+    -0.0996094 -3.32252e+13 -3.32252e+13 -6389.1 -1.53532e+14 -1.53532e+14
+    -0.183105 -4.06321e+14 -4.06321e+14 12644.4 2.14429e+14 2.14429e+14
+    -0.183594 -8.95079e+12 -8.95079e+12 1793.34 2.65345e+13 2.65345e+13
+    -0.184082 -4.06321e+14 -4.06321e+14 8180.46 1.3826e+14 1.3826e+14
+    -0.183105 -1.09822e+14 -1.09822e+14 3442.33 1.20086e+14 1.20086e+14
+    -0.183594 -4.06321e+14 -4.06321e+14 1410.46 2.45715e+13 2.45715e+13
+    -0.183105 -7.06141e+11 -7.70716e+11 -9388.7 -1.59689e+12 -1.41492e+12
+    -0.184082 -4.06321e+14 -4.06321e+14 -6698.07 -1.13793e+14 -1.13793e+14
+    -0.184082 -1.66011e+12 -2.1609e+12 -11384.3 -9.07208e+12 -9.12027e+12
+    -0.236328 -2.6783e+13 -3.00573e+13 19710.6 5.17176e+13 5.52075e+13
+    -0.236328 -8.41631e+11 -1.51789e+12 8058.8 4.88118e+12 1.22826e+12
+    -0.236328 -5.24559e+14 -5.24559e+14 -352.47 -4.76348e+12 -4.76348e+12
+    -0.234375 -5.24559e+14 -5.24559e+14 -3059.98 -5.28282e+13 -5.28282e+13
+    -0.237305 -6.91517e+13 -6.91517e+13 10327 -8.47231e+13 -8.47231e+13
+    -0.235352 -4.79771e+11 -4.97613e+11 -1499.82 1.45342e+12 1.34989e+12
+    -0.234375 -5.24559e+14 -5.24559e+14 -15150.8 -2.59152e+14 -2.59152e+14
+    -0.235352 -9.20585e+13 -1.09789e+14 -18033.4 -1.56265e+14 -1.62454e+14
+    -0.184082 -1.83832e+12 -2.77084e+12 14591.5 9.86045e+11 3.30887e+12
+    -0.18335 -2.95476e+11 -6.98771e+11 7312.27 2.27335e+12 1.99186e+12
+    -0.182373 -4.06322e+14 -4.06322e+14 -4335.45 -7.38429e+13 -7.38429e+13
+    -0.183105 -4.06321e+14 -4.06321e+14 -4665.24 -7.99757e+13 -7.99757e+13
+    -0.183838 -5.82496e+12 -5.82496e+12 10281.8 9.83456e+12 9.83456e+12
+    -0.183594 -3.74169e+11 -3.88084e+11 2918.78 -9.59764e+11 -8.97599e+11
+    -0.183105 -4.06322e+14 -4.06322e+14 -12845.1 -2.18731e+14 -2.18731e+14
+    -0.182861 -4.06321e+14 -4.06321e+14 -13258.6 -2.24864e+14 -2.24864e+14
+    -0.183105 -4.06321e+14 -4.06321e+14 11384.3 1.93366e+14 1.93366e+14
+    -0.183105 -3.56112e+13 -3.56112e+13 6698.07 5.85553e+13 5.85553e+13
+    -0.184082 -4.06321e+14 -4.06321e+14 9388.7 1.59322e+14 1.59322e+14
+    -0.184082 -6.13147e+13 -6.13147e+13 -1410.46 3.00441e+13 3.00441e+13
+    -0.184082 -4.06322e+14 -4.06322e+14 -3442.33 -5.8687e+13 -5.8687e+13
+    -0.183594 -9.8982e+11 -1.08838e+12 -8180.46 -1.39428e+12 -7.51623e+11
+    -0.183594 -4.06321e+14 -4.06321e+14 -1793.34 -3.05348e+13 -3.05348e+13
+    -0.184082 -1.37077e+12 -1.49613e+12 -12644.4 -1.3164e+12 -1.53999e+12
+    -0.100586 -1.0597e+14 -1.0597e+14 6389.1 2.06963e+14 2.06963e+14
+    -0.100098 -2.66911e+12 -2.66911e+12 -1307.62 2.7138e+12 2.7138e+12
+    -0.100342 -2.22551e+14 -2.22551e+14 2920.9 4.97189e+13 4.97189e+13
+    -0.100586 -1.19699e+14 -1.19699e+14 3662.83 -4.11588e+13 -4.11588e+13
+    -0.100342 -2.22551e+14 -2.22551e+14 3072.06 5.23213e+13 5.23213e+13
+    -0.0996094 -4.29223e+12 -4.29223e+12 -4624.67 1.92295e+13 1.92295e+13
+    -0.0996094 -2.22551e+14 -2.22551e+14 -5427.27 -9.24844e+13 -9.24844e+13
+    -0.100342 -1.02396e+13 -1.02396e+13 -4685.33 2.29963e+13 2.29963e+13
+    -0.237305 -1.32852e+14 -1.40619e+14 18033.4 3.54051e+14 3.53122e+14
+    -0.234375 -3.16267e+12 -5.55981e+12 15150.8 5.27605e+12 1.32819e+13
+    -0.235352 -5.24559e+14 -5.24559e+14 1499.82 2.61002e+13 2.61002e+13
+    -0.235352 -5.24559e+14 -5.24559e+14 -10327 -1.74831e+14 -1.74831e+14
+    -0.235352 -6.8559e+12 -6.8559e+12 3059.98 2.91778e+13 2.91778e+13
+    -0.236328 -5.22296e+11 -5.9364e+11 352.47 -3.00121e+10 -4.49754e+11
+    -0.236328 -5.24559e+14 -5.24559e+14 -8058.8 -1.37149e+14 -1.37149e+14
+    -0.236328 -1.17644e+14 -1.17644e+14 -19710.6 -1.72117e+14 -1.72117e+14
+    -0.163818 -8.86928e+11 -1.26085e+12 12087.8 7.27026e+11 4.57183e+11
+    -0.164795 -1.96514e+11 -5.73822e+11 9572.27 4.16905e+11 7.62906e+11
+    -0.16333 -3.63425e+14 -3.63425e+14 -5352.94 -9.09661e+13 -9.09661e+13
+    -0.16333 -3.63425e+14 -3.63425e+14 -7868.51 -1.3362e+14 -1.3362e+14
+    -0.164307 -6.06037e+11 -6.06037e+11 7868.51 2.76564e+12 2.76564e+12
+    -0.164307 -2.23343e+11 -3.03756e+11 5352.94 8.13419e+11 1.36499e+11
+    -0.16333 -3.63425e+14 -3.63425e+14 -9572.27 -1.62509e+14 -1.62509e+14
+    -0.164307 -3.63425e+14 -3.63425e+14 -12087.8 -2.05163e+14 -2.05163e+14
+    -0.165039 -3.63425e+14 -3.63425e+14 9189.18 1.55608e+14 1.55608e+14
+    -0.165039 -3.01804e+13 -3.01804e+13 9022.85 3.65166e+13 3.65166e+13
+    -0.164062 -3.63425e+14 -3.63425e+14 6923.74 1.17583e+14 1.17583e+14
+    -0.164551 -9.05738e+13 -9.05738e+13 -4969.85 1.89004e+14 1.89004e+14
+    -0.164062 -4.69494e+13 -4.69494e+13 -4408.17 -1.72738e+14 -1.72738e+14
+    -0.164551 -1.46263e+12 -1.47352e+12 -4574.5 2.84405e+12 2.84372e+12
+    -0.165039 -3.63425e+14 -3.63425e+14 355.165 5.81837e+12 5.81837e+12
+    -0.164062 -1.21683e+13 -1.21683e+13 -11538.4 -1.13751e+13 -1.13751e+13
+    -0.164062 -1.73048e+14 -1.73048e+14 11538.4 1.10903e+14 1.10903e+14
+    -0.164551 -2.65193e+12 -2.65193e+12 -355.165 9.57443e+12 9.57443e+12
+    -0.164551 -3.63425e+14 -3.63425e+14 4574.5 7.73615e+13 7.73615e+13
+    -0.164062 -1.95468e+14 -1.95468e+14 4408.17 2.28442e+14 2.28442e+14
+    -0.165039 -3.63425e+14 -3.63425e+14 4969.85 8.4065e+13 8.4065e+13
+    -0.164062 -8.09786e+11 -8.09786e+11 -6923.74 -3.41633e+11 -3.41633e+11
+    -0.164062 -3.63425e+14 -3.63425e+14 -9022.85 -1.53176e+14 -1.53176e+14
+    -0.165039 -1.22307e+13 -1.45863e+13 -9189.18 -6.03098e+13 -5.39577e+13
+    -0.273438 -1.53404e+14 -1.62373e+14 22370.4 2.76613e+14 2.78736e+14
+    -0.271484 -2.64441e+12 -4.3845e+12 12490.9 7.67146e+12 -6.31822e+10
+    -0.271484 -6.05708e+14 -6.05708e+14 4159.71 7.16695e+13 7.16695e+13
+    -0.271484 -6.05708e+14 -6.05708e+14 -5719.86 -9.83975e+13 -9.83975e+13
+    -0.271484 -7.98495e+13 -7.98495e+13 5719.86 4.6925e+14 4.6925e+14
+    -0.271484 -5.84695e+11 -6.10954e+11 -4159.71 1.76492e+12 1.54824e+12
+    -0.271484 -6.05708e+14 -6.05708e+14 -12490.9 -2.13582e+14 -2.13582e+14
+    -0.269531 -2.38402e+13 -2.84317e+13 -22370.4 -3.24915e+13 -4.06288e+13
+    -1 -1 -1 -1
+    -1 -1 999999 999999
+    -1 -1 -1 -1
+    0.05 1.732 1.732
+    0.05 1.732 1.732
+    0.05 0.866 0.866
+    0.05 0.866 0.866
+    0.05 0.866 0.866
+    0.05 0.866 0.866
+    0.05 0.866 0.866
+    0.05 0.866 0.866
+  }
+
+ primEdgedata { 5
+    29931 54907 50203
+    65552
+    0 5
+    30234 30234 30234 0
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+    31325.3 130560 130560 130560 15324.9 130560 130560 130560 130560 130560 65609.7 130560 130560 13155 15558.6 26320.9 130560 130560 130560 108358 130560 130560 130560 130560 130560 130560 39205.5 70221.5 130560 130560 130560 130560 130560 30166.7 21733.2 8638.37 62167.2 11569 130560 24209.5 130560 15692.8 130560 130560 130560 130560 130560 130560 130560 130560 130560 22912.9 130560 100983 19059.3 12041.5 42335.9 130560 33066.2 130560 130560 130560 130560 21523.7 10425.2 13661.5
+    31325.3 130560 130560 130560 71869.2 130560 130560 130560 130560 130560 65609.7 130560 130560 130560 29157.8 27907.2 130560 130560 130560 108358 130560 130560 130560 130560 130560 130560 39205.5 70221.5 130560 130560 130560 130560 130560 30166.7 21733.2 45315.5 62167.2 40479.8 130560 130560 130560 130560 130560 130560 130560 130560 130560 130560 130560 130560 130560 33660.4 130560 130560 19059.3 19965.1 42335.9 130560 106669 130560 130560 130560 130560 130560 88669.3 50448.5
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    -1 -1 -1 -1
+    -1 -1 999999 999999
+    -1 -1 -1 -1
+    0.05 1.732 1.732
+    0.05 1.732 1.732
+    0.05 0.866 0.866
+    0.05 0.866 0.866
+    0.05 0.866 0.866
+    0.05 0.866 0.866
+    0.05 0.866 0.866
+    0.05 0.866 0.866
+  }
+
+ primBodydata { 5
+    29931 54907 50203
+    65552
+    0 5
+    30234 30234 30234 0
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+    31325.3 130560 130560 130560 14891.2 130560 130560 130560 130560 130560 65609.7 130560 130560 13155 15558.6 26320.9 130560 12944.1 130560 108358 130560 130560 130560 130560 130560 130560 39205.5 70221.5 130560 130560 130560 130560 19491.6 30166.7 21733.2 8638.37 62167.2 11569 130560 14197.9 16866.5 15187 130560 130560 130560 130560 130560 130560 130560 130560 130560 22912.9 130560 29281.1 19059.3 12041.5 42335.9 130560 33066.2 130560 130560 17211.5 130560 15083.9 10425.2 13661.5
+    31325.3 130560 130560 130560 14891.2 130560 130560 130560 130560 130560 65609.7 130560 130560 14358 16923.8 27907.2 130560 12944.1 130560 108358 130560 130560 130560 130560 130560 130560 39205.5 70221.5 130560 130560 130560 130560 19491.6 30166.7 21733.2 11327.3 62167.2 15538 130560 14197.9 16866.5 15187 130560 130560 130560 130560 130560 130560 130560 130560 130560 27325.8 130560 29281.1 19059.3 19965.1 42335.9 130560 34999.4 130560 130560 17211.5 130560 15083.9 10812.9 13763.2
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    -1 -1 -1 -1
+    -1 -1 999999 999999
+    -1 -1 -1 -1
+    0.05 1.732 1.732
+    0.05 1.732 1.732
+    0.05 0.866 0.866
+    0.05 0.866 0.866
+    0.05 0.866 0.866
+    0.05 0.866 0.866
+    0.05 0.866 0.866
+    0.05 0.866 0.866
+  }
+
+ crop {0 0 2224 1548}
+ "Adjust Lighting" 0
+ "Hybrid Matte" 0
+ "Fine Tuning" 0
+ name Primatte1
+ xpos -548
+ ypos -380
+}
+Unpremult {
+ name Unpremult1
+ xpos -548
+ ypos -356
+}
+Grade {
+ channels alpha
+ blackpoint 0.2
+ name Grade1
+ xpos -548
+ ypos -332
+}
+FilterErode {
+ size 5
+ name FilterErode1
+ xpos -548
+ ypos -296
+}
+Premult {
+ name Premult1
+ xpos -548
+ ypos -260
+}
+set N80ce2c0 [stack 0]
+Group {
+ name gaussfill_1
+ knobChanged "\nexecfile(\"/mill3d/users/dollm/Nuke/scripts/gaussFill.py\")\ngaussFillCallback()\n"
+ tile_color 0xcc804eff
+ selected true
+ xpos -548
+ ypos -189
+ addUserKnob {20 gaussGroup l Gaussfill}
+ addUserKnob {7 fillAmt l Fill: R 0 30}
+ fillAmt 19
+ addUserKnob {20 advanced_group l Advanced}
+ addUserKnob {7 gaussMix l "Mix level" t "Generally, don't touch this value. Increasing it will blur the center of your input more." R 0 0.1}
+ gaussMix 0.1
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -549
+  ypos -96
+ }
+ Blur {
+  size 1
+  mix {{parent.gaussMix}}
+  name Blur1
+  xpos -399
+ }
+ Unpremult {
+  name Unpremult1
+  xpos -399
+  ypos 50
+ }
+set N2ed4ac00 [stack 0]
+push $N2ed4ac00
+ ChannelMerge {
+  inputs 2
+  operation divide
+  name ChannelMerge1
+  xpos -399
+  ypos 100
+ }
+ FilterErode {
+  size 2
+  filter gaussian
+  name FilterErode1
+  xpos -399
+  ypos 150
+ }
+ Grade {
+  channels alpha
+  gamma 0.05
+  name Grade1
+  xpos -399
+  ypos 200
+ }
+ Premult {
+  name Premult1
+  xpos -399
+  ypos 250
+ }
+ Blur {
+  size 2
+  mix {{parent.gaussMix}}
+  name Blur2
+  xpos -249
+ }
+ Unpremult {
+  name Unpremult2
+  xpos -249
+  ypos 50
+ }
+set N2ed6e9b0 [stack 0]
+push $N2ed6e9b0
+ ChannelMerge {
+  inputs 2
+  operation divide
+  name ChannelMerge2
+  xpos -249
+  ypos 100
+ }
+ FilterErode {
+  size 3
+  filter gaussian
+  name FilterErode2
+  xpos -249
+  ypos 150
+ }
+ Grade {
+  channels alpha
+  gamma 0.05
+  name Grade2
+  xpos -249
+  ypos 200
+ }
+ Premult {
+  name Premult2
+  xpos -249
+  ypos 250
+ }
+ Blur {
+  size 3
+  mix {{parent.gaussMix}}
+  name Blur3
+  xpos -99
+ }
+ Unpremult {
+  name Unpremult3
+  xpos -99
+  ypos 50
+ }
+set N2edc6670 [stack 0]
+push $N2edc6670
+ ChannelMerge {
+  inputs 2
+  operation divide
+  name ChannelMerge3
+  xpos -99
+  ypos 100
+ }
+ FilterErode {
+  size 4
+  filter gaussian
+  name FilterErode3
+  xpos -99
+  ypos 150
+ }
+ Grade {
+  channels alpha
+  gamma 0.05
+  name Grade3
+  xpos -99
+  ypos 200
+ }
+ Premult {
+  name Premult3
+  xpos -99
+  ypos 250
+ }
+ Blur {
+  size 4
+  mix {{parent.gaussMix}}
+  name Blur4
+  xpos 51
+ }
+ Unpremult {
+  name Unpremult4
+  xpos 51
+  ypos 50
+ }
+set N2ee0ba30 [stack 0]
+push $N2ee0ba30
+ ChannelMerge {
+  inputs 2
+  operation divide
+  name ChannelMerge4
+  xpos 51
+  ypos 100
+ }
+ FilterErode {
+  size 5
+  filter gaussian
+  name FilterErode4
+  xpos 51
+  ypos 150
+ }
+ Grade {
+  channels alpha
+  gamma 0.05
+  name Grade4
+  xpos 51
+  ypos 200
+ }
+ Premult {
+  name Premult4
+  xpos 51
+  ypos 250
+ }
+ Blur {
+  size 5
+  mix {{parent.gaussMix}}
+  name Blur5
+  xpos 201
+ }
+ Unpremult {
+  name Unpremult5
+  xpos 201
+  ypos 50
+ }
+set N2ee50de0 [stack 0]
+push $N2ee50de0
+ ChannelMerge {
+  inputs 2
+  operation divide
+  name ChannelMerge5
+  xpos 201
+  ypos 100
+ }
+ FilterErode {
+  size 6
+  filter gaussian
+  name FilterErode5
+  xpos 201
+  ypos 150
+ }
+ Grade {
+  channels alpha
+  gamma 0.05
+  name Grade5
+  xpos 201
+  ypos 200
+ }
+ Premult {
+  name Premult5
+  xpos 201
+  ypos 250
+ }
+ Blur {
+  size 6
+  mix {{parent.gaussMix}}
+  name Blur6
+  xpos 351
+ }
+ Unpremult {
+  name Unpremult6
+  xpos 351
+  ypos 50
+ }
+set N2ee96190 [stack 0]
+push $N2ee96190
+ ChannelMerge {
+  inputs 2
+  operation divide
+  name ChannelMerge6
+  xpos 351
+  ypos 100
+ }
+ FilterErode {
+  size 7
+  filter gaussian
+  name FilterErode6
+  xpos 351
+  ypos 150
+ }
+ Grade {
+  channels alpha
+  gamma 0.05
+  name Grade6
+  xpos 351
+  ypos 200
+ }
+ Premult {
+  name Premult6
+  xpos 351
+  ypos 250
+ }
+ Blur {
+  size 7
+  mix {{parent.gaussMix}}
+  name Blur7
+  xpos 501
+ }
+ Unpremult {
+  name Unpremult7
+  xpos 501
+  ypos 50
+ }
+set N2eedb540 [stack 0]
+push $N2eedb540
+ ChannelMerge {
+  inputs 2
+  operation divide
+  name ChannelMerge7
+  xpos 501
+  ypos 100
+ }
+ FilterErode {
+  size 8
+  filter gaussian
+  name FilterErode7
+  xpos 501
+  ypos 150
+ }
+ Grade {
+  channels alpha
+  gamma 0.05
+  name Grade7
+  xpos 501
+  ypos 200
+ }
+ Premult {
+  name Premult7
+  xpos 501
+  ypos 250
+ }
+ Blur {
+  size 8
+  mix {{parent.gaussMix}}
+  name Blur8
+  xpos 651
+ }
+ Unpremult {
+  name Unpremult8
+  xpos 651
+  ypos 50
+ }
+set N2ef208c0 [stack 0]
+push $N2ef208c0
+ ChannelMerge {
+  inputs 2
+  operation divide
+  name ChannelMerge8
+  xpos 651
+  ypos 100
+ }
+ FilterErode {
+  size 9
+  filter gaussian
+  name FilterErode8
+  xpos 651
+  ypos 150
+ }
+ Grade {
+  channels alpha
+  gamma 0.05
+  name Grade8
+  xpos 651
+  ypos 200
+ }
+ Premult {
+  name Premult8
+  xpos 651
+  ypos 250
+ }
+ Blur {
+  size 9
+  mix {{parent.gaussMix}}
+  name Blur9
+  xpos 801
+ }
+ Unpremult {
+  name Unpremult9
+  xpos 801
+  ypos 50
+ }
+set N2ef65c40 [stack 0]
+push $N2ef65c40
+ ChannelMerge {
+  inputs 2
+  operation divide
+  name ChannelMerge9
+  xpos 801
+  ypos 100
+ }
+ FilterErode {
+  size 10
+  filter gaussian
+  name FilterErode9
+  xpos 801
+  ypos 150
+ }
+ Grade {
+  channels alpha
+  gamma 0.05
+  name Grade9
+  xpos 801
+  ypos 200
+ }
+ Premult {
+  name Premult9
+  xpos 801
+  ypos 250
+ }
+ Blur {
+  size 10
+  mix {{parent.gaussMix}}
+  name Blur10
+  xpos 951
+ }
+ Unpremult {
+  name Unpremult10
+  xpos 951
+  ypos 50
+ }
+set N2efaafd0 [stack 0]
+push $N2efaafd0
+ ChannelMerge {
+  inputs 2
+  operation divide
+  name ChannelMerge10
+  xpos 951
+  ypos 100
+ }
+ FilterErode {
+  size 11
+  filter gaussian
+  name FilterErode10
+  xpos 951
+  ypos 150
+ }
+ Grade {
+  channels alpha
+  gamma 0.05
+  name Grade10
+  xpos 951
+  ypos 200
+ }
+ Premult {
+  name Premult10
+  xpos 951
+  ypos 250
+ }
+ Blur {
+  size 11
+  mix {{parent.gaussMix}}
+  name Blur11
+  xpos 1101
+ }
+ Unpremult {
+  name Unpremult11
+  xpos 1101
+  ypos 50
+ }
+set N2eff0370 [stack 0]
+push $N2eff0370
+ ChannelMerge {
+  inputs 2
+  operation divide
+  name ChannelMerge11
+  xpos 1101
+  ypos 100
+ }
+ FilterErode {
+  size 12
+  filter gaussian
+  name FilterErode11
+  xpos 1101
+  ypos 150
+ }
+ Grade {
+  channels alpha
+  gamma 0.05
+  name Grade11
+  xpos 1101
+  ypos 200
+ }
+ Premult {
+  name Premult11
+  xpos 1101
+  ypos 250
+ }
+ Blur {
+  size 12
+  mix {{parent.gaussMix}}
+  name Blur12
+  xpos 1251
+ }
+ Unpremult {
+  name Unpremult12
+  xpos 1251
+  ypos 50
+ }
+set N2f0356f0 [stack 0]
+push $N2f0356f0
+ ChannelMerge {
+  inputs 2
+  operation divide
+  name ChannelMerge12
+  xpos 1251
+  ypos 100
+ }
+ FilterErode {
+  size 13
+  filter gaussian
+  name FilterErode12
+  xpos 1251
+  ypos 150
+ }
+ Grade {
+  channels alpha
+  gamma 0.05
+  name Grade12
+  xpos 1251
+  ypos 200
+ }
+ Premult {
+  name Premult12
+  xpos 1251
+  ypos 250
+ }
+ Blur {
+  size 13
+  mix {{parent.gaussMix}}
+  name Blur13
+  xpos 1401
+ }
+ Unpremult {
+  name Unpremult13
+  xpos 1401
+  ypos 50
+ }
+set N2f07aaa0 [stack 0]
+push $N2f07aaa0
+ ChannelMerge {
+  inputs 2
+  operation divide
+  name ChannelMerge13
+  xpos 1401
+  ypos 100
+ }
+ FilterErode {
+  size 14
+  filter gaussian
+  name FilterErode13
+  xpos 1401
+  ypos 150
+ }
+ Grade {
+  channels alpha
+  gamma 0.05
+  name Grade13
+  xpos 1401
+  ypos 200
+ }
+ Premult {
+  name Premult13
+  xpos 1401
+  ypos 250
+ }
+ Blur {
+  size 14
+  mix {{parent.gaussMix}}
+  name Blur14
+  xpos 1551
+ }
+ Unpremult {
+  name Unpremult14
+  xpos 1551
+  ypos 50
+ }
+set N2f0bfe60 [stack 0]
+push $N2f0bfe60
+ ChannelMerge {
+  inputs 2
+  operation divide
+  name ChannelMerge14
+  xpos 1551
+  ypos 100
+ }
+ FilterErode {
+  size 15
+  filter gaussian
+  name FilterErode14
+  xpos 1551
+  ypos 150
+ }
+ Grade {
+  channels alpha
+  gamma 0.05
+  name Grade14
+  xpos 1551
+  ypos 200
+ }
+ Premult {
+  name Premult14
+  xpos 1551
+  ypos 250
+ }
+ Blur {
+  size 15
+  mix {{parent.gaussMix}}
+  name Blur15
+  xpos 1701
+ }
+ Unpremult {
+  name Unpremult15
+  xpos 1701
+  ypos 50
+ }
+set N2f105210 [stack 0]
+push $N2f105210
+ ChannelMerge {
+  inputs 2
+  operation divide
+  name ChannelMerge15
+  xpos 1701
+  ypos 100
+ }
+ FilterErode {
+  size 16
+  filter gaussian
+  name FilterErode15
+  xpos 1701
+  ypos 150
+ }
+ Grade {
+  channels alpha
+  gamma 0.05
+  name Grade15
+  xpos 1701
+  ypos 200
+ }
+ Premult {
+  name Premult15
+  xpos 1701
+  ypos 250
+ }
+ Blur {
+  size 16
+  mix {{parent.gaussMix}}
+  name Blur16
+  xpos 1851
+ }
+ Unpremult {
+  name Unpremult16
+  xpos 1851
+  ypos 50
+ }
+set N2f14a5c0 [stack 0]
+push $N2f14a5c0
+ ChannelMerge {
+  inputs 2
+  operation divide
+  name ChannelMerge16
+  xpos 1851
+  ypos 100
+ }
+ FilterErode {
+  size 17
+  filter gaussian
+  name FilterErode16
+  xpos 1851
+  ypos 150
+ }
+ Grade {
+  channels alpha
+  gamma 0.05
+  name Grade16
+  xpos 1851
+  ypos 200
+ }
+ Premult {
+  name Premult16
+  xpos 1851
+  ypos 250
+ }
+ Blur {
+  size 17
+  mix {{parent.gaussMix}}
+  name Blur17
+  xpos 2001
+ }
+ Unpremult {
+  name Unpremult17
+  xpos 2001
+  ypos 50
+ }
+set N2f18f970 [stack 0]
+push $N2f18f970
+ ChannelMerge {
+  inputs 2
+  operation divide
+  name ChannelMerge17
+  xpos 2001
+  ypos 100
+ }
+ FilterErode {
+  size 18
+  filter gaussian
+  name FilterErode17
+  xpos 2001
+  ypos 150
+ }
+ Grade {
+  channels alpha
+  gamma 0.05
+  name Grade17
+  xpos 2001
+  ypos 200
+ }
+ Premult {
+  name Premult17
+  xpos 2001
+  ypos 250
+ }
+ Blur {
+  size 18
+  mix {{parent.gaussMix}}
+  name Blur18
+  xpos 2151
+ }
+ Unpremult {
+  name Unpremult18
+  xpos 2151
+  ypos 50
+ }
+set N2f1d4d00 [stack 0]
+push $N2f1d4d00
+ ChannelMerge {
+  inputs 2
+  operation divide
+  name ChannelMerge18
+  xpos 2151
+  ypos 100
+ }
+ FilterErode {
+  size 19
+  filter gaussian
+  name FilterErode18
+  xpos 2151
+  ypos 150
+ }
+ Grade {
+  channels alpha
+  gamma 0.05
+  name Grade18
+  xpos 2151
+  ypos 200
+ }
+ Premult {
+  name Premult18
+  xpos 2151
+  ypos 250
+ }
+ Blur {
+  size 19
+  mix {{parent.gaussMix}}
+  name Blur19
+  xpos 2301
+ }
+ Unpremult {
+  name Unpremult19
+  xpos 2301
+  ypos 50
+ }
+set N2f21a090 [stack 0]
+push $N2f21a090
+ ChannelMerge {
+  inputs 2
+  operation divide
+  name ChannelMerge19
+  xpos 2301
+  ypos 100
+ }
+ FilterErode {
+  size 20
+  filter gaussian
+  name FilterErode19
+  xpos 2301
+  ypos 150
+ }
+ Grade {
+  channels alpha
+  gamma 0.05
+  name Grade19
+  xpos 2301
+  ypos 200
+ }
+ Premult {
+  name Premult19
+  selected true
+  xpos 2301
+  ypos 250
+ }
+ Output {
+  name Output1
+  xpos -550
+  ypos 421
+ }
+end_group
+push $N80ce2c0
+Viewer {
+ inputs 2
+ frame 1
+ frame_range 1-100
+ input_number 1
+ center_fstop 0
+ colour_sample_bbox {-0.2104316503 -0.6861510873 -0.1393884867 -0.6187050343}
+ viewerProcess "MillView (default)"
+ name Viewer1
+ xpos 417
+ ypos 81
+}

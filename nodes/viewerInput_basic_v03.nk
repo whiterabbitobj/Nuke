@@ -1,0 +1,186 @@
+set cut_paste_input [stack 0]
+version 11.2 v6
+push $cut_paste_input
+Group {
+ name VIEWER_INPUT
+ tile_color 0x5e00ffff
+ gl_color 0x2c472cff
+ note_font "Bitstream Vera Sans Bold Bold Bold"
+ note_font_size 33
+ note_font_color 0xafff8eff
+ selected true
+ xpos 4844
+ ypos 1290
+ hide_input true
+ addUserKnob {20 User}
+ addUserKnob {6 doLog l "Grade in LOG" +STARTLINE}
+ doLog true
+ addUserKnob {26 ""}
+ addUserKnob {19 msat l Sat R 0 4}
+ msat 1
+ addUserKnob {6 msat_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {6 msat_panelDropped_1 l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {19 mgain l Gain R 0 4}
+ mgain 1
+ addUserKnob {6 mgain_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {6 mgain_panelDropped_1 l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {19 mgamma l Gamma R 0 3}
+ mgamma 1
+ addUserKnob {6 mgamma_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {6 mgamma_panelDropped_1 l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {26 ""}
+ addUserKnob {22 toggleGUI l "Toggle Gui-Only" T "nuke.root().begin()\nfor node in nuke.allNodes():\n    if node.name().startswith(\"Gui_Only\"):\n        print node.name()\n        v = node\['doGuiSwitch'].value()\n        node\['doGuiSwitch'].setValue(not v)" +STARTLINE}
+ addUserKnob {26 ""}
+ addUserKnob {7 mask_opacity l "Mask Opacity" -STARTLINE}
+ mask_opacity 0.91
+ addUserKnob {6 doMask l "" -STARTLINE}
+ doMask true
+ addUserKnob {7 aspectRatio R 1 2.35}
+ aspectRatio 1.87
+}
+ BackdropNode {
+  inputs 0
+  name BackdropNode1
+  tile_color 0x262626ff
+  label grading
+  note_font "Verdana Bold Bold Bold Bold"
+  note_font_size 125
+  note_font_color 0x707070ff
+  xpos 482
+  ypos 102
+  bdwidth 200
+  bdheight 445
+ }
+ BackdropNode {
+  inputs 0
+  name BackdropNode2
+  tile_color 0x262626ff
+  label masking
+  note_font "Verdana Bold Bold Bold Bold"
+  note_font_size 125
+  note_font_color 0x707070ff
+  xpos 183
+  ypos 676
+  bdwidth 775
+  bdheight 500
+ }
+ Input {
+  inputs 0
+  name Input1
+  xpos 542
+  ypos -65
+ }
+ Dot {
+  name Dot4
+  note_font "Bitstream Vera Sans Italic Italic Italic Italic"
+  note_font_size 22
+  note_font_color 0xff0000ff
+  xpos 576
+  ypos 282
+ }
+ Colorspace {
+  colorspace_out AlexaV3LogC
+  name Colorspace5
+  xpos 542
+  ypos 331
+  disable {{!parent.doLog}}
+ }
+ ColorCorrect {
+  saturation {{parent.msat} {parent.msat} {parent.msat} {parent.msat}}
+  gamma {{parent.mgamma} {parent.mgamma} {parent.mgamma} {parent.mgamma}}
+  gain {{parent.mgain} {parent.mgain} {parent.mgain} {parent.mgain}}
+  name ColorCorrect50
+  xpos 542
+  ypos 380
+ }
+ Colorspace {
+  colorspace_in AlexaV3LogC
+  name Colorspace6
+  xpos 542
+  ypos 427
+  disable {{!parent.doLog}}
+ }
+ Dot {
+  name Dot1
+  note_font "Bitstream Vera Sans Italic Italic Italic Italic"
+  note_font_size 22
+  note_font_color 0xff0000ff
+  xpos 576
+  ypos 475
+ }
+ Dot {
+  name Dot2
+  note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic"
+  note_font_size 22
+  note_font_color 0xff0000ff
+  xpos 576
+  ypos 874
+ }
+set N864d730 [stack 0]
+ Dot {
+  name Dot3
+  note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic"
+  note_font_size 22
+  note_font_color 0xff0000ff
+  xpos 386
+  ypos 874
+ }
+ Shuffle {
+  alpha white
+  name Shuffle1
+  label "\[value in]"
+  xpos 352
+  ypos 964
+ }
+ Crop {
+  box {0 {"int(height - (height - heightMasked)/2)"} {width} {"int((height - heightMasked)/2)"}}
+  name Crop1
+  xpos 352
+  ypos 1014
+  addUserKnob {20 User}
+  addUserKnob {7 heightMasked l asdf R 0 5000}
+  heightMasked {{width/parent.aspectRatio}}
+ }
+set N8664360 [stack 0]
+push $N8664360
+push $N864d730
+ Colorspace {
+  inputs 1+1
+  colorspace_out AlexaV3LogC
+  invert_mask true
+  mix {{parent.mask_opacity}}
+  name Colorspace1
+  xpos 542
+  ypos 1014
+ }
+ Grade {
+  inputs 1+1
+  multiply 0
+  invert_mask true
+  mix {{"tanh(parent.mask_opacity + parent.mask_opacity)"}}
+  name Grade2
+  xpos 542
+  ypos 1063
+ }
+push $N864d730
+ Dot {
+  name Dot5
+  note_font "Bitstream Vera Sans Italic Italic Italic Italic"
+  note_font_size 22
+  note_font_color 0xff0000ff
+  xpos 725
+  ypos 981
+ }
+ Switch {
+  inputs 2
+  which {{parent.doMask}}
+  name Switch1
+  xpos 542
+  ypos 1113
+ }
+ Output {
+  name Output1
+  xpos 542
+  ypos 1313
+ }
+end_group

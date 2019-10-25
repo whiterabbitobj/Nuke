@@ -1,0 +1,147 @@
+#! /mill3d/server/apps/FOUNDRY/linux-x86-64/Nuke11.2v6/libnuke-11.2.6.so -nx
+version 11.2 v6
+define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
+<layout version="1.0">
+    <window x="1" y="1" w="1888" h="1102" screen="0">
+        <splitter orientation="1">
+            <split size="40"/>
+            <dock id="" hideTitles="1" activePageId="Toolbar.1">
+                <page id="Toolbar.1"/>
+            </dock>
+            <split size="373" stretch="1"/>
+            <splitter orientation="2">
+                <split size="1058"/>
+                <dock id="" activePageId="Properties.1">
+                    <page id="Properties.1"/>
+                </dock>
+            </splitter>
+            <split size="1467"/>
+            <splitter orientation="2">
+                <split size="947"/>
+                <dock id="" activePageId="DAG.1">
+                    <page id="DAG.1"/>
+                </dock>
+                <split size="107"/>
+                <dock id="" activePageId="Curve Editor.1">
+                    <page id="uk.co.thefoundry.scripteditor.1"/>
+                    <page id="Curve Editor.1"/>
+                </dock>
+            </splitter>
+        </splitter>
+    </window>
+    <window x="1921" y="1" w="1907" h="1166" screen="1">
+        <splitter orientation="2">
+            <split size="1166"/>
+            <dock id="" activePageId="Viewer.1" focus="true">
+                <page id="Viewer.1"/>
+            </dock>
+        </splitter>
+    </window>
+</layout>
+}
+Root {
+ inputs 0
+ name /usr/people/dollm/Nuke/visa_test.nk
+ frame 1013
+ first_frame 1001
+ last_frame 1087
+ format "2048 1152 0 0 2048 1152 1 village native "
+ proxy_type scale
+ proxy_format "1024 778 0 0 1024 778 1 1K_Super_35(full-ap)"
+ colorManagement OCIO
+ defaultViewerLUT "OCIO LUTs"
+ workingSpaceLUT linear
+ monitorLut MillView
+ int8Lut rec709
+ int16Lut rec709
+ logLut AlexaV3LogC
+ floatLut linear
+ luts {linear {}
+   sRGB {}
+   rec709 {}
+   Cineon {}
+   Gamma1.8 {}
+   Gamma2.2 {}
+   Gamma2.4 {}
+   Gamma2.6 {}
+   Panalog {}
+   REDLog {}
+   ViperLog {}
+   AlexaV3LogC {}
+   PLogLin {}
+   SLog {}
+   SLog1 {}
+   SLog2 {}
+   SLog3 {}
+   CLog {}
+   Log3G10 {}
+   Log3G12 {}
+   HybridLogGamma {}
+   Protune {}
+   BT1886 {}
+   HDR2084 {}
+   REDSpace {}
+   FlameVideo {pow((x+0.1498438276617182)/1.1498438276617182,1.0/0.45)*1.0109156157307528-0.0109156157307528}}
+}
+Read {
+ inputs 0
+ file_type exr
+ file /jobs/ads/visa_debit_holidays_J603518/VDH/sh002/n_002/comps/VDH_sh002_comp_v038/VDH_sh002_comp_v038.####.exr
+ format "2048 1152 0 0 2048 1152 1 village native "
+ first 1021
+ last 1064
+ origfirst 1021
+ origlast 1064
+ origset true
+ on_error "nearest frame"
+ version 1
+ colorspace linear
+ name Read51
+ label "\[value width]x\[value height]"
+ xpos -737.6666667
+ ypos 1226
+}
+Read {
+ inputs 0
+ file_type exr
+ file /jobs/ads/visa_debit_holidays_J603518/VDH/sh003/n_003/comps/VDH_sh003_comp_v044/VDH_sh003_comp_v044.####.exr
+ format "2048 1152 0 0 2048 1152 1 village native "
+ first 1001
+ last 1087
+ origfirst 1001
+ origlast 1087
+ origset true
+ on_error "nearest frame"
+ version 1
+ colorspace linear
+ name Read1
+ label "\[value width]x\[value height]"
+ xpos -737.6666667
+ ypos 1383
+}
+Read {
+ inputs 0
+ file_type exr
+ file /jobs/ads/visa_debit_holidays_J603518/VDH/sh001/n_001/comps/VDH_sh001_comp_v154/VDH_sh001_comp_v154.%04d.exr
+ format "2048 1152 0 0 2048 1152 1 village native "
+ first 1001
+ last 1080
+ origfirst 1001
+ origlast 1080
+ origset true
+ colorspace linear
+ name Read4
+ label "\[value width]x\[value height]"
+ xpos -737.6666667
+ ypos 1057
+}
+Viewer {
+ frame 1013
+ frame_range 1001-1036
+ center_fstop 0
+ viewerProcess "MillView (default)"
+ name Viewer1
+ selected true
+ xpos -1066
+ ypos 1511
+}

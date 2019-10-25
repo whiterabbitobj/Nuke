@@ -1,0 +1,57 @@
+set cut_paste_input [stack 0]
+version 11.2 v6
+push $cut_paste_input
+Group {
+name edgeGrad_v02_1
+tile_color 0xcc804eff
+note_font "Bitstream Vera Sans Bold"
+note_font_size 13
+selected true
+xpos 10010
+ypos -121
+addUserKnob {20 User}
+addUserKnob {7 blurAmt l "Edge Size:" R 12 120}
+blurAmt 12
+}
+Input {
+inputs 0
+name Input1
+xpos 568
+ypos 480
+}
+Dot {
+name Dot354
+xpos 602
+ypos 520
+}
+set Nec9a53e0 [stack 0]
+Blur {
+channels alpha
+size {{parent.blurAmt}}
+name Blur12
+selected true
+xpos 529
+ypos 542
+}
+push $Nec9a53e0
+ChannelMerge {
+inputs 2
+operation stencil
+name ChannelMerge50
+xpos 529
+ypos 584
+}
+push $Nec9a53e0
+ChannelMerge {
+inputs 2
+operation divide
+name ChannelMerge51
+xpos 529
+ypos 640
+}
+Output {
+name Output1
+xpos 529
+ypos 740
+}
+end_group

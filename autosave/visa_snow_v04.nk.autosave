@@ -1,0 +1,1435 @@
+#! /mill3d/server/apps/FOUNDRY/linux-x86-64/Nuke11.2v6/libnuke-11.2.6.so -nx
+#write_info Write1 file:"/usr/people/dollm/Nuke/snowTech/flake1.exr" format:"256 256 1" chans:":rgba.red:rgba.green:rgba.blue:rgba.alpha:" framerange:"1001 1154" fps:"0" colorspace:"default (linear)" datatype:"16 bit half" transfer:"unknown" views:"main" colorManagement:"OCIO"
+version 11.2 v6
+define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
+<layout version="1.0">
+    <window x="0" y="0" w="1902" h="1137" screen="0">
+        <splitter orientation="1">
+            <split size="40"/>
+            <dock id="" hideTitles="1" activePageId="Toolbar.1">
+                <page id="Toolbar.1"/>
+            </dock>
+            <split size="675" stretch="1"/>
+            <splitter orientation="2">
+                <split size="1093"/>
+                <dock id="" activePageId="Properties.1" focus="true">
+                    <page id="Properties.1"/>
+                </dock>
+            </splitter>
+            <split size="1179"/>
+            <splitter orientation="2">
+                <split size="776"/>
+                <dock id="" activePageId="DAG.1">
+                    <page id="DAG.1"/>
+                </dock>
+                <split size="313"/>
+                <dock id="" activePageId="Curve Editor.1">
+                    <page id="uk.co.thefoundry.scripteditor.1"/>
+                    <page id="Curve Editor.1"/>
+                </dock>
+            </splitter>
+        </splitter>
+    </window>
+    <window x="1921" y="1" w="1900" h="1137" screen="1">
+        <splitter orientation="1">
+            <split size="1081"/>
+            <dock id="" activePageId="Viewer.1">
+                <page id="Viewer.1"/>
+            </dock>
+            <split size="815"/>
+            <dock id="" activePageId="Viewer.2">
+                <page id="Viewer.2"/>
+            </dock>
+        </splitter>
+    </window>
+</layout>
+}
+Root {
+ inputs 0
+ name /usr/people/dollm/Nuke/visa_snow_v04.nk
+ frame 1039
+ first_frame 1001
+ last_frame 1154
+ lock_range true
+ format "2252 1268 0 0 2252 1268 1 "
+ proxy_type scale
+ proxy_format "1024 778 0 0 1024 778 1 1K_Super_35(full-ap)"
+ colorManagement OCIO
+ defaultViewerLUT "OCIO LUTs"
+ workingSpaceLUT linear
+ monitorLut MillView
+ int8Lut rec709
+ int16Lut rec709
+ logLut AlexaV3LogC
+ floatLut linear
+ luts {linear {}
+   sRGB {}
+   rec709 {}
+   Cineon {}
+   Gamma1.8 {}
+   Gamma2.2 {}
+   Gamma2.4 {}
+   Gamma2.6 {}
+   Panalog {}
+   REDLog {}
+   ViperLog {}
+   AlexaV3LogC {}
+   PLogLin {}
+   SLog {}
+   SLog1 {}
+   SLog2 {}
+   SLog3 {}
+   CLog {}
+   Log3G10 {}
+   Log3G12 {}
+   HybridLogGamma {}
+   Protune {}
+   BT1886 {}
+   HDR2084 {}
+   REDSpace {}
+   FlameVideo {pow((x+0.1498438276617182)/1.1498438276617182,1.0/0.45)*1.0109156157307528-0.0109156157307528}}
+}
+Read {
+ inputs 0
+ file_type exr
+ file /jobs/ads/visa_debit_holidays_J603518/VDH/sh011/n_011/comps/VDH_sh011_comp_v047/VDH_sh011_comp_v047.%04d.exr
+ format "2048 1152 0 0 2048 1152 1 "
+ first 1001
+ last 1154
+ origfirst 1001
+ origlast 1154
+ origset true
+ name Read2
+ label "\[value width]x\[value height]"
+ xpos 490
+ ypos 608
+}
+RotoPaint {
+ inputs 0
+ cliptype none
+ curves {{{v x3f99999a}
+  {f 0}
+  {n
+   {layer Root
+    {f 2097152}
+    {t x44700000 x44070000}
+    {a pt1x 0 pt1y 0 pt2x 0 pt2y 0 pt3x 0 pt3y 0 pt4x 0 pt4y 0 ptex00 0 ptex01 0 ptex02 0 ptex03 0 ptex10 0 ptex11 0 ptex12 0 ptex13 0 ptex20 0 ptex21 0 ptex22 0 ptex23 0 ptex30 0 ptex31 0 ptex32 0 ptex33 0 ptof1x 0 ptof1y 0 ptof2x 0 ptof2y 0 ptof3x 0 ptof3y 0 ptof4x 0 ptof4y 0 pterr 0 ptrefset 0 ptmot x40800000 ptref 0}
+    {curvegroup Rectangle1 512 bezier
+     {{cc
+       {f 8192}
+       {p
+        {}
+        {x448c9bbf x449c5f8c}
+        {}
+        {}
+        {x448cd5a1 x449c5f8c}
+        {}
+        {}
+        {x448d8d7d x441ebf18}
+        {}
+        {}
+        {x448be3e3 x441ebf18}
+        {}}}
+      {cc
+       {f 8192}
+       {p
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}}}}
+     {t x446c4000 x440bc000}
+     {a osw x41200000 osf 0 str 1 spx x44700000 spy x44070000 sb 1 ltn x44890000 ltm x44890000 tt x41000000}}}}}}
+ toolbox {selectAll {
+  { selectAll str 1 ssx 1 ssy 1 sf 1 }
+  { selectCurves str 1 ssx 1 ssy 1 sf 1 }
+  { createBezier str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBezierCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBSpline str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangle str 1 ssx 1 ssy 1 sf 1 sb 1 tt 8 }
+  { createRectangleCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { brush str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+ toolbar_brush_hardness 0.200000003
+ toolbar_source_transform_scale {1 1}
+ toolbar_source_transform_center {960 540}
+ colorOverlay {0 0 0 0}
+ lifetime_type "all frames"
+ lifetime_start 1096
+ lifetime_end 1096
+ motionblur_shutter_offset_type centred
+ source_black_outside true
+ name RotoPaint1
+ xpos -108
+ ypos -1975
+}
+Dot {
+ name Dot2
+ note_font "Bitstream Vera Sans Italic Italic"
+ note_font_size 22
+ note_font_color 0xff0000ff
+ xpos -74
+ ypos -1816
+}
+set Nee633460 [stack 0]
+Dot {
+ name Dot8
+ note_font "Bitstream Vera Sans Italic Italic Italic Italic"
+ note_font_size 22
+ note_font_color 0xff0000ff
+ xpos 250
+ ypos -774
+}
+set N6083ac0 [stack 0]
+Transform {
+ translate {0 {"parent.SNOWFLAKE2.offset + log(this.iteration)*parent.SNOWFLAKE2.offset*parent.SNOWFLAKE2.offsetRatio"}}
+ scale {{"parent.SNOWFLAKE2.scaling * pow(parent.SNOWFLAKE2.scalingRatio, this.iteration -1)"}}
+ center {1126 634}
+ name Transform34
+ label "\[value iteration]\nscale: \[value scale]"
+ xpos 1107
+ ypos -632
+ addUserKnob {20 User}
+ addUserKnob {3 iteration}
+ iteration 5
+}
+Merge2 {
+ name Merge25
+ note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold"
+ note_font_size 13
+ note_font_color 0xff00ff
+ xpos 1107
+ ypos -560
+ disable true
+}
+Dot {
+ name Dot16
+ note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic Italic Italic"
+ note_font_size 22
+ note_font_color 0xff0000ff
+ xpos 1141
+ ypos -516
+}
+set Nc55ca880 [stack 0]
+Transform {
+ rotate {{-parent.SNOWFLAKE2.rotation}}
+ center {{parent.Transform34.center} {"parent.Transform34.center + parent.Transform34.translate.y"}}
+ name Transform35
+ xpos 1164
+ ypos -494
+}
+push $Nc55ca880
+Transform {
+ rotate {{parent.SNOWFLAKE2.rotation}}
+ center {{parent.Transform34.center} {"parent.Transform34.center + parent.Transform34.translate.y"}}
+ name Transform36
+ xpos 1046
+ ypos -492
+}
+Merge2 {
+ inputs 2
+ name Merge26
+ note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 13
+ note_font_color 0xff00ff
+ xpos 1104
+ ypos -448
+}
+push $N6083ac0
+Transform {
+ translate {0 {"parent.SNOWFLAKE2.offset + log(this.iteration)*parent.SNOWFLAKE2.offset*parent.SNOWFLAKE2.offsetRatio"}}
+ scale {{"parent.SNOWFLAKE2.scaling * pow(parent.SNOWFLAKE2.scalingRatio, this.iteration -1)"}}
+ center {1126 634}
+ name Transform37
+ label "\[value iteration]\nscale: \[value scale]"
+ xpos 871
+ ypos -630
+ addUserKnob {20 User}
+ addUserKnob {3 iteration}
+ iteration 4
+}
+Merge2 {
+ inputs 2
+ name Merge27
+ note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold"
+ note_font_size 13
+ note_font_color 0xff00ff
+ xpos 871
+ ypos -558
+ disable true
+}
+Dot {
+ name Dot17
+ note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic Italic Italic"
+ note_font_size 22
+ note_font_color 0xff0000ff
+ xpos 905
+ ypos -514
+}
+set N2ab17b10 [stack 0]
+Transform {
+ rotate {{-parent.SNOWFLAKE2.rotation}}
+ center {{parent.Transform37.center} {"parent.Transform37.center + parent.Transform37.translate.y"}}
+ name Transform38
+ xpos 928
+ ypos -492
+}
+push $N2ab17b10
+Transform {
+ rotate {{parent.SNOWFLAKE2.rotation}}
+ center {{parent.Transform37.center} {"parent.Transform37.center + parent.Transform37.translate.y"}}
+ name Transform39
+ xpos 810
+ ypos -490
+}
+Merge2 {
+ inputs 2
+ name Merge28
+ note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 13
+ note_font_color 0xff00ff
+ xpos 868
+ ypos -446
+}
+push $N6083ac0
+Transform {
+ translate {0 {"parent.SNOWFLAKE2.offset + log(this.iteration)*parent.SNOWFLAKE2.offset*parent.SNOWFLAKE2.offsetRatio"}}
+ scale {{"parent.SNOWFLAKE2.scaling * pow(parent.SNOWFLAKE2.scalingRatio, this.iteration -1)"}}
+ center {1126 634}
+ name Transform40
+ label "\[value iteration]\nscale: \[value scale]"
+ xpos 664
+ ypos -619
+ addUserKnob {20 User}
+ addUserKnob {3 iteration}
+ iteration 3
+}
+Merge2 {
+ inputs 2
+ name Merge29
+ note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold"
+ note_font_size 13
+ note_font_color 0xff00ff
+ xpos 664
+ ypos -547
+ disable true
+}
+Dot {
+ name Dot18
+ note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic Italic"
+ note_font_size 22
+ note_font_color 0xff0000ff
+ xpos 698
+ ypos -503
+}
+set Neacd6440 [stack 0]
+Transform {
+ rotate {{-parent.SNOWFLAKE2.rotation}}
+ center {{parent.Transform40.center} {"parent.Transform40.center + parent.Transform40.translate.y"}}
+ name Transform41
+ xpos 721
+ ypos -481
+}
+push $Neacd6440
+Transform {
+ rotate {{parent.SNOWFLAKE2.rotation}}
+ center {{parent.Transform40.center} {"parent.Transform40.center + parent.Transform40.translate.y"}}
+ name Transform42
+ xpos 603
+ ypos -479
+}
+Merge2 {
+ inputs 2
+ name Merge30
+ note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold"
+ note_font_size 13
+ note_font_color 0xff00ff
+ xpos 661
+ ypos -435
+}
+push $N6083ac0
+Transform {
+ translate {0 {"parent.SNOWFLAKE2.offset + log(this.iteration)*parent.SNOWFLAKE2.offset*parent.SNOWFLAKE2.offsetRatio"}}
+ scale {{"parent.SNOWFLAKE2.scaling * pow(parent.SNOWFLAKE2.scalingRatio, this.iteration -1)"}}
+ center {1126 634}
+ name Transform43
+ label "\[value iteration]\nscale: \[value scale]"
+ xpos 430
+ ypos -626
+ addUserKnob {20 User}
+ addUserKnob {3 iteration}
+ iteration 2
+}
+Merge2 {
+ inputs 2
+ name Merge31
+ note_font "Bitstream Vera Sans Bold Bold Bold Bold"
+ note_font_size 13
+ note_font_color 0xff00ff
+ xpos 430
+ ypos -530
+ disable true
+}
+Dot {
+ name Dot19
+ note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic"
+ note_font_size 22
+ note_font_color 0xff0000ff
+ xpos 464
+ ypos -504
+}
+set Nead25c50 [stack 0]
+Transform {
+ rotate {{-parent.SNOWFLAKE2.rotation}}
+ center {{parent.Transform43.center} {"parent.Transform43.center + parent.Transform43.translate.y"}}
+ name Transform44
+ xpos 487
+ ypos -482
+}
+push $Nead25c50
+Transform {
+ rotate {{parent.SNOWFLAKE2.rotation}}
+ center {{parent.Transform43.center} {"parent.Transform43.center + parent.Transform43.translate.y"}}
+ name Transform45
+ xpos 369
+ ypos -480
+}
+Merge2 {
+ inputs 2
+ name Merge32
+ note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold"
+ note_font_size 13
+ note_font_color 0xff00ff
+ xpos 427
+ ypos -436
+}
+push $N6083ac0
+Transform {
+ translate {0 {"parent.SNOWFLAKE2.offset + log(this.iteration)*parent.SNOWFLAKE2.offset*parent.SNOWFLAKE2.offsetRatio"}}
+ scale {{"parent.SNOWFLAKE2.scaling * pow(parent.SNOWFLAKE2.scalingRatio, this.iteration -1)"}}
+ center {1126 634}
+ name Transform46
+ label "\[value iteration]\nscale: \[value scale]"
+ xpos 216
+ ypos -628
+ addUserKnob {20 User}
+ addUserKnob {3 iteration}
+ iteration 1
+}
+Merge2 {
+ inputs 2
+ name Merge33
+ note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold"
+ note_font_size 13
+ note_font_color 0xff00ff
+ xpos 216
+ ypos -532
+}
+Dot {
+ name Dot20
+ note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic Italic"
+ note_font_size 22
+ note_font_color 0xff0000ff
+ xpos 250
+ ypos -506
+}
+set Nd7bfad00 [stack 0]
+Transform {
+ rotate {{-parent.SNOWFLAKE2.rotation}}
+ center {{parent.Transform46.center} {"parent.Transform46.center + parent.Transform46.translate.y"}}
+ name Transform47
+ xpos 273
+ ypos -484
+}
+push $Nd7bfad00
+Transform {
+ rotate {{parent.SNOWFLAKE2.rotation}}
+ center {{parent.Transform46.center} {"parent.Transform46.center + parent.Transform46.translate.y"}}
+ name Transform48
+ xpos 156
+ ypos -482
+}
+Merge2 {
+ inputs 2
+ name Merge34
+ note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold"
+ note_font_size 13
+ note_font_color 0xff00ff
+ xpos 214
+ ypos -437
+}
+push $Nee633460
+Dot {
+ name Dot10
+ note_font "Bitstream Vera Sans Italic Italic Italic"
+ note_font_size 22
+ note_font_color 0xff0000ff
+ xpos 223
+ ypos -1267
+}
+set Neb086400 [stack 0]
+Transform {
+ translate {0 {"parent.SNOWFLAKE1.offset + log(this.iteration)*parent.SNOWFLAKE1.offset*parent.SNOWFLAKE1.offsetRatio"}}
+ scale {{"parent.SNOWFLAKE1.scaling * pow(parent.SNOWFLAKE1.scalingRatio, this.iteration -1)"}}
+ center {1126 634}
+ name Transform17
+ label "\[value iteration]\nscale: \[value scale]"
+ xpos 844
+ ypos -1123
+ addUserKnob {20 User}
+ addUserKnob {3 iteration}
+ iteration 4
+}
+Dot {
+ name Dot12
+ note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic Italic"
+ note_font_size 22
+ note_font_color 0xff0000ff
+ xpos 878
+ ypos -1007
+}
+set N1113a010 [stack 0]
+Transform {
+ rotate {{-parent.SNOWFLAKE1.rotation}}
+ center {{parent.Transform17.center} {"parent.Transform17.center + parent.Transform17.translate.y"}}
+ name Transform23
+ xpos 901
+ ypos -985
+}
+push $N1113a010
+Transform {
+ rotate {{parent.SNOWFLAKE1.rotation}}
+ center {{parent.Transform17.center} {"parent.Transform17.center + parent.Transform17.translate.y"}}
+ name Transform24
+ xpos 783
+ ypos -983
+}
+Merge2 {
+ inputs 2
+ name Merge18
+ note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold"
+ note_font_size 13
+ note_font_color 0xff00ff
+ xpos 841
+ ypos -939
+}
+push $Neb086400
+Transform {
+ translate {0 {"parent.SNOWFLAKE1.offset + log(this.iteration)*parent.SNOWFLAKE1.offset*parent.SNOWFLAKE1.offsetRatio"}}
+ scale {{"parent.SNOWFLAKE1.scaling * pow(parent.SNOWFLAKE1.scalingRatio, this.iteration -1)"}}
+ center {1126 634}
+ name Transform25
+ label "\[value iteration]\nscale: \[value scale]"
+ xpos 637
+ ypos -1112
+ addUserKnob {20 User}
+ addUserKnob {3 iteration}
+ iteration 3
+}
+Merge2 {
+ inputs 2
+ name Merge19
+ note_font "Bitstream Vera Sans Bold Bold Bold Bold"
+ note_font_size 13
+ note_font_color 0xff00ff
+ xpos 637
+ ypos -1040
+}
+Dot {
+ name Dot13
+ note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic"
+ note_font_size 22
+ note_font_color 0xff0000ff
+ xpos 671
+ ypos -996
+}
+set N2ffda350 [stack 0]
+Transform {
+ rotate {{-parent.SNOWFLAKE1.rotation}}
+ center {{parent.Transform25.center} {"parent.Transform25.center + parent.Transform25.translate.y"}}
+ name Transform26
+ xpos 694
+ ypos -974
+}
+push $N2ffda350
+Transform {
+ rotate {{parent.SNOWFLAKE1.rotation}}
+ center {{parent.Transform25.center} {"parent.Transform25.center + parent.Transform25.translate.y"}}
+ name Transform27
+ xpos 576
+ ypos -972
+}
+Merge2 {
+ inputs 2
+ name Merge20
+ note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold"
+ note_font_size 13
+ note_font_color 0xff00ff
+ xpos 634
+ ypos -928
+}
+push $Neb086400
+Transform {
+ translate {0 {"parent.SNOWFLAKE1.offset + log(this.iteration)*parent.SNOWFLAKE1.offset*parent.SNOWFLAKE1.offsetRatio"}}
+ scale {{"parent.SNOWFLAKE1.scaling * pow(parent.SNOWFLAKE1.scalingRatio, this.iteration -1)"}}
+ center {1126 634}
+ name Transform28
+ label "\[value iteration]\nscale: \[value scale]"
+ xpos 403
+ ypos -1119
+ addUserKnob {20 User}
+ addUserKnob {3 iteration}
+ iteration 2
+}
+Merge2 {
+ inputs 2
+ name Merge21
+ note_font "Bitstream Vera Sans Bold Bold Bold"
+ note_font_size 13
+ note_font_color 0xff00ff
+ xpos 403
+ ypos -1023
+}
+Dot {
+ name Dot14
+ note_font "Bitstream Vera Sans Italic Italic Italic Italic"
+ note_font_size 22
+ note_font_color 0xff0000ff
+ xpos 437
+ ypos -997
+}
+set N2c019e00 [stack 0]
+Transform {
+ rotate {{-parent.SNOWFLAKE1.rotation}}
+ center {{parent.Transform28.center} {"parent.Transform28.center + parent.Transform28.translate.y"}}
+ name Transform29
+ xpos 460
+ ypos -975
+}
+push $N2c019e00
+Transform {
+ rotate {{parent.SNOWFLAKE1.rotation}}
+ center {{parent.Transform28.center} {"parent.Transform28.center + parent.Transform28.translate.y"}}
+ name Transform30
+ xpos 342
+ ypos -973
+}
+Merge2 {
+ inputs 2
+ name Merge22
+ note_font "Bitstream Vera Sans Bold Bold Bold Bold"
+ note_font_size 13
+ note_font_color 0xff00ff
+ xpos 400
+ ypos -929
+}
+push $Neb086400
+Transform {
+ translate {0 {"parent.SNOWFLAKE1.offset + log(this.iteration)*parent.SNOWFLAKE1.offset*parent.SNOWFLAKE1.offsetRatio"}}
+ scale {{"parent.SNOWFLAKE1.scaling * pow(parent.SNOWFLAKE1.scalingRatio, this.iteration -1)"}}
+ center {1126 634}
+ name Transform31
+ label "\[value iteration]\nscale: \[value scale]"
+ xpos 189
+ ypos -1121
+ addUserKnob {20 User}
+ addUserKnob {3 iteration}
+ iteration 1
+}
+Merge2 {
+ inputs 2
+ name Merge23
+ note_font "Bitstream Vera Sans Bold Bold Bold Bold"
+ note_font_size 13
+ note_font_color 0xff00ff
+ xpos 189
+ ypos -1025
+}
+Dot {
+ name Dot15
+ note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic"
+ note_font_size 22
+ note_font_color 0xff0000ff
+ xpos 223
+ ypos -999
+}
+set Nc55c4720 [stack 0]
+Transform {
+ rotate {{-parent.SNOWFLAKE1.rotation}}
+ center {{parent.Transform31.center} {"parent.Transform31.center + parent.Transform31.translate.y"}}
+ name Transform32
+ xpos 246
+ ypos -977
+}
+push $Nc55c4720
+Transform {
+ rotate {{parent.SNOWFLAKE1.rotation}}
+ center {{parent.Transform31.center} {"parent.Transform31.center + parent.Transform31.translate.y"}}
+ name Transform33
+ xpos 129
+ ypos -975
+}
+Merge2 {
+ inputs 2
+ name Merge24
+ note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold"
+ note_font_size 13
+ note_font_color 0xff00ff
+ xpos 187
+ ypos -930
+}
+push $Nee633460
+Dot {
+ name Dot3
+ note_font "Bitstream Vera Sans Italic Italic"
+ note_font_size 22
+ note_font_color 0xff0000ff
+ xpos 192
+ ypos -1789
+}
+set N9fed410 [stack 0]
+Transform {
+ translate {0 {"parent.SNOWFLAKE.offset + log(this.iteration)*parent.SNOWFLAKE.offset*parent.SNOWFLAKE.offsetRatio"}}
+ scale {{"parent.SNOWFLAKE.scaling * pow(parent.SNOWFLAKE.scalingRatio, this.iteration -1)"}}
+ center {1126 634}
+ name Transform1
+ label "\[value iteration]\nscale: \[value scale]"
+ xpos 813
+ ypos -1645
+ addUserKnob {20 User}
+ addUserKnob {3 iteration}
+ iteration 4
+}
+Dot {
+ name Dot4
+ note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic"
+ note_font_size 22
+ note_font_color 0xff0000ff
+ xpos 847
+ ypos -1529
+}
+set N5f8642c0 [stack 0]
+Transform {
+ rotate {{-parent.SNOWFLAKE.rotation}}
+ center {{parent.Transform1.center} {"parent.Transform1.center + parent.Transform1.translate.y"}}
+ name Transform2
+ xpos 870
+ ypos -1507
+}
+push $N5f8642c0
+Transform {
+ rotate {{parent.SNOWFLAKE.rotation}}
+ center {{parent.Transform1.center} {"parent.Transform1.center + parent.Transform1.translate.y"}}
+ name Transform6
+ xpos 752
+ ypos -1505
+}
+Merge2 {
+ inputs 2
+ name Merge7
+ note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold"
+ note_font_size 13
+ note_font_color 0xff00ff
+ xpos 810
+ ypos -1461
+}
+push $N9fed410
+Transform {
+ translate {0 {"parent.SNOWFLAKE.offset + log(this.iteration)*parent.SNOWFLAKE.offset*parent.SNOWFLAKE.offsetRatio"}}
+ scale {{"parent.SNOWFLAKE.scaling * pow(parent.SNOWFLAKE.scalingRatio, this.iteration -1)"}}
+ center {1126 634}
+ name Transform3
+ label "\[value iteration]\nscale: \[value scale]"
+ xpos 606
+ ypos -1634
+ addUserKnob {20 User}
+ addUserKnob {3 iteration}
+ iteration 3
+}
+Merge2 {
+ inputs 2
+ name Merge5
+ note_font "Bitstream Vera Sans Bold Bold Bold"
+ note_font_size 13
+ note_font_color 0xff00ff
+ xpos 606
+ ypos -1562
+}
+Dot {
+ name Dot6
+ note_font "Bitstream Vera Sans Italic Italic Italic Italic"
+ note_font_size 22
+ note_font_color 0xff0000ff
+ xpos 640
+ ypos -1518
+}
+set Nc5977e40 [stack 0]
+Transform {
+ rotate {{-parent.SNOWFLAKE.rotation}}
+ center {{parent.Transform3.center} {"parent.Transform3.center + parent.Transform3.translate.y"}}
+ name Transform10
+ xpos 663
+ ypos -1496
+}
+push $Nc5977e40
+Transform {
+ rotate {{parent.SNOWFLAKE.rotation}}
+ center {{parent.Transform3.center} {"parent.Transform3.center + parent.Transform3.translate.y"}}
+ name Transform11
+ xpos 545
+ ypos -1494
+}
+Merge2 {
+ inputs 2
+ name Merge9
+ note_font "Bitstream Vera Sans Bold Bold Bold Bold"
+ note_font_size 13
+ note_font_color 0xff00ff
+ xpos 603
+ ypos -1450
+}
+push $N9fed410
+Transform {
+ translate {0 {"parent.SNOWFLAKE.offset + log(this.iteration)*parent.SNOWFLAKE.offset*parent.SNOWFLAKE.offsetRatio"}}
+ scale {{"parent.SNOWFLAKE.scaling * pow(parent.SNOWFLAKE.scalingRatio, this.iteration -1)"}}
+ center {1126 634}
+ name Transform5
+ label "\[value iteration]\nscale: \[value scale]"
+ xpos 372
+ ypos -1641
+ addUserKnob {20 User}
+ addUserKnob {3 iteration}
+ iteration 2
+}
+Merge2 {
+ inputs 2
+ name Merge8
+ note_font "Bitstream Vera Sans Bold Bold"
+ note_font_size 13
+ note_font_color 0xff00ff
+ xpos 372
+ ypos -1545
+}
+Dot {
+ name Dot5
+ note_font "Bitstream Vera Sans Italic Italic Italic"
+ note_font_size 22
+ note_font_color 0xff0000ff
+ xpos 406
+ ypos -1519
+}
+set N28478260 [stack 0]
+Transform {
+ rotate {{-parent.SNOWFLAKE.rotation}}
+ center {{parent.Transform5.center} {"parent.Transform5.center + parent.Transform5.translate.y"}}
+ name Transform8
+ xpos 429
+ ypos -1497
+}
+push $N28478260
+Transform {
+ rotate {{parent.SNOWFLAKE.rotation}}
+ center {{parent.Transform5.center} {"parent.Transform5.center + parent.Transform5.translate.y"}}
+ name Transform9
+ xpos 311
+ ypos -1495
+}
+Merge2 {
+ inputs 2
+ name Merge6
+ note_font "Bitstream Vera Sans Bold Bold Bold"
+ note_font_size 13
+ note_font_color 0xff00ff
+ xpos 369
+ ypos -1451
+}
+push $N9fed410
+Transform {
+ translate {0 {"parent.SNOWFLAKE.offset + log(this.iteration)*parent.SNOWFLAKE.offset*parent.SNOWFLAKE.offsetRatio"}}
+ scale {{"parent.SNOWFLAKE.scaling * pow(parent.SNOWFLAKE.scalingRatio, this.iteration -1)"}}
+ center {1126 634}
+ name Transform4
+ label "\[value iteration]\nscale: \[value scale]"
+ xpos 158
+ ypos -1643
+ addUserKnob {20 User}
+ addUserKnob {3 iteration}
+ iteration 1
+}
+Merge2 {
+ inputs 2
+ name Merge2
+ note_font "Bitstream Vera Sans Bold Bold Bold"
+ note_font_size 13
+ note_font_color 0xff00ff
+ xpos 158
+ ypos -1547
+}
+Dot {
+ name Dot9
+ note_font "Bitstream Vera Sans Italic Italic Italic Italic"
+ note_font_size 22
+ note_font_color 0xff0000ff
+ xpos 192
+ ypos -1521
+}
+set N4d9fd4a0 [stack 0]
+Transform {
+ rotate {{-parent.SNOWFLAKE.rotation}}
+ center {{parent.Transform4.center} {"parent.Transform4.center + parent.Transform4.translate.y"}}
+ name Transform21
+ xpos 215
+ ypos -1499
+}
+push $N4d9fd4a0
+Transform {
+ rotate {{parent.SNOWFLAKE.rotation}}
+ center {{parent.Transform4.center} {"parent.Transform4.center + parent.Transform4.translate.y"}}
+ name Transform22
+ xpos 98
+ ypos -1497
+}
+Merge2 {
+ inputs 2
+ name Merge16
+ note_font "Bitstream Vera Sans Bold Bold Bold Bold"
+ note_font_size 13
+ note_font_color 0xff00ff
+ xpos 156
+ ypos -1452
+}
+push $Nee633460
+Merge2 {
+ inputs 2
+ name Merge3
+ note_font "Bitstream Vera Sans Bold Bold"
+ note_font_size 13
+ note_font_color 0xff00ff
+ xpos -106
+ ypos -1452
+}
+Merge2 {
+ inputs 2
+ name Merge35
+ note_font "Bitstream Vera Sans Bold Bold"
+ note_font_size 13
+ note_font_color 0xff00ff
+ xpos -106
+ ypos -930
+}
+set N369cecd0 [stack 0]
+Merge2 {
+ inputs 2
+ name Merge36
+ note_font "Bitstream Vera Sans Bold Bold"
+ note_font_size 13
+ note_font_color 0xff00ff
+ xpos -106
+ ypos -437
+}
+set N2b659d30 [stack 0]
+Transform {
+ rotate -60
+ center {1126 634}
+ name Transform20
+ xpos -108
+ ypos -212
+}
+set N2a032340 [stack 0]
+Transform {
+ rotate 120
+ center {1126 634}
+ name Transform19
+ xpos 40
+ ypos -172
+}
+push 0
+push $N2a032340
+Transform {
+ rotate 60
+ center {1126 634}
+ name Transform18
+ xpos -47
+ ypos -173
+}
+push $N2a032340
+Merge2 {
+ inputs 3+1
+ name Merge14
+ note_font "Bitstream Vera Sans Bold Bold"
+ note_font_size 13
+ note_font_color 0xff00ff
+ xpos -108
+ ypos -121
+}
+set Nc597bc70 [stack 0]
+Mirror2 {
+ flip true
+ name Mirror2_1
+ xpos 2
+ ypos -121
+}
+push $Nc597bc70
+Merge2 {
+ inputs 2
+ name Merge15
+ note_font "Bitstream Vera Sans Bold Bold"
+ note_font_size 13
+ note_font_color 0xff00ff
+ xpos -108
+ ypos -43
+}
+Dot {
+ name Dot1
+ note_font "Bitstream Vera Sans Italic Italic"
+ note_font_size 22
+ note_font_color 0xff0000ff
+ xpos -74
+ ypos 129
+}
+NoOp {
+ inputs 0
+ name SNOWFLAKE2
+ xpos 437
+ ypos -798
+ addUserKnob {20 User}
+ addUserKnob {7 rotation R 0 90}
+ rotation 39.6
+ addUserKnob {26 ""}
+ addUserKnob {7 offset R 0 500}
+ offset 500
+ addUserKnob {7 offsetRatio}
+ offsetRatio 0.365
+ addUserKnob {26 ""}
+ addUserKnob {7 scaling}
+ scaling 0.21
+ addUserKnob {7 scalingRatio l "scaling Ratio"}
+ scalingRatio 0.36
+}
+Read {
+ inputs 0
+ file_type exr
+ file /jobs/ads/visa_debit_holidays_J603518/VDH/sh002/m_002/images/VDH_sh002_lighting_lighting_v009/VDH_sh002_lighting_lighting_v009_FX_PLOWSNOW_HOLDOUT.%04d.exr
+ format "1126 634 0 0 1126 634 1 "
+ first 1001
+ last 1066
+ origfirst 1001
+ origlast 1066
+ origset true
+ on_error black
+ version 3
+ name Read74
+ label "\[value width]x\[value height]"
+ xpos 330
+ ypos -25
+ disable {{hasError}}
+ postage_stamp false
+}
+push $N2b659d30
+Dot {
+ name Dot23
+ note_font "Bitstream Vera Sans Italic Italic Italic"
+ note_font_size 22
+ note_font_color 0xff0000ff
+ xpos -1022
+ ypos -229
+}
+set N7b1e100 [stack 0]
+Transform {
+ rotate {{"120 * this.iter"}}
+ center {1126 634}
+ name Transform53
+ xpos -915
+ ypos -203
+ addUserKnob {20 User}
+ addUserKnob {3 iter}
+ iter 2
+}
+push 0
+push $N7b1e100
+Transform {
+ rotate {{"120 * this.iter"}}
+ center {1126 634}
+ name Transform54
+ xpos -1000
+ ypos -203
+ addUserKnob {20 User}
+ addUserKnob {3 iter}
+ iter 1
+}
+push $N7b1e100
+Merge2 {
+ inputs 3+1
+ name Merge38
+ note_font "Bitstream Vera Sans Bold Bold Bold Bold"
+ note_font_size 13
+ note_font_color 0xff00ff
+ xpos -1056
+ ypos -161
+}
+Reformat {
+ format "512 512 0 0 512 512 1 sq512"
+ name Reformat2
+ xpos -1056
+ ypos -101
+}
+NoOp {
+ inputs 0
+ name SNOWFLAKE
+ xpos 380
+ ypos -1812
+ addUserKnob {20 User}
+ addUserKnob {7 rotation R 0 90}
+ rotation 61.4
+ addUserKnob {26 "" +STARTLINE}
+ addUserKnob {7 offset R 0 500}
+ offset 88
+ addUserKnob {7 offsetRatio}
+ offsetRatio 2
+ addUserKnob {26 "" +STARTLINE}
+ addUserKnob {7 scaling}
+ scaling 0.79
+ addUserKnob {7 scalingRatio l "scaling Ratio"}
+ scalingRatio 0.54
+}
+NoOp {
+ inputs 0
+ name SNOWFLAKE1
+ xpos 410
+ ypos -1291
+ addUserKnob {20 User}
+ addUserKnob {7 rotation R 0 90}
+ rotation 44.2
+ addUserKnob {26 ""}
+ addUserKnob {7 offset R 0 500}
+ offset 226
+ addUserKnob {7 offsetRatio}
+ offsetRatio 1
+ addUserKnob {26 ""}
+ addUserKnob {7 scaling}
+ scaling 0.79
+ addUserKnob {7 scalingRatio l "scaling Ratio"}
+ scalingRatio 0.465
+}
+push $N2b659d30
+Dot {
+ name Dot21
+ note_font "Bitstream Vera Sans Italic Italic"
+ note_font_size 22
+ note_font_color 0xff0000ff
+ xpos -653
+ ypos -231
+}
+set N539e4d90 [stack 0]
+Transform {
+ rotate {{"72 * this.iter"}}
+ center {1126 634}
+ name Transform50
+ xpos -453
+ ypos -204
+ addUserKnob {20 User}
+ addUserKnob {3 iter}
+ iter 3
+}
+push $N539e4d90
+Transform {
+ rotate {{"72 * this.iter"}}
+ center {1126 634}
+ name Transform52
+ xpos -322
+ ypos -210
+ addUserKnob {20 User}
+ addUserKnob {3 iter}
+ iter 4
+}
+push $N539e4d90
+Transform {
+ rotate {{"72 * this.iter"}}
+ center {1126 634}
+ name Transform49
+ xpos -547
+ ypos -210
+ addUserKnob {20 User}
+ addUserKnob {3 iter}
+ iter 2
+}
+push 0
+push $N539e4d90
+Transform {
+ rotate {{"72 * this.iter"}}
+ center {1126 634}
+ name Transform51
+ xpos -631
+ ypos -205
+ addUserKnob {20 User}
+ addUserKnob {3 iter}
+ iter 1
+}
+set Nd7a95c10 [stack 0]
+push $N539e4d90
+Merge2 {
+ inputs 5+1
+ name Merge37
+ note_font "Bitstream Vera Sans Bold Bold Bold"
+ note_font_size 13
+ note_font_color 0xff00ff
+ xpos -687
+ ypos -163
+}
+Reformat {
+ format "512 512 0 0 512 512 1 sq512"
+ name Reformat1
+ xpos -687
+ ypos -103
+}
+Transform {
+ scale 1.7
+ center {256 256}
+ name Transform7
+ xpos -687
+ ypos -67
+}
+Reformat {
+ type scale
+ scale 0.5
+ name Reformat3
+ xpos -687
+ ypos -31
+}
+Write {
+ channels rgba
+ file /usr/people/dollm/Nuke/snowTech/flake1.exr
+ file_type exr
+ first_part none
+ version 1
+ name Write1
+ xpos -776
+ ypos 45
+ addUserKnob {20 caravr l CaraVR}
+ addUserKnob {4 viewPresets l "View Presets" M {main stereo cams "stereo cams" all}}
+ addUserKnob {22 set l Set -STARTLINE T "w = nuke.thisNode()\nscriptViews = nuke.views()\nviewPreset = w\['viewPresets'].getValue()\nselectedViews = None\nif viewPreset == 0:\n  selectedViews = \['main']\nif viewPreset == 1:\n  stereoViews = \['left', 'right']\n  if set(stereoViews).issubset(set(scriptViews)):\n    selectedViews = stereoViews\n  else:\n    selectedViews = None\nelif viewPreset == 2:\n  selectedViews = \[v for v in scriptViews if 'cam' in v and not ('_left' in v or '_right' in v)]\nelif viewPreset == 3:\n  selectedViews = \[v for v in scriptViews if 'cam' in v and ('_left' in v or '_right' in v)]\nelif viewPreset == 4:\n  selectedViews = scriptViews\nif selectedViews:\n  w\['views'].fromScript(' '.join(selectedViews))\n"}
+}
+CheckerBoard2 {
+ inputs 0
+ name CheckerBoard1
+ xpos 32
+ ypos 455
+}
+set N3219b370 [stack 0]
+ReadGeo2 {
+ file /jobs/ads/visa_debit_holidays_J603518/VDH/sh012/m_012/cache/alembic/visaCard_CardPlacement.abc
+ read_on_each_frame true
+ use_geometry_colors false
+ range_first 0
+ range_last 1121
+ scene_view {{0} imported: 0 selected: 0 items: /root/pPlane1/pPlaneShape1}
+ name ReadGeo2
+ xpos 108
+ ypos 783
+}
+Camera2 {
+ inputs 0
+ translate {0 26 155}
+ name Camera1
+ xpos -369
+ ypos 980
+}
+ReadGeo2 {
+ inputs 0
+ file /jobs/ads/visa_debit_holidays_J603518/VDH/sh012/m_012/cache/alembic/visaCard_CardPlacement.abc
+ read_on_each_frame true
+ use_geometry_colors false
+ range_first 0
+ range_last 1121
+ display off
+ scene_view {{0} imported: 0 selected: 0 items: /root/pPlane1/pPlaneShape1}
+ name ReadGeo1
+ xpos -108
+ ypos 460
+}
+push 0
+ParticleEmitter {
+ inputs 2
+ start_frame 1001
+ emit_from faces
+ rate {{curve x1020 4 x1037 0 s0}}
+ rate_variation 0.19
+ lifetime 80
+ velocity 0.1
+ rotation_velocity 0.46
+ size 1
+ size_variation 0.405
+ transfer_velocity 1
+ spread 0.02
+ name ParticleEmitter2
+ xpos -225
+ ypos 537
+}
+ParticleSettings {
+ steps_per_frame 8
+ name ParticleSettings1
+ xpos -225
+ ypos 561
+}
+ParticleWind {
+ to {0 0 -0.5}
+ "air resistance" true
+ name ParticleWind1
+ selected true
+ xpos -225
+ ypos 621
+}
+ParticleVortex {
+ parallel 0.45
+ tangential 0.08
+ to {0 0 -1}
+ name ParticleVortex1
+ xpos -225
+ ypos 666
+}
+ParticleDrag {
+ drag 0.02
+ probability 0.96
+ name ParticleDrag1
+ xpos -225
+ ypos 702
+}
+ParticleTurbulence {
+ strength {0.1 0.1 0.1}
+ scale {5 5 5}
+ name ParticleTurbulence1
+ xpos -225
+ ypos 738
+}
+ParticlePointForce {
+ strength 15
+ radius 118
+ position {-44 -2 63}
+ name ParticlePointForce1
+ xpos -225
+ ypos 774
+ disable true
+}
+ParticleVortex {
+ radial 1
+ region sphere
+ translate {-27.80000114 0 90}
+ uniform_scale 100
+ name ParticleVortex2
+ xpos -225
+ ypos 810
+}
+push $N3219b370
+ReadGeo2 {
+ file /jobs/ads/visa_debit_holidays_J603518/VDH/sh012/m_012/cache/alembic/visaCard_CardPlacement.abc
+ read_on_each_frame true
+ use_geometry_colors false
+ range_first 0
+ range_last 1121
+ display wireframe
+ scene_view {{0} imported: 0 selected: 0 items: /root/pPlane1/pPlaneShape1}
+ name ReadGeo3
+ xpos 5
+ ypos 631
+}
+Scene {
+ inputs 2
+ name Scene1
+ xpos -99
+ ypos 892
+}
+push 0
+ScanlineRender {
+ inputs 3
+ conservative_shader_sampling false
+ motion_vectors_type distance
+ name ScanlineRender1
+ xpos -109
+ ypos 1001
+}
+set N7a51af0 [stack 0]
+Read {
+ inputs 0
+ file_type exr
+ file /jobs/ads/visa_debit_holidays_J603518/VDH/sh011/n_011/comps/VDH_sh011_comp_v051/VDH_sh011_comp_v051.####.exr
+ format "2048 1152 0 0 2048 1152 1 "
+ first 1001
+ last 1154
+ origfirst 1001
+ origlast 1154
+ origset true
+ name Read1
+ label "\[value width]x\[value height]"
+ xpos 241
+ ypos 678
+}
+Merge2 {
+ inputs 2
+ name Merge1
+ note_font "Bitstream Vera Sans Bold Bold Bold"
+ note_font_size 13
+ note_font_color 0xff00ff
+ xpos 119
+ ypos 1126
+}
+push $N7a51af0
+Viewer {
+ frame 1039
+ frame_range 1001-1154
+ center_fstop 0
+ viewerProcess "MillView (default)"
+ name Viewer2
+ xpos -318
+ ypos 1161
+}
+Read {
+ inputs 0
+ file_type exr
+ file /usr/people/dollm/Nuke/snowTech/flake1.exr
+ origset true
+ colorspace linear
+ name Read3
+ label "\[value width]x\[value height]"
+ xpos -709
+ ypos 109
+}
+Dot {
+ name Dot22
+ note_font "Bitstream Vera Sans Italic Italic"
+ note_font_size 22
+ note_font_color 0xff0000ff
+ xpos -210
+ ypos 447
+}
+push $N369cecd0
+push $Nd7a95c10
+push $N7a51af0
+Viewer {
+ inputs 3
+ frame 1039
+ frame_range 1001-1062
+ frame_range_lock true
+ safe_zone format
+ format_center true
+ center_fstop 0
+ viewerProcess "MillView (default)"
+ name Viewer1
+ xpos -677
+ ypos 816
+}

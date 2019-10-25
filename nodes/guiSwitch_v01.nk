@@ -1,0 +1,44 @@
+set cut_paste_input [stack 0]
+version 11.2 v6
+push 0
+push $cut_paste_input
+Group {
+inputs 2
+name Gui_Only
+knobChanged "\nk = nuke.thisKnob()\nn = nuke.thisNode()\nif k.name() == \"doGuiSwitch\":\n    if k.value():\n        n\['label'].setValue(\"RENDERING FARM BRANCH IN THE GUI (EXPENSIVE!)\")\n        n\['note_font_size'].setValue(22)\n        n\['note_font'].setValue('Bitstream Vera Sans Bold')\n    else:\n        n\['label'].setValue('The \"farm\" branch is not being rendered interactively (gui)')\n        n\['note_font_size'].setValue(11)\n        n\['note_font'].setValue('Bitstream Vera Sans')\n"
+label "The \"farm\" branch is not being rendered interactively (gui)"
+note_font "Bitstream Vera Sans"
+selected true
+xpos 260
+ypos 2152
+addUserKnob {20 User}
+addUserKnob {6 doGuiSwitch l "Render switched branch" +STARTLINE}
+}
+Input {
+inputs 0
+name gui
+xpos 329
+ypos 319
+number 1
+}
+Input {
+inputs 0
+name farm
+xpos 185
+ypos 380
+}
+Switch {
+inputs 2
+which {{"\$gui"}}
+name guiswitch
+selected true
+xpos 329
+ypos 460
+disable {{parent.doGuiSwitch}}
+}
+Output {
+name Output1
+xpos 329
+ypos 508
+}
+end_group

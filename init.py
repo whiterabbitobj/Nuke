@@ -4,7 +4,7 @@ import nuke
 sep = "#"*30
 print(sep)
 # Import NODES/PLUGINS in init.py
-facility_plugins = "E:/Google Drive/WORK/VFX/Nuke/REPO/nodes"
+facility_plugins = "/mill3d/users/dollm/Nuke/nodes"
 nuke.pluginAddPath(facility_plugins)
 print("Loading nodes from " + facility_plugins)
 
@@ -22,15 +22,15 @@ print(sep)
 
 # Implement callbacks
 
-def writeNodeDirs():
-	import os, nuke
-	file = nuke.filename(nuke.thisNode())
-	dir = os.path.dirname(file)
-	# osdir = nuke.callbacks.filenameFilter(dir)
-	try:
-		# os.makedirs(osdir)
-		os.makedirs(dir)
-	except OSError:
-		pass
+#def writeNodeDirs():
+#	import os, nuke
+#	file = nuke.filename(nuke.thisNode())
+#	dir = os.path.dirname(file)
+#	# osdir = nuke.callbacks.filenameFilter(dir)
+#	try:
+#		# os.makedirs(osdir)
+#		os.makedirs(dir)
+#	except OSError:
+#		pass
 
-nuke.addBeforeRender(writeNodeDirs)
+#nuke.addBeforeRender(writeNodeDirs)

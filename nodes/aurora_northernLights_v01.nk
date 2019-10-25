@@ -1,0 +1,605 @@
+set cut_paste_input [stack 0]
+version 11.2 v6
+push $cut_paste_input
+Reformat {
+format "2048 2048 0 0 2048 2048 1 square_2K"
+name Reformat7
+selected true
+xpos -4722
+ypos -6441
+}
+Noise {
+type turbulence
+zoffset {{frame/75}}
+gain 0.235
+gamma 1
+translate {{frame*2} {-frame*2}}
+center {1024 576}
+name Noise4
+selected true
+xpos -4722
+ypos -6352
+}
+Shuffle {
+alpha white
+name Shuffle24
+label "\[value in]"
+selected true
+xpos -4722
+ypos -6328
+}
+Invert {
+channels rgb
+name Invert8
+selected true
+xpos -4722
+ypos -6292
+}
+Grade {
+gamma 0.2
+name Grade9
+selected true
+xpos -4722
+ypos -6268
+}
+SphericalTransform {
+out_rz 90
+format "2048 2048 0 0 2048 2048 1 square_2K"
+fix true
+name SphericalTransform2
+selected true
+xpos -4722
+ypos -6227
+}
+Blur {
+name Blur8
+selected true
+xpos -4722
+ypos -6172
+}
+Sphere {
+u_extent 180
+v_extent 76
+rotate {0 180 0}
+scaling {1 0.5 1}
+uniform_scale 300
+name Sphere4
+selected true
+xpos -4722
+ypos -6071
+}
+push 0
+ScanlineRender {
+inputs 2
+conservative_shader_sampling false
+motion_vectors_type distance
+name ScanlineRender4
+selected true
+xpos -4722
+ypos -5864
+}
+push 0
+Read {
+inputs 0
+file_type exr
+file /jobs/ads/visa_debit_holidays_J603518/VDH/sh001/n_001/comps/VDH_sh001_comp_v045/VDH_sh001_comp_v045_latlongmap.%d.exr
+first 1001
+last 1001
+origset true
+on_error black
+colorspace linear
+name Read2
+label "\[value width]x\[value height]"
+selected true
+xpos -5572
+ypos -6199
+disable {{hasError}}
+}
+set N51faef0 [stack 0]
+Reformat {
+inputs 0
+format "2048 2048 0 0 2048 2048 1 square_2K"
+name Reformat12
+selected true
+xpos -5020
+ypos -6465
+}
+Noise {
+type turbulence
+size 950
+zoffset {{frame/175}}
+gain 0.315
+gamma 1
+translate {{frame} {-frame}}
+center {1024 576}
+name Noise7
+selected true
+xpos -5020
+ypos -6376
+}
+Shuffle {
+alpha white
+name Shuffle33
+label "\[value in]"
+selected true
+xpos -5020
+ypos -6352
+}
+Invert {
+channels rgb
+name Invert11
+selected true
+xpos -5020
+ypos -6316
+}
+Grade {
+gamma 0.2
+name Grade12
+selected true
+xpos -5020
+ypos -6292
+}
+SphericalTransform {
+out_rz 90
+format "2048 2048 0 0 2048 2048 1 square_2K"
+fix true
+name SphericalTransform5
+selected true
+xpos -5020
+ypos -6251
+disable true
+}
+STMap {
+inputs 2
+uv rgb
+name STMap5
+selected true
+xpos -5020
+ypos -6161
+}
+Blur {
+size 20
+name Blur11
+selected true
+xpos -5020
+ypos -6094
+}
+TimeOffset {
+time_offset 100
+time ""
+name TimeOffset2
+selected true
+xpos -5020
+ypos -6000
+}
+ColorCorrect {
+gain {0.22 0.7 1 1}
+gain_panelDropped true
+name ColorCorrect28
+selected true
+xpos -5020
+ypos -5976
+}
+push $N51faef0
+Reformat {
+inputs 0
+format "2048 2048 0 0 2048 2048 1 square_2K"
+name Reformat11
+selected true
+xpos -5156
+ypos -6467
+}
+Noise {
+type turbulence
+size 850
+zoffset {{frame/175}}
+gain 0.315
+gamma 1
+translate {{frame} {-frame}}
+center {1024 576}
+name Noise6
+selected true
+xpos -5156
+ypos -6378
+}
+Shuffle {
+alpha white
+name Shuffle31
+label "\[value in]"
+selected true
+xpos -5156
+ypos -6354
+}
+Invert {
+channels rgb
+name Invert10
+selected true
+xpos -5156
+ypos -6318
+}
+Grade {
+gamma 0.2
+name Grade11
+selected true
+xpos -5156
+ypos -6294
+}
+SphericalTransform {
+out_rz 90
+format "2048 2048 0 0 2048 2048 1 square_2K"
+fix true
+name SphericalTransform4
+selected true
+xpos -5156
+ypos -6253
+disable true
+}
+STMap {
+inputs 2
+uv rgb
+name STMap4
+selected true
+xpos -5156
+ypos -6166
+}
+Blur {
+name Blur10
+selected true
+xpos -5156
+ypos -6096
+}
+VolumeRays {
+name VolumeRays3
+label "Mar 20 2005"
+selected true
+xpos -5156
+ypos -6060
+vol_pos {{parent.VolumeRays1.vol_pos} {parent.VolumeRays1.vol_pos}}
+raylength 3
+flicker_speed 3
+flicker_size 60
+volume_end_color {0 0 0 0}
+chk_radial false
+}
+TimeOffset {
+time_offset 100
+time ""
+name TimeOffset1
+selected true
+xpos -5156
+ypos -6002
+}
+ColorCorrect {
+gamma {1 1 0.6 1}
+gamma_panelDropped true
+gain {1 0.07 0.38 1}
+gain_panelDropped true
+name ColorCorrect27
+selected true
+xpos -5156
+ypos -5978
+}
+push $N51faef0
+Reformat {
+inputs 0
+format "2048 2048 0 0 2048 2048 1 square_2K"
+name Reformat6
+selected true
+xpos -5292
+ypos -6467
+}
+set N1275aac0 [stack 0]
+Noise {
+type turbulence
+size 550
+zoffset {{frame/175}}
+gain 0.515
+gamma 1
+translate {{frame} {-frame}}
+center {1024 576}
+name Noise3
+selected true
+xpos -5292
+ypos -6378
+}
+Shuffle {
+alpha white
+name Shuffle17
+label "\[value in]"
+selected true
+xpos -5292
+ypos -6354
+}
+Invert {
+channels rgb
+name Invert7
+selected true
+xpos -5292
+ypos -6318
+}
+Grade {
+gamma 0.2
+name Grade8
+selected true
+xpos -5292
+ypos -6294
+}
+set N19b725b0 [stack 0]
+STMap {
+inputs 2
+uv rgb
+name STMap3
+selected true
+xpos -5292
+ypos -6163
+}
+set N16d2bbd0 [stack 0]
+Blur {
+size 59.5
+name Blur33
+selected true
+xpos -5430
+ypos -6068
+}
+push $N16d2bbd0
+Blur {
+size 2.6
+name Blur1
+selected true
+xpos -5292
+ypos -6096
+}
+VolumeRays {
+name VolumeRays1
+label "Mar 20 2005"
+selected true
+xpos -5292
+ypos -6036
+vol_pos {1384 238}
+raylength 2
+flicker_speed 3
+flicker_size 60
+volume_end_color {0 0 0 0}
+chk_radial false
+}
+Merge2 {
+inputs 2
+operation average
+name Merge26
+note_font "Bitstream Vera Sans Bold Bold"
+note_font_size 13
+note_font_color 0xff00ff
+selected true
+xpos -5292
+ypos -6000
+}
+ColorCorrect {
+gamma {0.88 1 0.66 1}
+gamma_panelDropped true
+gain {0.66 1 0.48 1}
+gain_panelDropped true
+name ColorCorrect19
+selected true
+xpos -5292
+ypos -5966
+}
+Merge2 {
+inputs 2
+operation plus
+mix 0.17
+name Merge24
+note_font "Bitstream Vera Sans Bold Bold"
+note_font_size 13
+note_font_color 0xff00ff
+selected true
+xpos -5292
+ypos -5924
+}
+Merge2 {
+inputs 2
+operation plus
+mix 0.045
+name Merge25
+note_font "Bitstream Vera Sans Bold Bold"
+note_font_size 13
+note_font_color 0xff00ff
+selected true
+xpos -5292
+ypos -5877
+}
+Crop {
+box {0 0 2048 2048}
+name Crop3
+selected true
+xpos -5292
+ypos -5816
+}
+Shuffle {
+alpha white
+name Shuffle25
+label "\[value in]"
+selected true
+xpos -5292
+ypos -5792
+}
+Sphere {
+u_extent 180
+v_extent 96
+translate {0 40 0}
+rotate {0 180 0}
+scaling {1 0.5 1}
+uniform_scale 300
+name Sphere3
+selected true
+xpos -5292
+ypos -5724
+}
+push 0
+ScanlineRender {
+inputs 3
+conservative_shader_sampling false
+motion_vectors_type distance
+name ScanlineRender2
+selected true
+xpos -5292
+ypos -5652
+}
+Reformat {
+inputs 0
+format "2048 2048 0 0 2048 2048 1 square_2K"
+name Reformat8
+selected true
+xpos -4608
+ypos -6286
+}
+Noise {
+type turbulence
+zoffset {{frame/75}}
+gain 0.235
+gamma 1
+translate {{frame*2} {-frame*2}}
+center {1024 576}
+name Noise5
+selected true
+xpos -4608
+ypos -6197
+}
+Shuffle {
+alpha white
+name Shuffle27
+label "\[value in]"
+selected true
+xpos -4608
+ypos -6173
+}
+Invert {
+channels rgb
+name Invert9
+selected true
+xpos -4608
+ypos -6137
+}
+Grade {
+gamma 0.2
+name Grade10
+selected true
+xpos -4608
+ypos -6113
+}
+SphericalTransform {
+out_rz 90
+format "2048 2048 0 0 2048 2048 1 square_2K"
+fix true
+name SphericalTransform3
+selected true
+xpos -4608
+ypos -6072
+}
+Blur {
+name Blur9
+selected true
+xpos -4608
+ypos -6017
+}
+VolumeRays {
+name VolumeRays2
+label "Mar 20 2005"
+selected true
+xpos -4514
+ypos -5985
+vol_pos {1384 338}
+raylength 3
+volume_end_color {0 0 0 0}
+chk_radial false
+}
+Crop {
+box {0 0 2048 2048}
+name Crop4
+selected true
+xpos -4514
+ypos -5949
+}
+Shuffle {
+alpha white
+name Shuffle29
+label "\[value in]"
+selected true
+xpos -4514
+ypos -5925
+}
+VolumeRays {
+inputs 0
+name VolumeRays4
+label "Mar 20 2005"
+selected true
+xpos -5520
+ypos -6029
+vol_pos {1384 338}
+raylength 3
+flicker_speed 3
+flicker_size 60
+volume_end_color {0 0 0 0}
+chk_radial false
+}
+push $N1275aac0
+Shuffle {
+red black
+green black
+blue black
+name Shuffle34
+label "\[value in]"
+selected true
+xpos -5734
+ypos -6261
+}
+Ramp {
+output {-rgba.red rgba.green -rgba.blue -rgba.alpha}
+p0 {100 -0.5}
+p1 {100 {height-0.5 i}}
+name Ramp13
+selected true
+xpos -5734
+ypos -6198
+}
+Ramp {
+output {rgba.red -rgba.green -rgba.blue -rgba.alpha}
+p0 {-0.5 0}
+p1 {{"width - 0.5" i} 0}
+name Ramp14
+selected true
+xpos -5734
+ypos -6156
+}
+SphericalTransform {
+out_rz 90
+format "2048 2048 0 0 2048 2048 1 square_2K"
+fix true
+name SphericalTransform6
+selected true
+xpos -5734
+ypos -6132
+}
+Write {
+channels rgba
+file /jobs/ads/visa_debit_holidays_J603518/VDH/sh001/n_001/comps/VDH_sh001_comp_v045/VDH_sh001_comp_v045_latlongmap.#.exr
+file_type exr
+first_part none
+name pcomp_latlongmap
+selected true
+xpos -5898
+ypos -6062
+disable true
+addUserKnob {20 caravr l CaraVR}
+addUserKnob {4 viewPresets l "View Presets" M {main stereo cams "stereo cams" all}}
+addUserKnob {22 set l Set -STARTLINE T "w = nuke.thisNode()\nscriptViews = nuke.views()\nviewPreset = w\['viewPresets'].getValue()\nselectedViews = None\nif viewPreset == 0:\n  selectedViews = \['main']\nif viewPreset == 1:\n  stereoViews = \['left', 'right']\n  if set(stereoViews).issubset(set(scriptViews)):\n    selectedViews = stereoViews\n  else:\n    selectedViews = None\nelif viewPreset == 2:\n  selectedViews = \[v for v in scriptViews if 'cam' in v and not ('_left' in v or '_right' in v)]\nelif viewPreset == 3:\n  selectedViews = \[v for v in scriptViews if 'cam' in v and ('_left' in v or '_right' in v)]\nelif viewPreset == 4:\n  selectedViews = scriptViews\nif selectedViews:\n  w\['views'].fromScript(' '.join(selectedViews))\n"}
+}
+push $N19b725b0
+SphericalTransform {
+out_rz 90
+format "2048 2048 0 0 2048 2048 1 square_2K"
+fix true
+name SphericalTransform1
+selected true
+xpos -5359
+ypos -6252
+}

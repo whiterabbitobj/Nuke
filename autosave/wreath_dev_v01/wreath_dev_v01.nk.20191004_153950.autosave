@@ -1,0 +1,163 @@
+#! /mill3d/server/apps/FOUNDRY/linux-x86-64/Nuke11.2v6/libnuke-11.2.6.so -nx
+version 11.2 v6
+define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
+<layout version="1.0">
+    <window x="0" y="0" w="1902" h="1137" screen="0">
+        <splitter orientation="1">
+            <split size="40"/>
+            <dock id="" hideTitles="1" activePageId="Toolbar.1">
+                <page id="Toolbar.1"/>
+            </dock>
+            <split size="387" stretch="1"/>
+            <splitter orientation="2">
+                <split size="1093"/>
+                <dock id="" activePageId="Properties.1">
+                    <page id="Properties.1"/>
+                </dock>
+            </splitter>
+            <split size="1467"/>
+            <splitter orientation="2">
+                <split size="978"/>
+                <dock id="" activePageId="DAG.1">
+                    <page id="DAG.1"/>
+                    <page id="DAG.2"/>
+                </dock>
+                <split size="111"/>
+                <dock id="" activePageId="Curve Editor.1">
+                    <page id="uk.co.thefoundry.scripteditor.1"/>
+                    <page id="Curve Editor.1"/>
+                </dock>
+            </splitter>
+        </splitter>
+    </window>
+    <window x="0" y="0" w="1900" h="1137" screen="0">
+        <splitter orientation="2">
+            <split size="1137"/>
+            <dock id="" activePageId="Viewer.1">
+                <page id="Viewer.1"/>
+            </dock>
+        </splitter>
+    </window>
+</layout>
+}
+Root {
+ inputs 0
+ name /usr/people/dollm/Nuke/wreath_dev_v01.nk
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ proxy_type scale
+ proxy_format "1024 778 0 0 1024 778 1 1K_Super_35(full-ap)"
+ colorManagement OCIO
+ defaultViewerLUT "OCIO LUTs"
+ workingSpaceLUT linear
+ monitorLut MillView
+ int8Lut rec709
+ int16Lut rec709
+ logLut AlexaV3LogC
+ floatLut linear
+ luts {linear {}
+   sRGB {}
+   rec709 {}
+   Cineon {}
+   Gamma1.8 {}
+   Gamma2.2 {}
+   Gamma2.4 {}
+   Gamma2.6 {}
+   Panalog {}
+   REDLog {}
+   ViperLog {}
+   AlexaV3LogC {}
+   PLogLin {}
+   SLog {}
+   SLog1 {}
+   SLog2 {}
+   SLog3 {}
+   CLog {}
+   Log3G10 {}
+   Log3G12 {}
+   HybridLogGamma {}
+   Protune {}
+   BT1886 {}
+   HDR2084 {}
+   REDSpace {}
+   FlameVideo {pow((x+0.1498438276617182)/1.1498438276617182,1.0/0.45)*1.0109156157307528-0.0109156157307528}}
+}
+Sphere {
+ inputs 0
+ rows 4
+ columns 4
+ translate {0 1 0}
+ scaling {0.1 1.4 {scaling.x}}
+ pivot {0 {-translate.y} 0}
+ name Sphere1
+ xpos -358
+ ypos 80
+}
+Viewer {
+ frame 1
+ frame_range 1-100
+ center_fstop 0
+ viewerProcess "MillView (default)"
+ name Viewer1
+ xpos -40
+ ypos -9
+}
+Group {
+ inputs 0
+ name Group1
+ selected true
+ xpos -340
+ ypos 249
+ addUserKnob {20 User}
+ addUserKnob {3 randSeed l Seed}
+ addUserKnob {26 "" +STARTLINE}
+ addUserKnob {3 needlesNum l "Num needles"}
+ addUserKnob {26 "" +STARTLINE}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -688
+  ypos -458
+ }
+ Dot {
+  name boughs_in
+  label "\[value name]"
+  note_font "DejaVu Sans Bold Italic Bold Italic"
+  note_font_size 22
+  note_font_color 0xff0000ff
+  xpos -654
+  ypos -418
+ }
+ Dot {
+  name boughs_out
+  label "\[value name]"
+  note_font "DejaVu Sans Bold Italic Bold Italic"
+  note_font_size 22
+  note_font_color 0xff0000ff
+  xpos -654
+  ypos -132
+ }
+ Dot {
+  name tuft_in
+  label "\[value name]"
+  note_font "DejaVu Sans Bold Italic Bold Italic Bold Italic"
+  note_font_size 22
+  note_font_color 0xff0000ff
+  xpos -654
+  ypos 252
+ }
+ Dot {
+  name tuft_out
+  label "\[value name]"
+  note_font "DejaVu Sans Bold Italic Bold Italic Bold Italic Bold Italic"
+  note_font_size 22
+  note_font_color 0xff0000ff
+  xpos -654
+  ypos 493
+ }
+ Output {
+  name Output1
+  xpos -654
+  ypos 593
+ }
+end_group

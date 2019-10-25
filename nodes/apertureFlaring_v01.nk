@@ -1,0 +1,622 @@
+set cut_paste_input [stack 0]
+version 11.2 v6
+BackdropNode {
+inputs 0
+name BackdropNode13
+tile_color 0x262626ff
+label "aperture flaring!"
+note_font "Verdana Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 125
+note_font_color 0x707070ff
+selected true
+xpos 1154
+ypos 7607
+bdwidth 1775
+bdheight 1728
+}
+Flare {
+inputs 0
+position {{width/2} {height/2}}
+radius {0 100 120}
+size_mult 4
+chroma_spread -0.056
+name Flare1
+selected true
+xpos 1456
+ypos 8582
+}
+Crop {
+box {504 52 1562 1096}
+name Crop9
+selected true
+xpos 1456
+ypos 8606
+}
+Transform {
+scale 0.1
+center {1024 576}
+name Transform11
+selected true
+xpos 1456
+ypos 8630
+}
+ColorCorrect {
+gain {0.5 1 1.94 1}
+gain_panelDropped true
+name ColorCorrect13
+selected true
+xpos 1456
+ypos 8654
+}
+Constant {
+inputs 0
+color 1
+name Constant11
+selected true
+xpos 1609
+ypos 7923
+}
+Transform {
+scale 0.98
+center {1024 576}
+name Transform10
+selected true
+xpos 1609
+ypos 7995
+}
+Blur {
+size 20
+name Blur17
+selected true
+xpos 1609
+ypos 8019
+}
+set N105b3650 [stack 0]
+Dot {
+name Dot115
+note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic Italic Italic Italic"
+note_font_size 22
+note_font_color 0xff0000ff
+selected true
+xpos 1719
+ypos 8028
+}
+Noise {
+inputs 0
+size {63 23}
+gain 0.42
+gamma 0.8
+center {1024 576}
+name Noise2
+selected true
+xpos 1483
+ypos 8015
+}
+Grade {
+blackpoint 0.3
+white_clamp true
+name Grade36
+selected true
+xpos 1483
+ypos 8039
+}
+push $N105b3650
+ChannelMerge {
+inputs 2+1
+operation stencil
+invert_mask true
+name ChannelMerge8
+selected true
+xpos 1609
+ypos 8072
+}
+Dot {
+name Dot114
+note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic Italic Italic Italic"
+note_font_size 22
+note_font_color 0xff0000ff
+selected true
+xpos 1643
+ypos 8163
+}
+push $cut_paste_input
+Dot {
+name Dot93
+note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic Italic Italic Italic Italic"
+note_font_size 22
+note_font_color 0xff0000ff
+selected true
+xpos 1871
+ypos 7756
+}
+set N105fc0d0 [stack 0]
+Merge2 {
+inputs 2
+operation stencil
+name Merge10
+note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 13
+note_font_color 0xff00ff
+selected true
+xpos 1837
+ypos 8159
+}
+Dot {
+name Dot118
+note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic Italic Italic Italic"
+note_font_size 22
+note_font_color 0xff0000ff
+selected true
+xpos 1871
+ypos 8544
+}
+set N105a5c20 [stack 0]
+Dot {
+name Dot119
+note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic Italic Italic Italic"
+note_font_size 22
+note_font_color 0xff0000ff
+selected true
+xpos 1650
+ypos 8544
+}
+set N106109a0 [stack 0]
+Transform {
+scale {1.02 1.02}
+center {1024 576}
+name Transform12
+selected true
+xpos 1700
+ypos 8583
+}
+push $N106109a0
+Merge2 {
+inputs 2
+operation plus
+name Merge35
+note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 13
+note_font_color 0xff00ff
+selected true
+xpos 1616
+ypos 8613
+}
+Convolve2 {
+inputs 2
+use_input_channels true
+name Convolve2
+selected true
+xpos 1616
+ypos 8648
+}
+Blur {
+size 56.5
+name Blur20
+selected true
+xpos 1616
+ypos 8754
+}
+ColorCorrect {
+saturation 0.6
+gain {0.56 1 1.35 1}
+gain_panelDropped true
+name ColorCorrect18
+selected true
+xpos 1616
+ypos 8790
+}
+Ramp {
+inputs 0
+output alpha
+invert true
+p0 {10 600}
+p1 {257 600}
+name Ramp8
+selected true
+xpos 2052
+ypos 8224
+}
+set N1099db70 [stack 0]
+Mirror2 {
+flop true
+name Mirror2_1
+selected true
+xpos 1966
+ypos 8272
+}
+push $N1099db70
+ChannelMerge {
+inputs 2
+name ChannelMerge7
+selected true
+xpos 2052
+ypos 8292
+}
+Invert {
+channels alpha
+name Invert4
+selected true
+xpos 2052
+ypos 8340
+}
+Dot {
+name Dot56
+note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic Italic Italic Italic"
+note_font_size 22
+note_font_color 0xff0000ff
+selected true
+xpos 2086
+ypos 8518
+}
+set N109e2a80 [stack 0]
+Dot {
+name Dot32
+note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic Italic Italic Italic Italic"
+note_font_size 22
+note_font_color 0xff0000ff
+selected true
+xpos 2397
+ypos 8786
+}
+push $N105fc0d0
+Shuffle {
+red black
+green black
+blue black
+alpha black
+name Shuffle26
+label "\[value in]"
+selected true
+xpos 2213
+ypos 8053
+}
+set N109e73b0 [stack 0]
+Ramp {
+output {-rgba.red rgba.green -rgba.blue -rgba.alpha}
+p0 {100 -0.5}
+p1 {100 {height-0.5 i}}
+name Ramp39
+selected true
+xpos 2213
+ypos 8089
+}
+Ramp {
+output {rgba.red -rgba.green -rgba.blue -rgba.alpha}
+p0 {-0.5 0}
+p1 {{"width - 0.5" i} 0}
+name Ramp42
+selected true
+xpos 2213
+ypos 8113
+}
+set N109ec010 [stack 0]
+Dot {
+name Dot45
+note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic Italic Italic Italic"
+note_font_size 22
+note_font_color 0xff0000ff
+selected true
+xpos 2558
+ypos 8597
+}
+set N10a16020 [stack 0]
+Dot {
+name Dot53
+note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic Italic Italic Italic Italic"
+note_font_size 22
+note_font_color 0xff0000ff
+selected true
+xpos 2655
+ypos 8597
+}
+push $N109e73b0
+Dot {
+name Dot51
+note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic"
+note_font_size 22
+note_font_color 0xff0000ff
+selected true
+xpos 2367
+ypos 8131
+}
+Ramp {
+output {rgba.red -rgba.green -rgba.blue -rgba.alpha}
+replace true
+invert true
+p0 {0 0}
+p1 {{width i} 0}
+name Ramp9
+selected true
+xpos 2333
+ypos 8170
+}
+Ramp {
+output {-rgba.red rgba.green -rgba.blue -rgba.alpha}
+replace true
+invert true
+p0 {0 0}
+p1 {0 {height i}}
+name Ramp10
+selected true
+xpos 2333
+ypos 8194
+}
+Grade {
+blackpoint 0.5
+black_clamp false
+name Grade35
+selected true
+xpos 2333
+ypos 8218
+}
+set N10a090a0 [stack 0]
+push $N10a16020
+ChannelMerge {
+inputs 2
+A rgba.red
+operation plus
+B rgba.red
+output rgba.red
+mix 0.01
+name ChannelMerge9
+selected true
+xpos 2524
+ypos 8628
+}
+Keymix {
+inputs 3
+name Keymix3
+selected true
+xpos 2524
+ypos 8777
+}
+push $N105a5c20
+STMap {
+inputs 2
+uv rgb
+name STMap2
+selected true
+xpos 2253
+ypos 8857
+}
+Noise {
+inputs 0
+size {432 22}
+zoffset {{frame}}
+gain 0.765
+center {1024 576}
+name Noise1
+selected true
+xpos 2566
+ypos 8084
+}
+Dot {
+name Dot50
+note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic Italic Italic Italic Italic"
+note_font_size 22
+note_font_color 0xff0000ff
+selected true
+xpos 2600
+ypos 8153
+}
+set N10a817c0 [stack 0]
+FrameHold {
+first_frame 1
+name FrameHold4
+selected true
+xpos 2687
+ypos 8169
+addUserKnob {20 User}
+addUserKnob {22 setCurrentFrame l "Set current frame" -STARTLINE T "import nuke\nnuke.thisNode()\[\"first_frame\"].setValue(nuke.frame())"}
+}
+push $N10a817c0
+FrameHold {
+first_frame 1051
+name FrameHold3
+selected true
+xpos 2566
+ypos 8170
+addUserKnob {20 User}
+addUserKnob {22 setCurrentFrame l "Set current frame" -STARTLINE T "import nuke\nnuke.thisNode()\[\"first_frame\"].setValue(nuke.frame())"}
+}
+Copy {
+inputs 2
+from0 rgba.green
+to0 rgba.green
+name Copy4
+selected true
+xpos 2566
+ypos 8206
+}
+Grade {
+whitepoint 0.8
+name Grade38
+selected true
+xpos 2566
+ypos 8242
+}
+Grade {
+blackpoint 0.5
+black_clamp false
+name Grade34
+selected true
+xpos 2566
+ypos 8284
+}
+Blur {
+size {12 4}
+name Blur18
+selected true
+xpos 2566
+ypos 8323
+}
+Grade {
+white {1 0.05 1 1}
+white_panelDropped true
+multiply 0.39
+name Grade37
+selected true
+xpos 2566
+ypos 8359
+}
+push $N109e2a80
+push $N109ec010
+Dot {
+name Dot15
+note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic Italic Italic"
+note_font_size 22
+note_font_color 0xff0000ff
+selected true
+xpos 2247
+ypos 8329
+}
+set N10ae1f80 [stack 0]
+Dot {
+name Dot113
+note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic Italic Italic Italic"
+note_font_size 22
+note_font_color 0xff0000ff
+selected true
+xpos 2172
+ypos 8329
+}
+push $N10a090a0
+push $N10ae1f80
+ChannelMerge {
+inputs 2
+A rgba.red
+operation from
+B rgba.red
+output rgba.red
+mix 0.12
+name ChannelMerge5
+selected true
+xpos 2213
+ypos 8360
+}
+Keymix {
+inputs 3
+invertMask true
+name Keymix2
+selected true
+xpos 2213
+ypos 8509
+}
+Merge2 {
+inputs 2
+operation plus
+mix 0.04
+name Merge18
+note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 13
+note_font_color 0xff00ff
+selected true
+xpos 2213
+ypos 8566
+}
+Dot {
+name Dot112
+note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic Italic Italic Italic"
+note_font_size 22
+note_font_color 0xff0000ff
+selected true
+xpos 2247
+ypos 8727
+}
+push $N105a5c20
+STMap {
+inputs 2
+uv rgb
+name STMap1
+selected true
+xpos 1837
+ypos 8749
+}
+Merge2 {
+inputs 2
+operation max
+name Merge32
+note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 13
+note_font_color 0xff00ff
+selected true
+xpos 1837
+ypos 8795
+}
+ColorCorrect {
+saturation 0.49
+gamma 0.61
+gain {0.66 1 1.52 1}
+gain_panelDropped true
+name ColorCorrect3
+selected true
+xpos 1837
+ypos 8838
+}
+Blur {
+size {120 5}
+name Blur19
+selected true
+xpos 1837
+ypos 8862
+}
+Blur {
+size 200
+mix 0.11
+name Blur21
+selected true
+xpos 1837
+ypos 8898
+}
+Blur {
+size 100
+mix 0.31
+name Blur22
+selected true
+xpos 1837
+ypos 8934
+}
+Blur {
+size 24
+mix 0.71
+name Blur23
+selected true
+xpos 1837
+ypos 8970
+}
+Merge2 {
+inputs 2
+operation plus
+name Merge30
+note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 13
+note_font_color 0xff00ff
+selected true
+xpos 1837
+ypos 9032
+}
+Grade {
+white 0.1
+gamma 1.7
+name Grade39
+selected true
+xpos 1837
+ypos 9108
+}
+Grade {
+multiply 0.03
+gamma 1.34
+name Grade41
+selected true
+xpos 1837
+ypos 9192
+}
+Dot {
+name Dot120
+note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic Italic Italic Italic"
+note_font_size 22
+note_font_color 0xff0000ff
+selected true
+xpos 1871
+ypos 9942
+}

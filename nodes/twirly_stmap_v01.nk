@@ -1,0 +1,315 @@
+set cut_paste_input [stack 0]
+version 11.2 v6
+push $cut_paste_input
+Dot {
+name Dot48
+note_font "Bitstream Vera Sans Italic Italic"
+note_font_size 22
+note_font_color 0xff0000ff
+selected true
+xpos -4261
+ypos 766
+}
+Shuffle {
+red black
+green black
+blue black
+alpha black
+name Shuffle21
+label "\[value in]"
+selected true
+xpos -4295
+ypos 794
+}
+set N79b39180 [stack 0]
+Radial {
+output alpha
+replace true
+area {{"width > height ? (width - height) / 2 : 0"} {"height > width ? (height - width) / 2 : 0"} {"width > height ? width - ((width - height) / 2) : width"} {"height > width ? height - ((height - width) / 2) : height"}}
+name Radial1
+selected true
+xpos -4391
+ypos 846
+}
+set N4f689190 [stack 0]
+Grade {
+channels alpha
+gamma 0.41
+name Grade29
+selected true
+xpos -4275
+ypos 948
+}
+push $N4f689190
+push $N79b39180
+Ramp {
+output {rgba.red -rgba.green -rgba.blue -rgba.alpha}
+replace true
+invert true
+p0 {0 0}
+p1 {{width i} 0}
+name Ramp3
+selected true
+xpos -4604
+ypos 846
+}
+Ramp {
+output {-rgba.red rgba.green -rgba.blue -rgba.alpha}
+replace true
+invert true
+p0 {0 0}
+p1 {0 {height i}}
+name Ramp4
+selected true
+xpos -4604
+ypos 888
+}
+Grade {
+blackpoint 0.5
+black_clamp false
+name Grade64
+selected true
+xpos -4604
+ypos 934
+}
+Shuffle {
+alpha white
+name Shuffle20
+label "\[value in]"
+selected true
+xpos -4604
+ypos 958
+}
+set N8baff690 [stack 0]
+Merge2 {
+inputs 2
+operation mask
+name Merge57
+note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 13
+note_font_color 0xff00ff
+selected true
+xpos -4391
+ypos 963
+disable true
+}
+GridWarp3 {
+toolbar_visibility_src false
+source_grid_col   {
+    1 5 5 4 1 0
+    {default }
+    {
+      { {2 0 0} { {2 0 90}  {2 0 -90}  {2 120 0}  {2 -120 0} } } 
+      { {2 360 0} { {2 0 90}  {2 0 -90}  {2 120 0}  {2 -120 0} } } 
+      { {2 720 0} { {2 0 90}  {2 0 -90}  {2 120 0}  {2 -120 0} } } 
+      { {2 1080 0} { {2 0 90}  {2 0 -90}  {2 120 0}  {2 -120 0} } } 
+      { {2 1440 0} { {2 0 90}  {2 0 -90}  {2 120 0}  {2 -120 0} } } 
+      { {2 0 270} { {2 0 90}  {2 0 -90}  {2 120 0}  {2 -120 0} } } 
+      { {2 360 270} { {2 0 90}  {2 0 -90}  {2 120 0}  {2 -120 0} } } 
+      { {2 720 270} { {2 0 90}  {2 0 -90}  {2 120 0}  {2 -120 0} } } 
+      { {2 1080 270} { {2 0 90}  {2 0 -90}  {2 120 0}  {2 -120 0} } } 
+      { {2 1440 270} { {2 0 90}  {2 0 -90}  {2 120 0}  {2 -120 0} } } 
+      { {2 0 540} { {2 0 90}  {2 0 -90}  {2 120 0}  {2 -120 0} } } 
+      { {2 360 540} { {2 0 90}  {2 0 -90}  {2 120 0}  {2 -120 0} } } 
+      { {2 720 540} { {2 0 90}  {2 0 -90}  {2 120 0}  {2 -120 0} } } 
+      { {2 1080 540} { {2 0 90}  {2 0 -90}  {2 120 0}  {2 -120 0} } } 
+      { {2 1440 540} { {2 0 90}  {2 0 -90}  {2 120 0}  {2 -120 0} } } 
+      { {2 0 810} { {2 0 90}  {2 0 -90}  {2 120 0}  {2 -120 0} } } 
+      { {2 360 810} { {2 0 90}  {2 0 -90}  {2 120 0}  {2 -120 0} } } 
+      { {2 720 810} { {2 0 90}  {2 0 -90}  {2 120 0}  {2 -120 0} } } 
+      { {2 1080 810} { {2 0 90}  {2 0 -90}  {2 120 0}  {2 -120 0} } } 
+      { {2 1440 810} { {2 0 90}  {2 0 -90}  {2 120 0}  {2 -120 0} } } 
+      { {2 0 1080} { {2 0 90}  {2 0 -90}  {2 120 0}  {2 -120 0} } } 
+      { {2 360 1080} { {2 0 90}  {2 0 -90}  {2 120 0}  {2 -120 0} } } 
+      { {2 720 1080} { {2 0 90}  {2 0 -90}  {2 120 0}  {2 -120 0} } } 
+      { {2 1080 1080} { {2 0 90}  {2 0 -90}  {2 120 0}  {2 -120 0} } } 
+      { {2 1440 1080} { {2 0 90}  {2 0 -90}  {2 120 0}  {2 -120 0} } } 
+    }
+  }
+destination_grid_col   {
+    1 5 5 4 1 0
+    {default }
+    {
+      { {2 0 0} { {2 0 90}  {2 0 -90}  {2 120 0}  {2 -120 0} } } 
+      { {2 360 0} { {2 0 90}  {2 0 -90}  {2 120 0}  {2 -120 0} } } 
+      { {2 720 0} { {2 0 90}  {2 0 -90}  {2 120 0}  {2 -120 0} } } 
+      { {2 1080 0} { {2 0 90}  {2 0 -90}  {2 120 0}  {2 -120 0} } } 
+      { {2 1440 0} { {2 0 90}  {2 0 -90}  {2 120 0}  {2 -120 0} } } 
+      { {2 0 270} { {2 0 90}  {2 0 -90}  {2 120 0}  {2 -120 0} } } 
+      { {1 {curve L x134 442.1477356} {curve L x134 186.0252686}} { {1 {curve L x134 -23.29385376} {curve L x134 86.93322754}}  {1 {curve L x134 23.29354858} {curve L x134 -86.93333435}}  {1 {curve L x134 115.9109192} {curve L x134 31.05825806}}  {1 {curve L x134 -115.9110565} {curve L x134 -31.05828857}} } } 
+      { {1 {curve L x134 839} {curve L x134 290}} { {1 {curve L x134 24.11889648} {curve L x134 72.79998779}}  {1 {curve L x134 -28.30773926} {curve L x134 -85.43215942}}  {1 {curve L x134 115.9108276} {curve L x134 31.05825806}}  {1 {curve L x134 -115.9111938} {curve L x134 -31.05822754}} } } 
+      { {1 {curve L x134 1137.614258} {curve L x134 372.375}} { {1 {curve L x134 -23.29296875} {curve L x134 86.93353271}}  {1 {curve L x134 23.29418945} {curve L x134 -86.93334961}}  {1 {curve L x134 103.3948975} {curve L x134 60.90625}}  {1 {curve L x134 -90.61425781} {curve L x134 -53.375}} } } 
+      { {1 {curve L x134 1444} {curve L x134 420}} { {1 {curve L x134 0} {curve L x134 90}}  {1 {curve L x134 0} {curve L x134 -90}}  {1 {curve L x134 120} {curve L x134 0}}  {1 {curve L x134 -120} {curve L x134 0}} } } 
+      { {2 0 540} { {2 0 90}  {2 0 -90}  {2 120 0}  {2 -120 0} } } 
+      { {1 {curve L x134 372.26651} {curve L x134 446.8253784}} { {1 {curve L x134 -23.29367065} {curve L x134 86.9331665}}  {1 {curve L x134 23.29373169} {curve L x134 -86.93356323}}  {1 {curve L x134 115.9111633} {curve L x134 31.05804443}}  {1 {curve L x134 -115.9111023} {curve L x134 -31.05834961}} } } 
+      { {1 {curve L x134 720} {curve L x134 540.0001221}} { {1 {curve L x134 -71} {curve L x134 54.99987793}}  {1 {curve L x134 71.14941406} {curve L x134 -55.11581421}}  {1 {curve L x134 56} {curve L x134 111.9998779}}  {1 {curve L x134 -53.66918945} {curve L x134 -107.3293152}} } } 
+      { {1 {curve L x134 1068} {curve L x134 683}} { {1 {curve L x134 -23.29418945} {curve L x134 86.93328857}}  {1 {curve L x134 23.29418945} {curve L x134 -86.93328857}}  {1 {curve L x134 71} {curve L x134 69}}  {1 {curve L x134 -103.5485229} {curve L x134 -100.6226807}} } } 
+      { {1 {curve L x134 1440} {curve L x134 722}} { {1 {curve L x134 0} {curve L x134 90}}  {1 {curve L x134 0} {curve L x134 -90}}  {1 {curve L x134 115.4598389} {curve L x134 32.69622803}}  {1 {curve L x134 -113} {curve L x134 -32}} } } 
+      { {2 0 810} { {2 0 90}  {2 0 -90}  {2 120 0}  {2 -120 0} } } 
+      { {1 {curve L x134 302.385437} {curve L x134 707.6252441}} { {1 {curve L x134 -23.29394531} {curve L x134 86.93322754}}  {1 {curve L x134 23.29364014} {curve L x134 -86.93341064}}  {1 {curve L x134 115.9111633} {curve L x134 31.05841064}}  {1 {curve L x134 -115.9111176} {curve L x134 -31.05847168}} } } 
+      { {1 {curve L x134 573} {curve L x134 795}} { {1 {curve L x134 30} {curve L x134 73}}  {1 {curve L x134 -34.21026611} {curve L x134 -83.24462891}}  {1 {curve L x134 115.9108276} {curve L x134 31.05834961}}  {1 {curve L x134 -115.9110107} {curve L x134 -31.05847168}} } } 
+      { {1 {curve L x134 875} {curve L x134 881}} { {1 {curve L x134 -23.29437256} {curve L x134 86.93334961}}  {1 {curve L x134 23.29345703} {curve L x134 -86.93328857}}  {1 {curve L x134 115.9106445} {curve L x134 31.05810547}}  {1 {curve L x134 -115.911499} {curve L x134 -31.05841064}} } } 
+      { {1 {curve L x134 1405} {curve L x134 951}} { {1 {curve L x134 0} {curve L x134 90}}  {1 {curve L x134 0} {curve L x134 -90}}  {1 {curve L x134 117.6695557} {curve L x134 23.53436279}}  {1 {curve L x134 -110} {curve L x134 -22}} } } 
+      { {2 0 1080} { {2 0 90}  {2 0 -90}  {2 120 0}  {2 -120 0} } } 
+      { {2 360 1080} { {2 0 90}  {2 0 -90}  {2 120 0}  {2 -120 0} } } 
+      { {2 720 1080} { {2 0 90}  {2 0 -90}  {2 120 0}  {2 -120 0} } } 
+      { {1 {curve L x134 850} {curve L x134 1084}} { {1 {curve L x134 0} {curve L x134 90}}  {1 {curve L x134 0} {curve L x134 -90}}  {1 {curve L x134 120} {curve L x134 0}}  {1 {curve L x134 -120} {curve L x134 0}} } } 
+      { {2 1440 1080} { {2 0 90}  {2 0 -90}  {2 120 0}  {2 -120 0} } } 
+    }
+  }
+grids_manually_moved true
+source_grid_transform_center {720 540}
+destination_grid_transform_center {720 540}
+name GridWarp3_1
+selected true
+xpos -4391
+ypos 1003
+disable true
+}
+Merge2 {
+inputs 2
+operation stencil
+name Merge6
+note_font "Bitstream Vera Sans Bold Bold"
+note_font_size 13
+note_font_color 0xff00ff
+selected true
+xpos -4391
+ypos 1052
+disable true
+}
+push $N4f689190
+push $N8baff690
+Shuffle {
+red green
+green red
+name Shuffle23
+label "\[value in]"
+selected true
+xpos -4604
+ypos 1043
+}
+Expression {
+expr1 -g
+name Expression1
+selected true
+xpos -4604
+ypos 1079
+}
+Merge2 {
+inputs 2
+operation mask
+name Merge7
+note_font "Bitstream Vera Sans Bold Bold"
+note_font_size 13
+note_font_color 0xff00ff
+selected true
+xpos -4604
+ypos 1124
+}
+set N68a2bf0 [stack 0]
+Grade {
+multiply 0.76
+black_clamp false
+name Grade30
+selected true
+xpos -4349
+ypos 1169
+}
+push $N79b39180
+Ramp {
+output {rgba.red -rgba.green -rgba.blue -rgba.alpha}
+p0 {-0.5 0}
+p1 {{width-0.5 i} 0}
+name Ramp5
+selected true
+xpos -4195
+ypos 864
+}
+Ramp {
+output {-rgba.red rgba.green -rgba.blue -rgba.alpha}
+p0 {0 -0.5}
+p1 {0 {height-0.5 i}}
+name Ramp6
+selected true
+xpos -4195
+ypos 903
+}
+set N4fd8ac70 [stack 0]
+Ramp {
+replace true
+p0 {646 250}
+p1 {656 829}
+name Ramp7
+selected true
+xpos -3983
+ypos 1086
+}
+push $N68a2bf0
+Reformat {
+type "to box"
+box_width 30
+box_height {{box_width}}
+box_fixed true
+resize fit
+name Reformat3
+selected true
+xpos -4391
+ypos 1110
+}
+push $cut_paste_input
+Blur {
+size 38
+name Blur7
+selected true
+xpos -4109
+ypos 963
+}
+Grade {
+blackpoint 0.022
+name Grade6
+selected true
+xpos -4109
+ypos 1017
+}
+Convolve2 {
+inputs 2
+use_input_channels true
+filter_bounds format
+normalize false
+name Convolve1
+selected true
+xpos -4109
+ypos 1073
+}
+Grade {
+multiply 0.016
+black_clamp false
+name Grade7
+selected true
+xpos -4109
+ypos 1109
+}
+Merge2 {
+inputs 2
+operation plus
+name Merge10
+note_font "Bitstream Vera Sans Bold Bold"
+note_font_size 13
+note_font_color 0xff00ff
+selected true
+xpos -4109
+ypos 1144
+}
+push $N4fd8ac70
+Merge2 {
+inputs 2
+operation plus
+name Merge58
+note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 13
+note_font_color 0xff00ff
+selected true
+xpos -4195
+ypos 1195
+}

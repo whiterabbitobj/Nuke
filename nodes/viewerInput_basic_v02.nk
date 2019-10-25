@@ -1,0 +1,61 @@
+set cut_paste_input [stack 0]
+version 11.2 v6
+push $cut_paste_input
+Group {
+name VIEWER_INPUT
+selected true
+xpos 1238
+ypos 15603
+addUserKnob {20 User}
+addUserKnob {6 doLog l "Grade in LOG" +STARTLINE}
+doLog true
+addUserKnob {26 ""}
+addUserKnob {19 msat l Sat R 0 4}
+msat 1.64
+addUserKnob {6 msat_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+addUserKnob {19 mgain l Gain R 0 4}
+mgain 1
+addUserKnob {6 mgain_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+addUserKnob {19 mgamma l Gamma R 0 3}
+mgamma 1
+addUserKnob {6 mgamma_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+addUserKnob {6 mgamma_panelDropped_1 l "panel dropped state" -STARTLINE +HIDDEN}
+addUserKnob {6 mgain_panelDropped_1 l "panel dropped state" -STARTLINE +HIDDEN}
+addUserKnob {6 msat_panelDropped_1 l "panel dropped state" -STARTLINE +HIDDEN}
+addUserKnob {26 ""}
+addUserKnob {22 toggleGUI l "Toggle Gui-Only" T "nuke.root().begin()\nfor node in nuke.allNodes():\n    if node.name().startswith(\"Gui_Only\"):\n        print node.name()\n        v = node\['doGuiSwitch'].value()\n        node\['doGuiSwitch'].setValue(not v)" +STARTLINE}
+}
+Input {
+inputs 0
+name Input1
+xpos 542
+ypos 291
+}
+Colorspace {
+colorspace_out AlexaV3LogC
+name Colorspace5
+xpos 542
+ypos 331
+disable {{!parent.doLog}}
+}
+ColorCorrect {
+saturation {{parent.msat} {parent.msat} {parent.msat} {parent.msat}}
+gamma {{parent.mgamma} {parent.mgamma} {parent.mgamma} {parent.mgamma}}
+gain {{parent.mgain} {parent.mgain} {parent.mgain} {parent.mgain}}
+name ColorCorrect50
+xpos 542
+ypos 380
+}
+Colorspace {
+colorspace_in AlexaV3LogC
+name Colorspace6
+xpos 542
+ypos 427
+disable {{!parent.doLog}}
+}
+Output {
+name Output1
+xpos 542
+ypos 527
+}
+end_group

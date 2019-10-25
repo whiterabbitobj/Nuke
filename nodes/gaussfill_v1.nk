@@ -1,0 +1,62 @@
+set cut_paste_input [stack 0]
+version 11.2 v6
+push $cut_paste_input
+Group {
+name gaussfill_1
+selected true
+xpos -11266
+ypos 18905
+addUserKnob {20 User}
+addUserKnob {7 fillAmt l Fill: R 0 30}
+fillAmt 3
+}
+Input {
+inputs 0
+name Input1
+xpos -611
+ypos 316
+}
+Dot {
+name Dot1
+note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic"
+note_font_size 22
+note_font_color 0xff0000ff
+xpos -525
+ypos 380
+}
+Blur {
+size {{parent.fillAmt}}
+mix 0.01
+name Blur43
+selected true
+xpos -601
+ypos 417
+}
+set N187c5560 [stack 0]
+Dot {
+name Dot77
+note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic"
+note_font_size 22
+note_font_color 0xff0000ff
+xpos -638
+ypos 492
+}
+push $N187c5560
+Unpremult {
+name Unpremult1
+xpos -559
+ypos 482
+}
+ChannelMerge {
+inputs 2
+operation divide
+name ChannelMerge27
+xpos -559
+ypos 529
+}
+Output {
+name Output1
+xpos -559
+ypos 616
+}
+end_group

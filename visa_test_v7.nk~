@@ -1,0 +1,219 @@
+#! /mill3d/server/apps/FOUNDRY/linux-x86-64/Nuke11.2v6/libnuke-11.2.6.so -nx
+version 11.2 v6
+define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
+<layout version="1.0">
+    <window x="0" y="0" w="1902" h="1137" screen="0">
+        <splitter orientation="1">
+            <split size="40"/>
+            <dock id="" hideTitles="1" activePageId="Toolbar.1">
+                <page id="Toolbar.1"/>
+            </dock>
+            <split size="387" stretch="1"/>
+            <splitter orientation="2">
+                <split size="1093"/>
+                <dock id="" activePageId="Properties.1">
+                    <page id="Properties.1"/>
+                </dock>
+            </splitter>
+            <split size="1467"/>
+            <splitter orientation="2">
+                <split size="829"/>
+                <dock id="" activePageId="DAG.1" focus="true">
+                    <page id="DAG.1"/>
+                </dock>
+                <split size="260"/>
+                <dock id="" activePageId="uk.co.thefoundry.scripteditor.1">
+                    <page id="uk.co.thefoundry.scripteditor.1"/>
+                    <page id="Curve Editor.1"/>
+                </dock>
+            </splitter>
+        </splitter>
+    </window>
+    <window x="1921" y="1" w="1900" h="1137" screen="1">
+        <splitter orientation="2">
+            <split size="1137"/>
+            <dock id="" activePageId="Viewer.1">
+                <page id="Viewer.1"/>
+            </dock>
+        </splitter>
+    </window>
+</layout>
+}
+Root {
+inputs 0
+name /usr/people/dollm/Nuke/visa_test_v7.nk
+frame 1066
+first_frame 1021
+last_frame 1064
+lock_range true
+format "2048 1152 0 0 2048 1152 1 village native "
+proxy_type scale
+proxy_format "1024 778 0 0 1024 778 1 1K_Super_35(full-ap)"
+colorManagement OCIO
+defaultViewerLUT "OCIO LUTs"
+workingSpaceLUT linear
+monitorLut MillView
+int8Lut rec709
+int16Lut rec709
+logLut AlexaV3LogC
+floatLut linear
+luts {linear {}
+  sRGB {}
+  rec709 {}
+  Cineon {}
+  Gamma1.8 {}
+  Gamma2.2 {}
+  Gamma2.4 {}
+  Gamma2.6 {}
+  Panalog {}
+  REDLog {}
+  ViperLog {}
+  AlexaV3LogC {}
+  PLogLin {}
+  SLog {}
+  SLog1 {}
+  SLog2 {}
+  SLog3 {}
+  CLog {}
+  Log3G10 {}
+  Log3G12 {}
+  HybridLogGamma {}
+  Protune {}
+  BT1886 {}
+  HDR2084 {}
+  REDSpace {}
+  FlameVideo {pow((x+0.1498438276617182)/1.1498438276617182,1.0/0.45)*1.0109156157307528-0.0109156157307528}}
+}
+Read {
+inputs 0
+file_type exr
+file /jobs/ads/visa_debit_holidays_J603518/VDH/sh002/m_002/images/VDH_sh002_lighting_lighting_v010/VDH_sh002_lighting_lighting_v010_FX_PLOWSNOW_BTY.%04d.exr
+format "1126 634 0 0 1126 634 1 "
+first 1001
+last 1066
+origfirst 1001
+origlast 1066
+origset true
+on_error black
+version 6
+name Read73
+label "\[value width]x\[value height]"
+xpos -645
+ypos 4390
+disable {{hasError}}
+postage_stamp false
+}
+Read {
+inputs 0
+file_type exr
+file /jobs/ads/visa_debit_holidays_J603518/VDH/sh001/n_001/comps/VDH_sh001_comp_v170/VDH_sh001_comp_v170.%04d.exr
+format "2048 1152 0 0 2048 1152 1 village native "
+first 1001
+last 1080
+origfirst 1001
+origlast 1080
+origset true
+version 1
+colorspace linear
+name Read12
+label "\[value width]x\[value height]"
+xpos -197
+ypos 1083
+}
+Read {
+inputs 0
+file_type exr
+file /jobs/ads/visa_debit_holidays_J603518/VDH/sh002/n_002/comps/VDH_sh002_comp_v060/VDH_sh002_comp_v060.%d.exr
+first 1021
+last 1064
+origset true
+name Read1
+label "\[value width]x\[value height]"
+xpos -51
+ypos 1207
+}
+Read {
+inputs 0
+file_type exr
+file /jobs/ads/visa_debit_holidays_J603518/VDH/sh003/n_003/comps/VDH_sh003_comp_v048/VDH_sh003_comp_v048.%04d.exr
+format "2048 1152 0 0 2048 1152 1 village native "
+first 1001
+last 1087
+origfirst 1001
+origlast 1087
+origset true
+on_error "nearest frame"
+version 1
+colorspace linear
+name Read6
+label "\[value width]x\[value height]"
+xpos -187
+ypos 1350
+}
+ContactSheet {
+inputs 0
+rows 2
+columns 2
+name ContactSheet1
+xpos -509
+ypos 1013
+}
+Read {
+inputs 0
+file_type exr
+file /jobs/ads/visa_debit_holidays_J603518/VDH/sh003/n_003/comps/VDH_sh003_comp_v051/VDH_sh003_comp_v051.%04d.exr
+format "2048 1152 0 0 2048 1152 1 village native "
+first 1001
+last 1087
+origfirst 1001
+origlast 1087
+origset true
+on_error "nearest frame"
+version 1
+colorspace linear
+name Read2
+label "\[value width]x\[value height]"
+xpos -14
+ypos 1355
+}
+Read {
+inputs 0
+file_type exr
+file /jobs/ads/visa_debit_holidays_J603518/VDH/sh002/n_002/comps/VDH_sh002_comp_v058/VDH_sh002_comp_v058.%d.exr
+first 1021
+last 1064
+origset true
+name Read11
+label "\[value width]x\[value height]"
+xpos -195
+ypos 1211
+}
+Read {
+inputs 0
+file_type exr
+file /jobs/ads/visa_debit_holidays_J603518/VDH/sh003/n_003/comps/VDH_sh003_comp_v054/VDH_sh003_comp_v054.%04d.exr
+format "2048 1152 0 0 2048 1152 1 village native "
+first 1001
+last 1087
+origfirst 1001
+origlast 1087
+origset true
+on_error "nearest frame"
+version 1
+colorspace linear
+name Read3
+label "\[value width]x\[value height]"
+xpos 158
+ypos 1356
+}
+Viewer {
+inputs 2
+frame 1066
+frame_range 1021-1021
+full_frame_processing true
+center_fstop 0
+viewerProcess "MillView (default)"
+name Viewer1
+xpos -1058
+ypos 1507
+}

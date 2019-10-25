@@ -1,0 +1,133 @@
+set cut_paste_input [stack 0]
+version 11.2 v6
+push $cut_paste_input
+Dot {
+name Dot48
+note_font "Bitstream Vera Sans Italic Italic"
+note_font_size 22
+note_font_color 0xff0000ff
+selected true
+xpos -4261
+ypos 766
+}
+Shuffle {
+red black
+green black
+blue black
+alpha black
+name Shuffle21
+label "\[value in]"
+selected true
+xpos -4295
+ypos 794
+}
+set N79b39180 [stack 0]
+Radial {
+output alpha
+replace true
+area {{"width > height ? (width - height) / 2 : 0"} {"height > width ? (height - width) / 2 : 0"} {"width > height ? width - ((width - height) / 2) : width"} {"height > width ? height - ((height - width) / 2) : height"}}
+name Radial1
+selected true
+xpos -4391
+ypos 846
+}
+ColorLookup {
+channels alpha
+lut {master {curve 0 x0.5933961868 0.7927860022 x1 1 s0}
+  red {}
+  green {}
+  blue {}
+  alpha {}}
+name ColorLookup5
+selected true
+xpos -4391
+ypos 882
+}
+push $N79b39180
+Ramp {
+output {rgba.red -rgba.green -rgba.blue -rgba.alpha}
+replace true
+invert true
+p0 {0 0}
+p1 {{width i} 0}
+name Ramp3
+selected true
+xpos -4522
+ypos 846
+}
+Ramp {
+output {-rgba.red rgba.green -rgba.blue -rgba.alpha}
+replace true
+invert true
+p0 {0 0}
+p1 {0 {height i}}
+name Ramp4
+selected true
+xpos -4522
+ypos 888
+}
+Grade {
+blackpoint 0.5
+black_clamp false
+name Grade64
+selected true
+xpos -4522
+ypos 930
+}
+Shuffle {
+alpha white
+name Shuffle20
+label "\[value in]"
+selected true
+xpos -4522
+ypos 958
+}
+Merge2 {
+inputs 2
+operation mask
+name Merge57
+note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 13
+note_font_color 0xff00ff
+selected true
+xpos -4391
+ypos 963
+}
+push $N79b39180
+Ramp {
+output {rgba.red -rgba.green -rgba.blue -rgba.alpha}
+p0 {-0.5 0}
+p1 {{width-0.5 i} 0}
+name Ramp5
+selected true
+xpos -4195
+ypos 864
+}
+Ramp {
+output {-rgba.red rgba.green -rgba.blue -rgba.alpha}
+p0 {0 -0.5}
+p1 {0 {height-0.5 i}}
+name Ramp6
+selected true
+xpos -4195
+ypos 906
+}
+Reformat {
+resize distort
+name Reformat34
+selected true
+xpos -4195
+ypos 951
+}
+Merge2 {
+inputs 2
+operation plus
+mix 0.053
+name Merge58
+note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 13
+note_font_color 0xff00ff
+selected true
+xpos -4195
+ypos 1201
+}

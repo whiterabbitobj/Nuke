@@ -1,30 +1,41 @@
 set cut_paste_input [stack 0]
-version 6.3 v2
+version 11.2 v6
 push $cut_paste_input
-Ramp {
- output {-rgba.red rgba.green -rgba.blue -rgba.alpha}
- p0 {100 -0.5}
- p1 {100 {height-0.5 i}}
- name Ramp39
- selected true
- xpos -1042
- ypos -625
+Shuffle {
+red black
+green black
+blue black
+alpha black
+name Shuffle47
+label "\[value in]"
+selected true
+xpos -4588
+ypos 767
 }
 Ramp {
- output {rgba.red -rgba.green -rgba.blue -rgba.alpha}
- p0 {-0.5 0}
- p1 {{"width - 0.5" i} 0}
- name Ramp42
- selected true
- xpos -1042
- ypos -583
+output {-rgba.red rgba.green -rgba.blue -rgba.alpha}
+p0 {100 -0.5}
+p1 {100 {height-0.5 i}}
+name Ramp17
+selected true
+xpos -4588
+ypos 815
+}
+Ramp {
+output {rgba.red -rgba.green -rgba.blue -rgba.alpha}
+p0 {-0.5 0}
+p1 {{"width - 0.5" i} 0}
+name Ramp18
+selected true
+xpos -4588
+ypos 857
 }
 push 0
 STMap {
- inputs 2
- uv rgb
- name STMap17
- selected true
- xpos -1042
- ypos -485
+inputs 2
+uv rgb
+name STMap6
+selected true
+xpos -4588
+ypos 955
 }

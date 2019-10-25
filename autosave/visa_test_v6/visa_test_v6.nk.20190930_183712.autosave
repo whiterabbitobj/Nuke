@@ -1,0 +1,521 @@
+#! /mill3d/server/apps/FOUNDRY/linux-x86-64/Nuke11.2v6/libnuke-11.2.6.so -nx
+version 11.2 v6
+define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
+<layout version="1.0">
+    <window x="0" y="0" w="1902" h="1137" screen="0">
+        <splitter orientation="1">
+            <split size="40"/>
+            <dock id="" hideTitles="1" activePageId="Toolbar.1">
+                <page id="Toolbar.1"/>
+            </dock>
+            <split size="387" stretch="1"/>
+            <splitter orientation="2">
+                <split size="1093"/>
+                <dock id="" activePageId="Properties.1">
+                    <page id="Properties.1"/>
+                </dock>
+            </splitter>
+            <split size="1467"/>
+            <splitter orientation="2">
+                <split size="786"/>
+                <dock id="" activePageId="DAG.1">
+                    <page id="DAG.1"/>
+                </dock>
+                <split size="303"/>
+                <dock id="" activePageId="Curve Editor.1">
+                    <page id="uk.co.thefoundry.scripteditor.1"/>
+                    <page id="Curve Editor.1"/>
+                </dock>
+            </splitter>
+        </splitter>
+    </window>
+    <window x="1921" y="1" w="1900" h="1137" screen="1">
+        <splitter orientation="2">
+            <split size="1137"/>
+            <dock id="" activePageId="Viewer.1" focus="true">
+                <page id="Viewer.1"/>
+            </dock>
+        </splitter>
+    </window>
+</layout>
+}
+Root {
+inputs 0
+name /usr/people/dollm/Nuke/visa_test_v6.nk
+frame 1048
+first_frame 1021
+last_frame 1064
+lock_range true
+format "2048 1152 0 0 2048 1152 1 village native "
+proxy_type scale
+proxy_format "1024 778 0 0 1024 778 1 1K_Super_35(full-ap)"
+colorManagement OCIO
+defaultViewerLUT "OCIO LUTs"
+workingSpaceLUT linear
+monitorLut MillView
+int8Lut rec709
+int16Lut rec709
+logLut AlexaV3LogC
+floatLut linear
+luts {linear {}
+  sRGB {}
+  rec709 {}
+  Cineon {}
+  Gamma1.8 {}
+  Gamma2.2 {}
+  Gamma2.4 {}
+  Gamma2.6 {}
+  Panalog {}
+  REDLog {}
+  ViperLog {}
+  AlexaV3LogC {}
+  PLogLin {}
+  SLog {}
+  SLog1 {}
+  SLog2 {}
+  SLog3 {}
+  CLog {}
+  Log3G10 {}
+  Log3G12 {}
+  HybridLogGamma {}
+  Protune {}
+  BT1886 {}
+  HDR2084 {}
+  REDSpace {}
+  FlameVideo {pow((x+0.1498438276617182)/1.1498438276617182,1.0/0.45)*1.0109156157307528-0.0109156157307528}}
+}
+Read {
+inputs 0
+file_type exr
+file /jobs/ads/visa_debit_holidays_J603518/VDH/sh002/m_002/images/VDH_sh002_lighting_lighting_v010/VDH_sh002_lighting_lighting_v010_FX_PLOWSNOW_BTY.%04d.exr
+format "1126 634 0 0 1126 634 1 "
+first 1001
+last 1066
+origfirst 1001
+origlast 1066
+origset true
+on_error black
+version 6
+name Read73
+label "\[value width]x\[value height]"
+xpos -645
+ypos 4390
+disable {{hasError}}
+postage_stamp false
+}
+Read {
+inputs 0
+file_type exr
+file /jobs/ads/visa_debit_holidays_J603518/VDH/sh002/m_002/images/VDH_sh002_lighting_lighting_v010/VDH_sh002_lighting_lighting_v010_ENV_FOREGROUND_BTY_0008.%04d.exr
+format "1126 634 0 0 1126 634 1 "
+first 1001
+last 1066
+origfirst 1001
+origlast 1066
+origset true
+on_error black
+version 3
+name Read71
+label "\[value width]x\[value height]"
+xpos -354
+ypos 2535
+disable {{hasError}}
+postage_stamp false
+}
+Switch {
+which {{hasError}}
+name Switch25
+xpos -354
+ypos 2648
+}
+Read {
+inputs 0
+file_type exr
+file /jobs/ads/visa_debit_holidays_J603518/VDH/sh002/m_002/images/VDH_sh002_lighting_lighting_v010/VDH_sh002_lighting_lighting_v010_ENV_FOREGROUND_BTY_0007.%04d.exr
+format "1126 634 0 0 1126 634 1 "
+first 1001
+last 1066
+origfirst 1001
+origlast 1066
+origset true
+on_error black
+version 3
+name Read70
+label "\[value width]x\[value height]"
+xpos -463
+ypos 2535
+disable {{hasError}}
+postage_stamp false
+}
+Switch {
+which {{hasError}}
+name Switch24
+xpos -463
+ypos 2648
+}
+Read {
+inputs 0
+file_type exr
+file /jobs/ads/visa_debit_holidays_J603518/VDH/sh002/m_002/images/VDH_sh002_lighting_lighting_v010/VDH_sh002_lighting_lighting_v010_ENV_FOREGROUND_BTY_0006.%04d.exr
+format "1126 634 0 0 1126 634 1 "
+first 1001
+last 1066
+origfirst 1001
+origlast 1066
+origset true
+on_error black
+version 3
+name Read69
+label "\[value width]x\[value height]"
+xpos -576
+ypos 2535
+disable {{hasError}}
+postage_stamp false
+}
+Switch {
+which {{hasError}}
+name Switch23
+xpos -576
+ypos 2648
+}
+Read {
+inputs 0
+file_type exr
+file /jobs/ads/visa_debit_holidays_J603518/VDH/sh002/m_002/images/VDH_sh002_lighting_lighting_v010/VDH_sh002_lighting_lighting_v010_ENV_FOREGROUND_BTY_0005.%04d.exr
+format "1126 634 0 0 1126 634 1 "
+first 1001
+last 1066
+origfirst 1001
+origlast 1066
+origset true
+on_error black
+version 3
+name Read50
+label "\[value width]x\[value height]"
+xpos -690
+ypos 2535
+disable {{hasError}}
+postage_stamp false
+}
+Switch {
+which {{hasError}}
+name Switch22
+xpos -690
+ypos 2648
+}
+Read {
+inputs 0
+file_type exr
+file /jobs/ads/visa_debit_holidays_J603518/VDH/sh002/m_002/images/VDH_sh002_lighting_lighting_v010/VDH_sh002_lighting_lighting_v010_ENV_FOREGROUND_BTY_0004.%04d.exr
+format "1126 634 0 0 1126 634 1 "
+first 1001
+last 1066
+origfirst 1001
+origlast 1066
+origset true
+on_error black
+version 3
+name Read49
+label "\[value width]x\[value height]"
+xpos -803
+ypos 2535
+disable {{hasError}}
+postage_stamp false
+}
+Switch {
+which {{hasError}}
+name Switch21
+xpos -803
+ypos 2648
+}
+Read {
+inputs 0
+file_type exr
+file /jobs/ads/visa_debit_holidays_J603518/VDH/sh002/m_002/images/VDH_sh002_lighting_lighting_v010/VDH_sh002_lighting_lighting_v010_ENV_FOREGROUND_BTY_0003.%04d.exr
+format "1126 634 0 0 1126 634 1 "
+first 1001
+last 1066
+origfirst 1001
+origlast 1066
+origset true
+on_error black
+version 3
+name Read48
+label "\[value width]x\[value height]"
+xpos -905
+ypos 2535
+disable {{hasError}}
+postage_stamp false
+}
+Switch {
+which {{hasError}}
+name Switch20
+xpos -905
+ypos 2648
+}
+Read {
+inputs 0
+file_type exr
+file /jobs/ads/visa_debit_holidays_J603518/VDH/sh002/m_002/images/VDH_sh002_lighting_lighting_v010/VDH_sh002_lighting_lighting_v010_ENV_FOREGROUND_BTY_0002.%04d.exr
+format "1126 634 0 0 1126 634 1 "
+first 1001
+last 1066
+origfirst 1001
+origlast 1066
+origset true
+on_error black
+version 3
+name Read47
+label "\[value width]x\[value height]"
+xpos -1007
+ypos 2535
+disable {{hasError}}
+postage_stamp false
+}
+Switch {
+which {{hasError}}
+name Switch19
+xpos -1007
+ypos 2648
+}
+push 0
+Read {
+inputs 0
+file_type exr
+file /jobs/ads/visa_debit_holidays_J603518/VDH/sh002/m_002/images/VDH_sh002_lighting_lighting_v010/VDH_sh002_lighting_lighting_v010_ENV_FOREGROUND_BTY_0000.%04d.exr
+format "1126 634 0 0 1126 634 1 "
+first 1001
+last 1066
+origfirst 1001
+origlast 1066
+origset true
+on_error black
+version 3
+name Read45
+label "\[value width]x\[value height]"
+xpos -1215
+ypos 2535
+disable {{hasError}}
+postage_stamp false
+}
+Switch {
+which {{hasError}}
+name Switch17
+xpos -1215
+ypos 2648
+}
+Read {
+inputs 0
+file_type exr
+file /jobs/ads/visa_debit_holidays_J603518/VDH/sh002/m_002/images/VDH_sh002_lighting_lighting_v010/VDH_sh002_lighting_lighting_v010_ENV_FOREGROUND_BTY_0001.%04d.exr
+format "1126 634 0 0 1126 634 1 "
+first 1001
+last 1066
+origfirst 1001
+origlast 1066
+origset true
+on_error black
+version 3
+name Read46
+label "\[value width]x\[value height]"
+xpos -1111
+ypos 2535
+disable {{hasError}}
+postage_stamp false
+}
+Switch {
+which {{hasError}}
+name Switch18
+xpos -1111
+ypos 2648
+}
+Merge2 {
+inputs 9+1
+also_merge all
+name Merge4
+note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 13
+note_font_color 0xff00ff
+xpos -803
+ypos 2775
+}
+set N5476cd50 [stack 0]
+Dot {
+name Dot33
+note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic"
+note_font_size 22
+note_font_color 0xff0000ff
+xpos -306
+ypos 2985
+}
+push $N5476cd50
+add_layer {volume volume.red volume.green volume.blue}
+Shuffle {
+in volume
+name Shuffle92
+label "\[value in]"
+xpos -803
+ypos 2900
+}
+Tracker4 {
+add_tracks true
+tracks { { 1 31 1 } 
+{ { 5 1 20 enable e 1 } 
+{ 3 1 75 name name 1 } 
+{ 2 1 58 track_x track_x 1 } 
+{ 2 1 58 track_y track_y 1 } 
+{ 2 1 63 offset_x offset_x 1 } 
+{ 2 1 63 offset_y offset_y 1 } 
+{ 4 1 27 T T 1 } 
+{ 4 1 27 R R 1 } 
+{ 4 1 27 S S 1 } 
+{ 2 0 45 error error 1 } 
+{ 1 1 0 error_min error_min 1 } 
+{ 1 1 0 error_max error_max 1 } 
+{ 1 1 0 pattern_x pattern_x 1 } 
+{ 1 1 0 pattern_y pattern_y 1 } 
+{ 1 1 0 pattern_r pattern_r 1 } 
+{ 1 1 0 pattern_t pattern_t 1 } 
+{ 1 1 0 search_x search_x 1 } 
+{ 1 1 0 search_y search_y 1 } 
+{ 1 1 0 search_r search_r 1 } 
+{ 1 1 0 search_t search_t 1 } 
+{ 2 1 0 key_track key_track 1 } 
+{ 2 1 0 key_search_x key_search_x 1 } 
+{ 2 1 0 key_search_y key_search_y 1 } 
+{ 2 1 0 key_search_r key_search_r 1 } 
+{ 2 1 0 key_search_t key_search_t 1 } 
+{ 2 1 0 key_track_x key_track_x 1 } 
+{ 2 1 0 key_track_y key_track_y 1 } 
+{ 2 1 0 key_track_r key_track_r 1 } 
+{ 2 1 0 key_track_t key_track_t 1 } 
+{ 2 1 0 key_centre_offset_x key_centre_offset_x 1 } 
+{ 2 1 0 key_centre_offset_y key_centre_offset_y 1 } 
+} 
+{ 
+ { {curve K x1056 1} "track 1" {curve x1021 459.6991272 457.4568787 455.0656738 452.6445312 450.1430664 447.6381836 445.150177 442.71521 440.2500305 437.8906555 435.6935425 433.6186829 431.6142883 429.6329041 427.6569824 425.7227173 423.8640442 422.1246643 420.4621582 418.78302 417.1309509 415.5491333 413.8403015 411.9924927 410.1453247 408.3864136 406.699646 404.980957 403.3491516 401.8486328 400.2376099 398.6315308 396.9038391 394.9881287 392.995697 391 389.0708923 387.2922668 385.781311 384.2206116 382.8861084 381.5193787 380.4312439 379.5717163 402.5639038 402.5560913} {curve x1021 815.8256836 819.6726685 823.2817993 826.7971191 830.56427 834.6298828 839.03125 843.3319092 847.4969482 851.3115234 854.7268066 857.7318726 860.1151123 861.8392334 863.0043335 863.9206543 864.8926392 866.1350098 867.6760254 869.47052 871.5649414 873.8590698 876.3360596 878.8884277 881.2213135 883.102478 884.5571289 885.8860474 887.1420898 888.3848877 889.6964111 891.0090332 892.2984009 893.5664673 894.7783813 896 897.3305054 898.7566528 899.9355469 900.68927 900.7141113 900.3012695 899.4837646 898.6311035 885.675415 885.7197266} {curve K x1056 0} {curve K x1056 0} 1 0 0 {curve x1021 0.0002561744626 0.000102716829 0.0006879753528 0.0004242138802 0.0001801795156 8.423401515e-05 0.0008977515099 0.0006534837987 0.0004101991483 0.0002040599706 6.341271404e-05 0.0007560697362 0.0004910100187 0.0003179277299 0.0001981524154 0.0001238557906 5.584212852e-05 0.0008640082745 0.0007550004688 0.0004953571548 0.0003226872925 0.0002875172675 0.0001639700419 9.616591803e-05 4.163339005e-05 0.0008042579726 0.0006820752648 0.0004440276621 0.0003090941135 0.0002491042498 0.0001452601013 0.0001414006575 7.067734761e-05 2.549271084e-05 1.095537911e-05 0 1.950727665e-05 7.94522757e-05 0.0001254116009 0.0001743183515 0.0002443607132 0.0004661651914 0.0005156186941 0.0006567529849 0.1943181603 0} 0 0.194318 -35 -35 35 35 -24 -24 24 24 {} {curve x1056 332} {curve x1056 837} {curve x1056 449} {curve x1056 954} {curve x1056 356} {curve x1056 861} {curve x1056 425} {curve x1056 930} {curve x1056 34.5} {curve x1056 34.5}  } 
+} 
+}
+
+translate {{curve x1021 0 -2.242248535 -4.633453369 -7.054595947 -9.556060791 -12.0609436 -14.5489502 -16.98391724 -19.44909668 -21.80847168 -24.00558472 -26.08044434 -28.08483887 -30.06622314 -32.04214478 -33.97640991 -35.83508301 -37.57446289 -39.23696899 -40.91610718 -42.56817627 -44.1499939 -45.85882568 -47.70663452 -49.55380249 -51.31271362 -52.9994812 -54.71817017 -56.34997559 -57.85049438 -59.46151733 -61.06759644 -62.79528809 -64.71099854 -66.70343018 -68.6991272 -70.62823486 -72.40686035 -73.91781616 -75.47851562 -76.8130188 -78.17974854 -79.2678833 -80.12741089 -57.13522339 -57.14303589} {curve x1021 0 3.846984863 7.456115723 10.97143555 14.73858643 18.80419922 23.20556641 27.50622559 31.67126465 35.48583984 38.90112305 41.90618896 44.28942871 46.0135498 47.1786499 48.0949707 49.06695557 50.30932617 51.8503418 53.64483643 55.73925781 58.03338623 60.51037598 63.06274414 65.39562988 67.27679443 68.73144531 70.06036377 71.31640625 72.5592041 73.87072754 75.18334961 76.47271729 77.74078369 78.95269775 80.17431641 81.50482178 82.93096924 84.10986328 84.86358643 84.88842773 84.47558594 83.65808105 82.80541992 69.84973145 69.89404297}}
+center {{curve x1021 459.6991272 459.6991272 459.6991272 459.6991272 459.6991272 459.6991272 459.6991272 459.6991272 459.6991272 459.6991272 459.6991272 459.6991272 459.6991272 459.6991272 459.6991272 459.6991272 459.6991272 459.6991272 459.6991272 459.6991272 459.6991272 459.6991272 459.6991272 459.6991272 459.6991272 459.6991272 459.6991272 459.6991272 459.6991272 459.6991272 459.6991272 459.6991272 459.6991272 459.6991272 459.6991272 459.6991272 459.6991272 459.6991272 459.6991272 459.6991272 459.6991272 459.6991272 459.6991272 459.6991272 459.6991272 459.6991272} {curve x1021 815.8256836 815.8256836 815.8256836 815.8256836 815.8256836 815.8256836 815.8256836 815.8256836 815.8256836 815.8256836 815.8256836 815.8256836 815.8256836 815.8256836 815.8256836 815.8256836 815.8256836 815.8256836 815.8256836 815.8256836 815.8256836 815.8256836 815.8256836 815.8256836 815.8256836 815.8256836 815.8256836 815.8256836 815.8256836 815.8256836 815.8256836 815.8256836 815.8256836 815.8256836 815.8256836 815.8256836 815.8256836 815.8256836 815.8256836 815.8256836 815.8256836 815.8256836 815.8256836 815.8256836 815.8256836 815.8256836}}
+selected_tracks 0
+name Tracker1
+xpos -786
+ypos 2951
+}
+Read {
+inputs 0
+file_type exr
+file /jobs/ads/visa_debit_holidays_J603518/VDH/sh001/n_001/comps/VDH_sh001_comp_v170/VDH_sh001_comp_v170.%04d.exr
+format "2048 1152 0 0 2048 1152 1 village native "
+first 1001
+last 1080
+origfirst 1001
+origlast 1080
+origset true
+version 1
+colorspace linear
+name Read12
+label "\[value width]x\[value height]"
+xpos -197
+ypos 1083
+}
+Read {
+inputs 0
+file_type exr
+file /jobs/ads/visa_debit_holidays_J603518/VDH/sh002/n_002/comps/VDH_sh002_comp_v060/VDH_sh002_comp_v060.%d.exr
+first 1021
+last 1064
+origset true
+name Read1
+label "\[value width]x\[value height]"
+xpos -51
+ypos 1207
+}
+Read {
+inputs 0
+file_type exr
+file /jobs/ads/visa_debit_holidays_J603518/VDH/sh003/n_003/comps/VDH_sh003_comp_v048/VDH_sh003_comp_v048.%04d.exr
+format "2048 1152 0 0 2048 1152 1 village native "
+first 1001
+last 1087
+origfirst 1001
+origlast 1087
+origset true
+on_error "nearest frame"
+version 1
+colorspace linear
+name Read6
+label "\[value width]x\[value height]"
+xpos -187
+ypos 1350
+}
+ContactSheet {
+inputs 0
+rows 2
+columns 2
+name ContactSheet1
+xpos -509
+ypos 1013
+}
+Read {
+inputs 0
+file_type exr
+file /jobs/ads/visa_debit_holidays_J603518/VDH/sh003/n_003/comps/VDH_sh003_comp_v051/VDH_sh003_comp_v051.%04d.exr
+format "2048 1152 0 0 2048 1152 1 village native "
+first 1001
+last 1087
+origfirst 1001
+origlast 1087
+origset true
+on_error "nearest frame"
+version 1
+colorspace linear
+name Read2
+label "\[value width]x\[value height]"
+xpos -14
+ypos 1355
+}
+Read {
+inputs 0
+file_type exr
+file /jobs/ads/visa_debit_holidays_J603518/VDH/sh002/n_002/comps/VDH_sh002_comp_v058/VDH_sh002_comp_v058.%d.exr
+first 1021
+last 1064
+origset true
+name Read11
+label "\[value width]x\[value height]"
+xpos -195
+ypos 1211
+}
+Read {
+inputs 0
+file_type exr
+file /jobs/ads/visa_debit_holidays_J603518/VDH/sh003/n_003/comps/VDH_sh003_comp_v054/VDH_sh003_comp_v054.%04d.exr
+format "2048 1152 0 0 2048 1152 1 village native "
+first 1001
+last 1087
+origfirst 1001
+origlast 1087
+origset true
+on_error "nearest frame"
+version 1
+colorspace linear
+name Read3
+label "\[value width]x\[value height]"
+xpos 121
+ypos 1353
+}
+Viewer {
+inputs 2
+frame 1048
+frame_range 1021-1021
+full_frame_processing true
+center_fstop 0
+viewerProcess "MillView (default)"
+name Viewer1
+selected true
+xpos -1058
+ypos 1507
+}

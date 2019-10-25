@@ -1,0 +1,159 @@
+#! /mill3d/server/apps/FOUNDRY/linux-x86-64/Nuke11.2v6/libnuke-11.2.6.so -nx
+version 11.2 v6
+define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
+<layout version="1.0">
+    <window x="1920" y="0" w="1902" h="1137" screen="0">
+        <splitter orientation="1">
+            <split size="40"/>
+            <dock id="" hideTitles="1" activePageId="Toolbar.1">
+                <page id="Toolbar.1"/>
+            </dock>
+            <split size="387" stretch="1"/>
+            <splitter orientation="2">
+                <split size="1093"/>
+                <dock id="" activePageId="Properties.1">
+                    <page id="Properties.1"/>
+                </dock>
+            </splitter>
+            <split size="1467"/>
+            <splitter orientation="2">
+                <split size="978"/>
+                <dock id="" activePageId="DAG.1" focus="true">
+                    <page id="DAG.1"/>
+                </dock>
+                <split size="111"/>
+                <dock id="" activePageId="Curve Editor.1">
+                    <page id="uk.co.thefoundry.scripteditor.1"/>
+                    <page id="Curve Editor.1"/>
+                </dock>
+            </splitter>
+        </splitter>
+    </window>
+    <window x="8" y="1" w="1900" h="1137" screen="1">
+        <splitter orientation="2">
+            <split size="1137"/>
+            <dock id="" activePageId="Viewer.1">
+                <page id="Viewer.1"/>
+            </dock>
+        </splitter>
+    </window>
+</layout>
+}
+Root {
+ inputs 0
+ name /usr/people/dollm/Nuke/TheMill/cap1_quicksilver_review.nk
+ first_frame 1001
+ last_frame 1099
+ lock_range true
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ proxy_type scale
+ proxy_format "1024 778 0 0 1024 778 1 1K_Super_35(full-ap)"
+ colorManagement OCIO
+ defaultViewerLUT "OCIO LUTs"
+ workingSpaceLUT linear
+ monitorLut MillView
+ int8Lut rec709
+ int16Lut rec709
+ logLut AlexaV3LogC
+ floatLut linear
+ luts {linear {}
+   sRGB {}
+   rec709 {}
+   Cineon {}
+   Gamma1.8 {}
+   Gamma2.2 {}
+   Gamma2.4 {}
+   Gamma2.6 {}
+   Panalog {}
+   REDLog {}
+   ViperLog {}
+   AlexaV3LogC {}
+   PLogLin {}
+   SLog {}
+   SLog1 {}
+   SLog2 {}
+   SLog3 {}
+   CLog {}
+   Log3G10 {}
+   Log3G12 {}
+   HybridLogGamma {}
+   Protune {}
+   BT1886 {}
+   HDR2084 {}
+   REDSpace {}
+   FlameVideo {pow((x+0.1498438276617182)/1.1498438276617182,1.0/0.45)*1.0109156157307528-0.0109156157307528}}
+}
+Read {
+ inputs 0
+ file_type exr
+ file /jobs/ads/capitalone_quicksilver_J603529/CSP/sh004/n_004/comps/CSP_sh004_comp_v040/CSP_sh004_comp_v040.####.exr
+ format "2224 1548 0 0 2224 1548 1 "
+ first 1001
+ last 1099
+ origfirst 1001
+ origlast 1099
+ origset true
+ name Read1
+ label "\[value width]x\[value height]"
+ xpos -686
+ ypos -194
+}
+Read {
+ inputs 0
+ file_type exr
+ file /jobs/ads/capitalone_quicksilver_J603529/CSP/sh007/n_007/comps/CSP_sh007_comp_v013/CSP_sh007_comp_v013.####.exr
+ format "2224 1548 0 0 2224 1548 1 "
+ first 1001
+ last 1042
+ origfirst 1001
+ origlast 1042
+ origset true
+ name Read2
+ label "\[value width]x\[value height]"
+ xpos -485
+ ypos -196
+}
+Dot {
+ name Dot1
+ label "needs grain fix"
+ note_font "Bitstream Vera Sans Italic Italic"
+ note_font_size 22
+ note_font_color 0xff0000ff
+ xpos -451
+ ypos -88
+}
+Viewer {
+ frame 1
+ frame_range 1001-1099
+ gain 5.6
+ center_fstop 0
+ viewerProcess "MillView (default)"
+ name Viewer1
+ xpos -40
+ ypos -9
+}
+Read {
+ inputs 0
+ file_type exr
+ file /jobs/ads/capitalone_quicksilver_J603529/CSP/sh015/n_015/comps/CSP_sh015_comp_v005/CSP_sh015_comp_v005.####.exr
+ format "2224 1548 0 0 2224 1548 1 "
+ first 1001
+ last 1062
+ origfirst 1001
+ origlast 1062
+ origset true
+ name Read3
+ label "\[value width]x\[value height]"
+ xpos -199
+ ypos -205
+}
+Dot {
+ name Dot2
+ label "needs grain fix"
+ note_font "Bitstream Vera Sans Italic Italic"
+ note_font_size 22
+ note_font_color 0xff0000ff
+ selected true
+ xpos -165
+ ypos -97
+}

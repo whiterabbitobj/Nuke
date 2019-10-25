@@ -1,0 +1,378 @@
+set cut_paste_input [stack 0]
+version 11.3 v4
+push 0
+push $cut_paste_input
+Group {
+inputs 2
+name multiLevel_lightwrap
+knobChanged "\nif nuke.thisKnob().name() == 'hidePanel':\n    nuke.thisNode()\['prevBG'].setValue(False)\n"
+tile_color 0x34ff55ff
+selected true
+xpos -2193
+ypos 6087
+addUserKnob {20 User}
+addUserKnob {26 ""}
+addUserKnob {26 lwTxt l Lightwrap: T " "}
+addUserKnob {6 outputLW l "Output lightwrap.rgba" -STARTLINE}
+outputLW true
+addUserKnob {6 doTight l Tight +STARTLINE}
+doTight true
+addUserKnob {14 tightBlur l Blur: R 0 100}
+tightBlur 4.2
+addUserKnob {7 tightAmt l Amount:}
+tightAmt 1
+addUserKnob {6 doMid l Mid +STARTLINE}
+doMid true
+addUserKnob {14 midBlur l Blur: R 0 100}
+midBlur 20
+addUserKnob {7 midAmt l Amount}
+midAmt 0.8
+addUserKnob {6 doBroad l Broad +STARTLINE}
+doBroad true
+addUserKnob {14 broadBlur l Blur: R 0 100}
+broadBlur 60
+addUserKnob {7 broadAmt l Amount:}
+broadAmt 0.285
+addUserKnob {26 ""}
+addUserKnob {6 prevBG l "Preview Lightwrap Source/BG" -STARTLINE}
+addUserKnob {20 bgproccessGroup l "Process BG" n 1}
+addUserKnob {6 doLuma l "Luminance Based?" t "This will process the BG to only lightwrap bright areas and not darker areas." +STARTLINE}
+doLuma true
+addUserKnob {7 bgDarks l Blackpoint}
+bgDarks 0.13
+addUserKnob {7 bgBrites l Whitepoint R 0 2}
+bgBrites 0.65
+addUserKnob {18 tintBG l "Tint BG" R 0 3}
+tintBG 1.05
+addUserKnob {6 tintBG_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+addUserKnob {6 tintBG_panelDropped_1 l "panel dropped state" -STARTLINE +HIDDEN}
+addUserKnob {6 tintBG_panelDropped_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+addUserKnob {20 endGroup n -1}
+addUserKnob {26 ""}
+addUserKnob {20 fgprocessgroup l "Process FG" n 1}
+fgprocessgroup 0
+addUserKnob {7 erodeAlpha l "Dilate alpha" R -4 4}
+erodeAlpha -2
+addUserKnob {7 dilateColor l "Dilate Color" R -4 4}
+dilateColor -2
+addUserKnob {20 endGroup_1 l endGroup n -1}
+addUserKnob {26 ""}
+addUserKnob {7 mix l Mix}
+mix 0.39
+addUserKnob {20 About}
+addUserKnob {26 abouttxt l "" +STARTLINE T "Author: MDoll\nVersion: 1.1\nDate revised: Nov.27, 2013"}
+}
+Input {
+inputs 0
+name fgAlpha
+xpos -101
+ypos -109
+number 2
+}
+Input {
+inputs 0
+name fg
+note_font "Bitstream Vera Sans"
+xpos 71
+ypos -112
+}
+Copy {
+inputs 2
+from0 rgba.alpha
+to0 rgba.alpha
+name Copy1
+xpos 71
+ypos 2
+disable {{"\[input parent 2] ? 0 : 1"}}
+}
+add_layer {lightwrap lightwrap.red lightwrap.green lightwrap.blue lightwrap.alpha}
+AddChannels {
+channels lightwrap
+name AddChannels1
+xpos 71
+ypos 40
+disable {{!parent.outputLW}}
+}
+Dot {
+name Dot9
+note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic"
+note_font_size 22
+note_font_color 0xff0000ff
+xpos 105
+ypos 120
+}
+set N38dad400 [stack 0]
+FilterErode {
+size {{parent.erodeAlpha}}
+name FilterErode1
+xpos 537
+ypos 111
+}
+Input {
+inputs 0
+name bg
+xpos 722
+ypos -100
+number 1
+}
+Dot {
+name Dot8
+note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic"
+note_font_size 22
+note_font_color 0xff0000ff
+xpos 756
+ypos -31
+}
+Shuffle {
+alpha white
+name Shuffle2
+xpos 722
+ypos -13
+}
+Keyer {
+operation "luminance key"
+range {{parent.bgDarks i} {parent.bgBrites i} 1 1}
+name Keyer1
+xpos 722
+ypos 63
+disable {{!parent.doLuma i}}
+}
+ChannelMerge {
+inputs 2
+operation stencil
+name ChannelMerge1
+xpos 722
+ypos 105
+}
+Premult {
+name Premult4
+xpos 722
+ypos 155
+}
+Remove {
+operation keep
+channels rgba
+name Remove1
+xpos 722
+ypos 181
+}
+Shuffle {
+alpha black
+name Shuffle1
+xpos 722
+ypos 221
+}
+Crop {
+box {0 0 {width} {height}}
+crop false
+name Crop1
+selected true
+xpos 722
+ypos 247
+}
+Grade {
+multiply {{parent.tintBG} {parent.tintBG} {parent.tintBG} {parent.tintBG}}
+name Grade1
+xpos 722
+ypos 275
+}
+Dot {
+name Dot2
+note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic"
+note_font_size 22
+note_font_color 0xff0000ff
+xpos 756
+ypos 363
+}
+set N38dd0000 [stack 0]
+FilterErode {
+channels rgba
+size {{parent.dilateColor}}
+name FilterErode2
+xpos 722
+ypos 405
+}
+Dot {
+name Dot3
+note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic"
+note_font_size 22
+note_font_color 0xff0000ff
+xpos 756
+ypos 458
+}
+set N38dfd400 [stack 0]
+Dot {
+name Dot4
+note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic"
+note_font_size 22
+note_font_color 0xff0000ff
+xpos 756
+ypos 571
+}
+set N38dfd000 [stack 0]
+Dot {
+name Dot5
+note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic"
+note_font_size 22
+note_font_color 0xff0000ff
+xpos 756
+ypos 962
+}
+push $N38dfd000
+Transform {
+scale 0.5
+center {914 778}
+black_outside false
+shutter 0
+shutteroffset centred
+name Transform30
+xpos 559
+ypos 567
+}
+Blur {
+size {{parent.broadBlur.w} {parent.broadBlur.h}}
+name Blur27
+xpos 559
+ypos 593
+}
+Transform {
+scale {{1/parent.Transform30.scale}}
+center {914 778}
+shutter 0
+shutteroffset centred
+name Transform31
+xpos 559
+ypos 631
+}
+Grade {
+white {{parent.doBroad}}
+multiply {{parent.broadAmt/2}}
+name Grade4
+xpos 559
+ypos 657
+}
+push $N38dfd400
+Blur {
+size {{parent.midBlur i} {parent.midBlur i}}
+name Blur2
+xpos 555
+ypos 448
+}
+Grade {
+white {{parent.doMid}}
+multiply {{parent.midAmt/2}}
+name Grade3
+xpos 555
+ypos 486
+}
+push $N38dd0000
+Blur {
+size {{parent.tightBlur i} {parent.tightBlur i}}
+name Blur1
+xpos 550
+ypos 353
+}
+Grade {
+white {{parent.doTight}}
+multiply {{parent.tightAmt/2}}
+name Grade2
+xpos 550
+ypos 393
+}
+Dot {
+name Dot1
+note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic Italic"
+note_font_size 22
+note_font_color 0xff0000ff
+xpos 351
+ypos 397
+}
+Merge2 {
+inputs 2
+operation plus
+output {rgba.red rgba.green rgba.blue -rgba.alpha}
+name Merge1
+label "\[value mix]"
+note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold"
+note_font_size 13
+note_font_color 0xff00ff
+xpos 317
+ypos 478
+}
+Merge2 {
+inputs 2
+operation plus
+output {rgba.red rgba.green rgba.blue -rgba.alpha}
+name Merge2
+label "\[value mix]"
+note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold"
+note_font_size 13
+note_font_color 0xff00ff
+xpos 317
+ypos 649
+}
+set N38e20000 [stack 0]
+push $N38dad400
+Merge2 {
+inputs 2
+operation atop
+name Merge3
+label "\[value mix]"
+note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold"
+note_font_size 13
+note_font_color 0xff00ff
+xpos 164
+ypos 649
+}
+set N38e5dc00 [stack 0]
+push $N38e20000
+Merge2 {
+inputs 2
+operation mask
+name Merge4
+label "\[value mix]"
+note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold"
+note_font_size 13
+note_font_color 0xff00ff
+xpos 317
+ypos 691
+}
+Keyer {
+operation "luminance key"
+name Keyer2
+xpos 317
+ypos 770
+}
+push $N38e5dc00
+ShuffleCopy {
+inputs 2
+red red
+green green
+blue blue
+out lightwrap
+name ShuffleCopy1
+xpos 164
+ypos 776
+disable {{!parent.outputLW}}
+}
+push $N38dad400
+Dissolve {
+inputs 2
+which {{parent.mix i}}
+name Dissolve1
+xpos 71
+ypos 842
+}
+Switch {
+inputs 2
+which {{"\$gui ? parent.prevBG : 0"}}
+name Switch1
+xpos 71
+ypos 958
+}
+Output {
+name Output1
+xpos 71
+ypos 1125
+}
+end_group

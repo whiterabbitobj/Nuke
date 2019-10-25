@@ -1,0 +1,343 @@
+set cut_paste_input [stack 0]
+version 11.2 v6
+push $cut_paste_input
+Group {
+ name depthEdgefixer_01
+ tile_color 0xcc804eff
+ note_font "Bitstream Vera Sans Bold"
+ selected true
+ xpos 896
+ ypos -4124
+ addUserKnob {20 User}
+ addUserKnob {7 farDist l "Far Distance" t "Set to maximum depth value for proper preprocessing to fix edges. Failure to do so may cause artifacting." R 0 3000}
+ farDist 1000
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos 385
+  ypos -526
+ }
+ Dot {
+  name Dot1
+  note_font "Bitstream Vera Sans Italic Italic"
+  note_font_size 22
+  note_font_color 0xff0000ff
+  xpos 419
+  ypos -411
+ }
+set N35c63b30 [stack 0]
+ Shuffle {
+  in depth
+  out rgb
+  name Shuffle9
+  label "\[value in]"
+  xpos 614
+  ypos -420
+ }
+ Grade {
+  channels {rgba.red -rgba.green -rgba.blue}
+  whitepoint {{parent.farDist}}
+  name Grade2
+  xpos 614
+  ypos -384
+ }
+ Grade {
+  channels alpha
+  blackpoint 0.65
+  name Grade4
+  xpos 614
+  ypos -348
+ }
+set Nc8ceb810 [stack 0]
+ FilterErode {
+  size 4
+  filter gaussian
+  name FilterErode1
+  xpos 524
+  ypos -271
+ }
+push $Nc8ceb810
+push $Nc8ceb810
+ Premult {
+  channels {rgba.red -rgba.green -rgba.blue}
+  name Premult3
+  xpos 768
+  ypos -342
+ }
+ Dot {
+  name Dot34
+  note_font "Bitstream Vera Sans Italic Italic Italic"
+  note_font_size 22
+  note_font_color 0xff0000ff
+  xpos 802
+  ypos -309
+ }
+ Group {
+  name gaussfill_1
+  xpos 768
+  ypos -271
+  addUserKnob {20 User}
+  addUserKnob {7 fillAmt l Fill: R 0 30}
+  fillAmt 2
+ }
+  Input {
+   inputs 0
+   name Input1
+   xpos -611
+   ypos 316
+  }
+  Dot {
+   name Dot1
+   note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic"
+   note_font_size 22
+   note_font_color 0xff0000ff
+   xpos -525
+   ypos 380
+  }
+  Blur {
+   size {{parent.fillAmt}}
+   mix 0.01
+   name Blur43
+   selected true
+   xpos -601
+   ypos 417
+  }
+set Nc92b91e0 [stack 0]
+  Dot {
+   name Dot77
+   note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic"
+   note_font_size 22
+   note_font_color 0xff0000ff
+   xpos -638
+   ypos 492
+  }
+push $Nc92b91e0
+  Unpremult {
+   name Unpremult1
+   xpos -559
+   ypos 482
+  }
+  ChannelMerge {
+   inputs 2
+   operation divide
+   name ChannelMerge27
+   xpos -559
+   ypos 529
+  }
+  Output {
+   name Output1
+   xpos -559
+   ypos 616
+  }
+ end_group
+ Group {
+  name gaussfill_2
+  xpos 768
+  ypos -247
+  addUserKnob {20 User}
+  addUserKnob {7 fillAmt l Fill: R 0 30}
+  fillAmt 3
+ }
+  Input {
+   inputs 0
+   name Input1
+   xpos -611
+   ypos 316
+  }
+  Dot {
+   name Dot1
+   note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic"
+   note_font_size 22
+   note_font_color 0xff0000ff
+   xpos -525
+   ypos 380
+  }
+  Blur {
+   size {{parent.fillAmt}}
+   mix 0.01
+   name Blur43
+   selected true
+   xpos -601
+   ypos 417
+  }
+set Nc2d9d4c0 [stack 0]
+  Dot {
+   name Dot77
+   note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic"
+   note_font_size 22
+   note_font_color 0xff0000ff
+   xpos -638
+   ypos 492
+  }
+push $Nc2d9d4c0
+  Unpremult {
+   name Unpremult1
+   xpos -559
+   ypos 482
+  }
+  ChannelMerge {
+   inputs 2
+   operation divide
+   name ChannelMerge27
+   xpos -559
+   ypos 529
+  }
+  Output {
+   name Output1
+   xpos -559
+   ypos 616
+  }
+ end_group
+ Group {
+  name gaussfill_3
+  xpos 768
+  ypos -223
+  addUserKnob {20 User}
+  addUserKnob {7 fillAmt l Fill: R 0 30}
+  fillAmt 4
+ }
+  Input {
+   inputs 0
+   name Input1
+   xpos -611
+   ypos 316
+  }
+  Dot {
+   name Dot1
+   note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic"
+   note_font_size 22
+   note_font_color 0xff0000ff
+   xpos -525
+   ypos 380
+  }
+  Blur {
+   size {{parent.fillAmt}}
+   mix 0.01
+   name Blur43
+   selected true
+   xpos -601
+   ypos 417
+  }
+set N375cfd90 [stack 0]
+  Dot {
+   name Dot77
+   note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic"
+   note_font_size 22
+   note_font_color 0xff0000ff
+   xpos -638
+   ypos 492
+  }
+push $N375cfd90
+  Unpremult {
+   name Unpremult1
+   xpos -559
+   ypos 482
+  }
+  ChannelMerge {
+   inputs 2
+   operation divide
+   name ChannelMerge27
+   xpos -559
+   ypos 529
+  }
+  Output {
+   name Output1
+   xpos -559
+   ypos 616
+  }
+ end_group
+ Group {
+  name gaussfill_4
+  xpos 768
+  ypos -199
+  addUserKnob {20 User}
+  addUserKnob {7 fillAmt l Fill: R 0 30}
+  fillAmt 5
+ }
+  Input {
+   inputs 0
+   name Input1
+   xpos -611
+   ypos 316
+  }
+  Dot {
+   name Dot1
+   note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic"
+   note_font_size 22
+   note_font_color 0xff0000ff
+   xpos -525
+   ypos 380
+  }
+  Blur {
+   size {{parent.fillAmt}}
+   mix 0.01
+   name Blur43
+   selected true
+   xpos -601
+   ypos 417
+  }
+set Nf8925050 [stack 0]
+  Dot {
+   name Dot77
+   note_font "Bitstream Vera Sans Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic Italic"
+   note_font_size 22
+   note_font_color 0xff0000ff
+   xpos -638
+   ypos 492
+  }
+push $Nf8925050
+  Unpremult {
+   name Unpremult1
+   xpos -559
+   ypos 482
+  }
+  ChannelMerge {
+   inputs 2
+   operation divide
+   name ChannelMerge27
+   xpos -559
+   ypos 529
+  }
+  Output {
+   name Output1
+   xpos -559
+   ypos 616
+  }
+ end_group
+ Blur {
+  size 20
+  name Blur1
+  xpos 768
+  ypos -175
+ }
+ Keymix {
+  inputs 3
+  channels {rgba.red -rgba.green -rgba.blue}
+  name Keymix1
+  xpos 614
+  ypos -175
+ }
+ Grade {
+  channels {rgba.red -rgba.green -rgba.blue}
+  whitepoint {{parent.Grade2.whitepoint}}
+  reverse true
+  name Grade5
+  xpos 614
+  ypos -139
+ }
+push $N35c63b30
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 depth.Z
+  name Copy1
+  xpos 385
+  ypos -139
+ }
+ Output {
+  name Output1
+  xpos 385
+  ypos -41
+ }
+end_group

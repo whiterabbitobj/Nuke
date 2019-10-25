@@ -1,0 +1,53 @@
+set cut_paste_input [stack 0]
+version 11.2 v6
+push $cut_paste_input
+Group {
+name expGlowMixer_1
+selected true
+xpos -5545
+ypos 15048
+addUserKnob {20 User}
+addUserKnob {7 glowAmt l Glow R 0 100}
+glowAmt 34.5
+addUserKnob {7 glowRatio l "Glow Ratio"}
+glowRatio 0.5
+addUserKnob {26 ""}
+addUserKnob {7 glowMix l Mix}
+glowMix 1
+addUserKnob {7 mixRatio l "Mix Ratio"}
+mixRatio 0.645
+}
+Input {
+inputs 0
+name Input1
+xpos 514
+ypos -508
+}
+Blur {
+size {{parent.glowAmt}}
+mix {{"parent.glowMix * parent.mixRatio * parent.mixRatio"}}
+name Blur30
+selected true
+xpos 514
+ypos -468
+}
+Blur {
+size {{"parent.Blur30.size * parent.glowRatio"}}
+mix {{"parent.glowMix * parent.mixRatio"}}
+name Blur31
+xpos 514
+ypos -432
+}
+Blur {
+size {{"parent.Blur30.size * parent.glowRatio * parent.glowRatio"}}
+mix {{parent.glowMix}}
+name Blur32
+xpos 514
+ypos -396
+}
+Output {
+name Output1
+xpos 514
+ypos -296
+}
+end_group
