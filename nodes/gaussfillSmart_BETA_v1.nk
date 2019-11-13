@@ -1,0 +1,230 @@
+set cut_paste_input [stack 0]
+version 11.1 v4
+push $cut_paste_input
+Group {
+ name gaussfill_BETA_1
+ knobChanged "\ndef gaussFillCallback():\n    n = nuke.thisNode()\n    k = nuke.thisKnob()\n\n    if k.name() == \"fillAmt\":\n        adjust_levels(n, k)\n\n    return\n\ndef adjust_levels(node, knob):\n    node.begin()\n    i = nuke.toNode(\"Input1\")\n    o = nuke.toNode(\"Output1\")\n    \n    delete_existing(i, o)\n\n    connect_me = create_fill(i, 1)\n\n    for x in range(1, int(knob.value())):\n        connect_me = create_fill(connect_me, x+1)\n\n    o.setInput(0, connect_me)\n\ndef delete_existing(i, o):\n    for node in nuke.allNodes():\n        if node in \[i,o]:\n            print \"node \{\} is protected!\".format(node.name().upper())\n            continue\n        nuke.delete(node)\n\ndef create_fill(top, amt):\n    print \"creating level: \{\}\".format(amt)\n    x = top.xpos()\n    y = 0\n\n    nodes = \[nuke.createNode(\"Blur\", \"size \{\} mix parent.gaussMix\".format(amt), inpanel=False),\n            nuke.createNode(\"Unpremult\", inpanel=False),\n            nuke.createNode(\"ChannelMerge\", \"operation divide\", inpanel=False),\n            nuke.createNode(\"FilterErode\", \"filter gaussian\", inpanel=False),\n            nuke.createNode(\"Grade\", \"channels alpha gamma parent.gammaFix\", inpanel=False),\n            nuke.createNode(\"Premult\", inpanel=False)]\n\n    for i, node in enumerate(nodes):\n        node.setInput(0, top)\n        node.setXYpos(x+150, y)\n        if node.Class() == \"FilterErode\" or node.Class() == \"Blur\":\n            node\['size'].setExpression('parent.blurScalar * \{\}'.format(amt+1))\n        top = node\n        y += 50\n    #top.setInput(1, nodes\[0])\n    return top\ngaussFillCallback()\n"
+ tile_color 0xcc804eff
+ selected true
+ xpos 14288
+ ypos 4601
+ addUserKnob {20 gaussGroup l Gaussfill}
+ addUserKnob {7 fillAmt l Fill: R 0 30}
+ fillAmt 5
+ addUserKnob {26 ""}
+ addUserKnob {26 ""}
+ addUserKnob {7 blurScalar l "Blur Scalar:" R 1 4}
+ blurScalar 1
+ addUserKnob {7 gammaFix l "Edge Fixing" R 0.01 0.5}
+ gammaFix 0.0645
+ addUserKnob {7 gaussMix l "Mix level" t "Generally, don't touch this value. Increasing it will blur the center of your input more." R 0 0.1}
+ gaussMix 0.1
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -549
+  ypos -96
+ }
+ Blur {
+  size {{"parent.blurScalar * 2"}}
+  mix {{parent.gaussMix}}
+  name Blur1
+  xpos -399
+ }
+ Unpremult {
+  name Unpremult1
+  xpos -399
+  ypos 50
+ }
+set N8bb03c00 [stack 0]
+push $N8bb03c00
+ ChannelMerge {
+  inputs 2
+  operation divide
+  name ChannelMerge1
+  xpos -399
+  ypos 100
+ }
+ FilterErode {
+  size {{"parent.blurScalar * 2"}}
+  filter gaussian
+  name FilterErode1
+  xpos -399
+  ypos 150
+ }
+ Grade {
+  channels alpha
+  gamma {{parent.gammaFix}}
+  name Grade1
+  xpos -399
+  ypos 200
+ }
+ Premult {
+  name Premult1
+  xpos -399
+  ypos 250
+ }
+ Blur {
+  size {{"parent.blurScalar * 3"}}
+  mix {{parent.gaussMix}}
+  name Blur2
+  xpos -249
+ }
+ Unpremult {
+  name Unpremult2
+  xpos -249
+  ypos 50
+ }
+set N8bb02700 [stack 0]
+push $N8bb02700
+ ChannelMerge {
+  inputs 2
+  operation divide
+  name ChannelMerge2
+  xpos -249
+  ypos 100
+ }
+ FilterErode {
+  size {{"parent.blurScalar * 3"}}
+  filter gaussian
+  name FilterErode2
+  xpos -249
+  ypos 150
+ }
+ Grade {
+  channels alpha
+  gamma {{parent.gammaFix}}
+  name Grade2
+  xpos -249
+  ypos 200
+ }
+ Premult {
+  name Premult2
+  xpos -249
+  ypos 250
+ }
+ Blur {
+  size {{"parent.blurScalar * 4"}}
+  mix {{parent.gaussMix}}
+  name Blur3
+  xpos -99
+ }
+ Unpremult {
+  name Unpremult3
+  xpos -99
+  ypos 50
+ }
+set Ncb031180 [stack 0]
+push $Ncb031180
+ ChannelMerge {
+  inputs 2
+  operation divide
+  name ChannelMerge3
+  xpos -99
+  ypos 100
+ }
+ FilterErode {
+  size {{"parent.blurScalar * 4"}}
+  filter gaussian
+  name FilterErode3
+  xpos -99
+  ypos 150
+ }
+ Grade {
+  channels alpha
+  gamma {{parent.gammaFix}}
+  name Grade3
+  xpos -99
+  ypos 200
+ }
+ Premult {
+  name Premult3
+  xpos -99
+  ypos 250
+ }
+ Blur {
+  size {{"parent.blurScalar * 5"}}
+  mix {{parent.gaussMix}}
+  name Blur4
+  xpos 51
+ }
+ Unpremult {
+  name Unpremult4
+  xpos 51
+  ypos 50
+ }
+set N990ebc00 [stack 0]
+push $N990ebc00
+ ChannelMerge {
+  inputs 2
+  operation divide
+  name ChannelMerge4
+  xpos 51
+  ypos 100
+ }
+ FilterErode {
+  size {{"parent.blurScalar * 5"}}
+  filter gaussian
+  name FilterErode4
+  xpos 51
+  ypos 150
+ }
+ Grade {
+  channels alpha
+  gamma {{parent.gammaFix}}
+  name Grade4
+  xpos 51
+  ypos 200
+ }
+ Premult {
+  name Premult4
+  xpos 51
+  ypos 250
+ }
+ Blur {
+  size {{"parent.blurScalar * 6"}}
+  mix {{parent.gaussMix}}
+  name Blur5
+  xpos 201
+ }
+ Unpremult {
+  name Unpremult5
+  xpos 201
+  ypos 50
+ }
+set N990ea700 [stack 0]
+push $N990ea700
+ ChannelMerge {
+  inputs 2
+  operation divide
+  name ChannelMerge5
+  xpos 201
+  ypos 100
+ }
+ FilterErode {
+  size {{"parent.blurScalar * 6"}}
+  filter gaussian
+  name FilterErode5
+  xpos 201
+  ypos 150
+ }
+ Grade {
+  channels alpha
+  gamma {{parent.gammaFix}}
+  name Grade5
+  xpos 201
+  ypos 200
+ }
+ Premult {
+  name Premult5
+  selected true
+  xpos 201
+  ypos 250
+ }
+ Output {
+  name Output1
+  xpos -550
+  ypos 421
+ }
+end_group
