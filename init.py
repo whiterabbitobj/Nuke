@@ -4,7 +4,7 @@ import nuke
 sep = "#"*30
 print(sep)
 # Import NODES/PLUGINS in init.py
-facility_plugins = "/mill3d/users/dollm/Nuke/nodes"
+facility_plugins = "C:/Users/mdoll/Nuke/nodes"
 nuke.pluginAddPath(facility_plugins)
 print("Loading nodes from " + facility_plugins)
 
